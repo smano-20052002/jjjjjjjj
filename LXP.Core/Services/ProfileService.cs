@@ -116,7 +116,7 @@ namespace LXP.Core.Services
                 Stream = profile.Stream,
                 ContactNumber = profile.ContactNumber,
                 ProfilePhoto = String.Format(
-                    "{0}://{1}{2}/wwwroot/CourseThumbnailImages/{3}",
+                    "{0}://{1}{2}/wwwroot/Images/{3}",
                     _contextAccessor.HttpContext.Request.Scheme,
                     _contextAccessor.HttpContext.Request.Host,
                     _contextAccessor.HttpContext.Request.PathBase,

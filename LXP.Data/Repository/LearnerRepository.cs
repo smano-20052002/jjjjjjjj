@@ -10,6 +10,7 @@ using LXP.Data.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Hosting;
 
 namespace LXP.Data.Repository
@@ -138,5 +139,10 @@ namespace LXP.Data.Repository
                 };
             return result;
         }
+        public IDbContextTransaction BeginTransaction()
+        {
+            return _lXPDbContext.Database.BeginTransaction();
+        }
+        
     }
 }

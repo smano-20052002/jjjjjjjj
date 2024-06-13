@@ -98,7 +98,8 @@ namespace LXP.Data.Repository
                 LearnerAttemptId = learnerAttemptId,
                 QuizQuestionId = quizQuestionId,
                 QuestionOptionId = questionOptionId,
-                CreatedBy = "System"
+                CreatedBy = "Learner",
+                CreatedAt = DateTime.Now
             };
 
             _dbContext.LearnerAnswers.Add(learnerAnswer);
@@ -291,6 +292,7 @@ namespace LXP.Data.Repository
             if (existingAttempt != null)
             {
                 existingAttempt.Score = attempt.Score;
+                existingAttempt.EndTime = attempt.EndTime;
                 await _dbContext.SaveChangesAsync();
             }
         }
@@ -454,6 +456,7 @@ namespace LXP.Data.Repository
                             selectedOption
                         ),
                         CreatedBy = "System"
+                        
                     };
 
                     _dbContext.LearnerAnswers.Add(learnerAnswer);

@@ -193,6 +193,17 @@ app.UseStaticFiles(
         RequestPath = "/wwwroot/CourseMaterial"
     }
 );
+
+app.UseStaticFiles(new StaticFileOptions
+
+{
+
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "Images")),
+
+    RequestPath = "/wwwroot/Images"
+
+});
+
 app.UseCors("_myAllowSpecificOrigins");
 app.UseHttpsRedirection();
 

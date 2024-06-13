@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace LXP.Data.IRepository
 {
@@ -27,5 +28,6 @@ namespace LXP.Data.IRepository
         object GetAllLearnerDetailsByLearnerId(Guid learnerId);
 
         object GetLearnerEnrolledcourseByLearnerId(Guid learnerId);
+        IDbContextTransaction BeginTransaction();
     }
 }
