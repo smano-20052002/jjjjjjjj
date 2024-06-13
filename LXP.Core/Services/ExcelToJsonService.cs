@@ -76,8 +76,9 @@ namespace LXP.Core.Services
                         continue;
                     }
                 }
-                else if (question.QuestionType == "TF")
-                {
+                else if (question.QuestionType == "T/F")
+                    //else if (question.QuestionType == "TF")
+                        {
                     if (
                         question.Options.Length != 2
                         || !question.Options.Contains("True", StringComparer.OrdinalIgnoreCase)
