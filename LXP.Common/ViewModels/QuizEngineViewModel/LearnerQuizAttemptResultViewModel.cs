@@ -1,6 +1,4 @@
-﻿
-
-namespace LXP.Common.ViewModels.QuizEngineViewModel
+﻿namespace LXP.Common.ViewModels.QuizEngineViewModel
 {
     public class LearnerQuizAttemptResultViewModel
     {
@@ -9,7 +7,6 @@ namespace LXP.Common.ViewModels.QuizEngineViewModel
         public Guid LearnerAttemptId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        // public TimeSpan TimeTaken { get; set; }
         public double TimeTaken { get; set; }
         public int CurrentAttempt { get; set; }
         public int AttemptsRemaining { get; set; }

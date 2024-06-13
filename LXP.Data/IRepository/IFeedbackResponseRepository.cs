@@ -1,5 +1,5 @@
-﻿using LXP.Common.Entities;
-using System;
+﻿using System;
+using LXP.Common.Entities;
 
 namespace LXP.Data.IRepository
 {
@@ -8,10 +8,20 @@ namespace LXP.Data.IRepository
         Quizfeedbackquestion GetQuizFeedbackQuestion(Guid quizFeedbackQuestionId);
         Topicfeedbackquestion GetTopicFeedbackQuestion(Guid topicFeedbackQuestionId);
         Learner GetLearner(Guid learnerId);
-        Feedbackresponse GetExistingQuizFeedbackResponse(Guid quizFeedbackQuestionId, Guid learnerId);
-        Feedbackresponse GetExistingTopicFeedbackResponse(Guid topicFeedbackQuestionId, Guid learnerId);
+        Feedbackresponse GetExistingQuizFeedbackResponse(
+            Guid quizFeedbackQuestionId,
+            Guid learnerId
+        );
+        Feedbackresponse GetExistingTopicFeedbackResponse(
+            Guid topicFeedbackQuestionId,
+            Guid learnerId
+        );
         void AddFeedbackResponse(Feedbackresponse feedbackResponse);
         Guid? GetOptionIdByText(Guid questionId, string optionText);
+
+        //new bug fix 
+        void DeleteFeedbackResponsesByQuizQuestionId(Guid quizFeedbackQuestionId);
+        void DeleteFeedbackResponsesByTopicQuestionId(Guid topicFeedbackQuestionId);
         //LearnerProfile GetLearnerProfile(Guid learnerId);
     }
 }

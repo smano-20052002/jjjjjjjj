@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\praveen.janarthanam\\Desktop\\Integration\\Integrationchecking\\LXP.Common\\LXP.Common.csproj": {}
+    "D:\\Relevantz.LXP\\LXP.Common\\LXP.Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\praveen.janarthanam\\Desktop\\Integration\\Integrationchecking\\LXP.Common\\LXP.Common.csproj": {
+    "D:\\Relevantz.LXP\\LXP.Common\\LXP.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\praveen.janarthanam\\Desktop\\Integration\\Integrationchecking\\LXP.Common\\LXP.Common.csproj",
+        "projectUniqueName": "D:\\Relevantz.LXP\\LXP.Common\\LXP.Common.csproj",
         "projectName": "LXP.Common",
-        "projectPath": "C:\\Users\\praveen.janarthanam\\Desktop\\Integration\\Integrationchecking\\LXP.Common\\LXP.Common.csproj",
-        "packagesPath": "C:\\Users\\praveen.janarthanam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\praveen.janarthanam\\Desktop\\Integration\\Integrationchecking\\LXP.Common\\obj\\",
+        "projectPath": "D:\\Relevantz.LXP\\LXP.Common\\LXP.Common.csproj",
+        "packagesPath": "C:\\Users\\gokul.jawahar\\.nuget\\packages\\",
+        "outputPath": "D:\\Relevantz.LXP\\LXP.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\praveen.janarthanam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gokul.jawahar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

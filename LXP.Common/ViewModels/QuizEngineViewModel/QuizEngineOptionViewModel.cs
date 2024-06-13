@@ -4,5 +4,4 @@
     {
         public string? Option { get; set; }
     }
-
 }

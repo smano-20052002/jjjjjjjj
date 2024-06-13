@@ -1,5 +1,4 @@
 ﻿namespace LXP.Common.ViewModels.QuizEngineViewModel
-
 {
     public class QuizEngineQuestionViewModel
     {

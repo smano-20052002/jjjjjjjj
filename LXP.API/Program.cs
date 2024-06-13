@@ -93,6 +93,8 @@ builder.Services.AddScoped<IQuizReportServices, QuizReportServices>();
 builder.Services.AddScoped<IQuizReportRepository, QuizReportRepository>();
 builder.Services.AddScoped<IFeedbackResponseRepository, FeedbackResponseRepository>();
 builder.Services.AddScoped<IFeedbackResponseService,FeedbackResponseService>();
+builder.Services.AddScoped<IExcelToJsonService, ExcelToJsonService>();
+builder.Services.AddScoped<IQuizQuestionJsonRepository, QuizQuestionJsonRepository>();
 
 builder.Services.AddSingleton<LXPDbContext>();
 builder.Services.AddScoped<ILearnerRepository, LearnerRepository>();

@@ -1,8 +1,8 @@
-﻿using LXP.Common.Entities;
-using LXP.Data.IRepository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LXP.Common.Entities;
+using LXP.Data.IRepository;
 
 namespace LXP.Data.Repository
 {
@@ -17,12 +17,16 @@ namespace LXP.Data.Repository
 
         public Quizfeedbackquestion GetQuizFeedbackQuestion(Guid quizFeedbackQuestionId)
         {
-            return _context.Quizfeedbackquestions.FirstOrDefault(q => q.QuizFeedbackQuestionId == quizFeedbackQuestionId);
+            return _context.Quizfeedbackquestions.FirstOrDefault(q =>
+                q.QuizFeedbackQuestionId == quizFeedbackQuestionId
+            );
         }
 
         public Topicfeedbackquestion GetTopicFeedbackQuestion(Guid topicFeedbackQuestionId)
         {
-            return _context.Topicfeedbackquestions.FirstOrDefault(q => q.TopicFeedbackQuestionId == topicFeedbackQuestionId);
+            return _context.Topicfeedbackquestions.FirstOrDefault(q =>
+                q.TopicFeedbackQuestionId == topicFeedbackQuestionId
+            );
         }
 
         public Learner GetLearner(Guid learnerId)
@@ -30,14 +34,24 @@ namespace LXP.Data.Repository
             return _context.Learners.FirstOrDefault(l => l.LearnerId == learnerId);
         }
 
-        public Feedbackresponse GetExistingQuizFeedbackResponse(Guid quizFeedbackQuestionId, Guid learnerId)
+        public Feedbackresponse GetExistingQuizFeedbackResponse(
+            Guid quizFeedbackQuestionId,
+            Guid learnerId
+        )
         {
-            return _context.Feedbackresponses.FirstOrDefault(r => r.QuizFeedbackQuestionId == quizFeedbackQuestionId && r.LearnerId == learnerId);
+            return _context.Feedbackresponses.FirstOrDefault(r =>
+                r.QuizFeedbackQuestionId == quizFeedbackQuestionId && r.LearnerId == learnerId
+            );
         }
 
-        public Feedbackresponse GetExistingTopicFeedbackResponse(Guid topicFeedbackQuestionId, Guid learnerId)
+        public Feedbackresponse GetExistingTopicFeedbackResponse(
+            Guid topicFeedbackQuestionId,
+            Guid learnerId
+        )
         {
-            return _context.Feedbackresponses.FirstOrDefault(r => r.TopicFeedbackQuestionId == topicFeedbackQuestionId && r.LearnerId == learnerId);
+            return _context.Feedbackresponses.FirstOrDefault(r =>
+                r.TopicFeedbackQuestionId == topicFeedbackQuestionId && r.LearnerId == learnerId
+            );
         }
 
         public void AddFeedbackResponse(Feedbackresponse feedbackResponse)
@@ -59,13 +73,38 @@ namespace LXP.Data.Repository
 
         public Guid? GetOptionIdByText(Guid questionId, string optionText)
         {
-            var option = _context.Feedbackquestionsoptions
-                .FirstOrDefault(o => o.QuizFeedbackQuestionId == questionId && o.OptionText.ToLower() == optionText.ToLower()) ??
-                          _context.Feedbackquestionsoptions
-                .FirstOrDefault(o => o.TopicFeedbackQuestionId == questionId && o.OptionText.ToLower() == optionText.ToLower());
+            var option =
+                _context.Feedbackquestionsoptions.FirstOrDefault(o =>
+                    o.QuizFeedbackQuestionId == questionId
+                    && o.OptionText.ToLower() == optionText.ToLower()
+                )
+                ?? _context.Feedbackquestionsoptions.FirstOrDefault(o =>
+                    o.TopicFeedbackQuestionId == questionId
+                    && o.OptionText.ToLower() == optionText.ToLower()
+                );
 
             return option?.FeedbackQuestionOptionId;
         }
+
+        //new bug fix 
+        public void DeleteFeedbackResponsesByQuizQuestionId(Guid quizFeedbackQuestionId)
+        {
+            var responses = _context.Feedbackresponses
+                .Where(r => r.QuizFeedbackQuestionId == quizFeedbackQuestionId)
+                .ToList();
+            _context.Feedbackresponses.RemoveRange(responses);
+            _context.SaveChanges();
+        }
+
+        public void DeleteFeedbackResponsesByTopicQuestionId(Guid topicFeedbackQuestionId)
+        {
+            var responses = _context.Feedbackresponses
+                .Where(r => r.TopicFeedbackQuestionId == topicFeedbackQuestionId)
+                .ToList();
+            _context.Feedbackresponses.RemoveRange(responses);
+            _context.SaveChanges();
+        }
+
     }
 }
 

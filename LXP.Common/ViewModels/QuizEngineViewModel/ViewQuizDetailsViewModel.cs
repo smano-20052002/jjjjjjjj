@@ -1,7 +1,6 @@
 ﻿namespace LXP.Common.ViewModels.QuizEngineViewModel
 {
     public class ViewQuizDetailsViewModel
-
     {
         public Guid QuizId { get; set; }
         public Guid CourseId { get; set; }

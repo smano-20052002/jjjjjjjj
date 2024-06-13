@@ -6,6 +6,7 @@
         public Guid TopicId { get; set; }
 
         public Guid LearnerAttemptId { get; set; }
-        public List<QuestionResponseViewModel> QuestionResponses { get; set; } = new List<QuestionResponseViewModel>();
+        public List<QuestionResponseViewModel> QuestionResponses { get; set; } =
+            new List<QuestionResponseViewModel>();
     }
 }

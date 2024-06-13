@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LXP.Common.ViewModels.QuizFeedbackQuestionViewModel
+﻿namespace LXP.Common.ViewModels.QuizFeedbackQuestionViewModel
 {
     public class QuizfeedbackquestionViewModel
     {
@@ -14,8 +8,7 @@ namespace LXP.Common.ViewModels.QuizFeedbackQuestionViewModel
 
         public string QuestionType { get; set; } = null!;
 
-        public List<QuizFeedbackQuestionsOptionViewModel> Options { get; set; } = new List<QuizFeedbackQuestionsOptionViewModel>();
+        public List<QuizFeedbackQuestionsOptionViewModel> Options { get; set; } =
+            new List<QuizFeedbackQuestionsOptionViewModel>();
     }
 }
-
-//public int QuestionNo { get; set; }

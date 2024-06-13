@@ -1,10 +1,8 @@
-﻿
-using LXP.Common.ViewModels.TopicFeedbackQuestionViemModel;
+﻿using LXP.Common.Constants;
 using LXP.Common.Entities;
+using LXP.Common.ViewModels.TopicFeedbackQuestionViewModel;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
-using LXP.Common.Constants;
-
 
 namespace LXP.Core.Services
 {
@@ -17,7 +15,10 @@ namespace LXP.Core.Services
             _topicFeedbackRepository = topicFeedbackRepository;
         }
 
-        public Guid AddFeedbackQuestion(TopicFeedbackQuestionViewModel topicFeedbackQuestion, List<TopicFeedbackQuestionsOptionViewModel> options)
+        public Guid AddFeedbackQuestion(
+            TopicFeedbackQuestionViewModel topicFeedbackQuestion,
+            List<TopicFeedbackQuestionsOptionViewModel> options
+        )
         {
             var normalizedQuestionType = topicFeedbackQuestion.QuestionType.ToUpper();
 
@@ -27,16 +28,21 @@ namespace LXP.Core.Services
             }
 
             if (!ValidateOptionsByFeedbackQuestionType(topicFeedbackQuestion.QuestionType, options))
-                throw new ArgumentException("Invalid options for the given question type.", nameof(options));
+                throw new ArgumentException(
+                    "Invalid options for the given question type.",
+                    nameof(options)
+                );
 
             var questionEntity = new Topicfeedbackquestion
             {
                 TopicId = topicFeedbackQuestion.TopicId,
-                QuestionNo = _topicFeedbackRepository.GetNextFeedbackQuestionNo(topicFeedbackQuestion.TopicId),
+                QuestionNo = _topicFeedbackRepository.GetNextFeedbackQuestionNo(
+                    topicFeedbackQuestion.TopicId
+                ),
                 Question = topicFeedbackQuestion.Question,
                 QuestionType = normalizedQuestionType,
                 CreatedBy = "Admin",
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.Now
             };
 
             _topicFeedbackRepository.AddFeedbackQuestion(questionEntity);
@@ -45,13 +51,15 @@ namespace LXP.Core.Services
             {
                 if (options != null && options.Count > 0)
                 {
-                    var optionEntities = options.Select(option => new Feedbackquestionsoption
-                    {
-                        TopicFeedbackQuestionId = questionEntity.TopicFeedbackQuestionId,
-                        OptionText = option.OptionText,
-                        CreatedAt = DateTime.UtcNow,
-                        CreatedBy = "Admin"
-                    }).ToList();
+                    var optionEntities = options
+                        .Select(option => new Feedbackquestionsoption
+                        {
+                            TopicFeedbackQuestionId = questionEntity.TopicFeedbackQuestionId,
+                            OptionText = option.OptionText,
+                            CreatedAt = DateTime.Now,
+                            CreatedBy = "Admin"
+                        })
+                        .ToList();
 
                     _topicFeedbackRepository.AddFeedbackQuestionOptions(optionEntities);
                 }
@@ -65,45 +73,70 @@ namespace LXP.Core.Services
             return _topicFeedbackRepository.GetAllFeedbackQuestions();
         }
 
-        public TopicFeedbackQuestionNoViewModel GetFeedbackQuestionById(Guid topicFeedbackQuestionId)
+        public TopicFeedbackQuestionNoViewModel GetFeedbackQuestionById(
+            Guid topicFeedbackQuestionId
+        )
         {
             return _topicFeedbackRepository.GetFeedbackQuestionById(topicFeedbackQuestionId);
         }
 
-        public bool UpdateFeedbackQuestion(Guid topicFeedbackQuestionId, TopicFeedbackQuestionViewModel topicFeedbackQuestion, List<TopicFeedbackQuestionsOptionViewModel> options)
+        public bool UpdateFeedbackQuestion(
+            Guid topicFeedbackQuestionId,
+            TopicFeedbackQuestionViewModel topicFeedbackQuestion,
+            List<TopicFeedbackQuestionsOptionViewModel> options
+        )
         {
-            var existingQuestion = _topicFeedbackRepository.GetTopicFeedbackQuestionEntityById(topicFeedbackQuestionId);
+            var existingQuestion = _topicFeedbackRepository.GetTopicFeedbackQuestionEntityById(
+                topicFeedbackQuestionId
+            );
             if (existingQuestion != null)
             {
-                if (!existingQuestion.QuestionType.Equals(topicFeedbackQuestion.QuestionType, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !existingQuestion.QuestionType.Equals(
+                        topicFeedbackQuestion.QuestionType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     throw new InvalidOperationException("Question type cannot be modified.");
                 }
 
                 existingQuestion.Question = topicFeedbackQuestion.Question;
-                existingQuestion.ModifiedAt = DateTime.UtcNow;
+                existingQuestion.ModifiedAt = DateTime.Now;
                 existingQuestion.ModifiedBy = "Admin";
                 _topicFeedbackRepository.UpdateFeedbackQuestion(existingQuestion);
 
-                if (existingQuestion.QuestionType == TopicFeedbackQuestionTypes.MultiChoiceQuestion.ToUpper())
+                if (
+                    existingQuestion.QuestionType
+                    == TopicFeedbackQuestionTypes.MultiChoiceQuestion.ToUpper()
+                )
                 {
-                    if (!ValidateOptionsByFeedbackQuestionType(existingQuestion.QuestionType, options))
+                    if (
+                        !ValidateOptionsByFeedbackQuestionType(
+                            existingQuestion.QuestionType,
+                            options
+                        )
+                    )
                     {
                         throw new ArgumentException("Invalid options for the given question type.");
                     }
 
-                    var existingOptions = _topicFeedbackRepository.GetFeedbackQuestionOptionsById(topicFeedbackQuestionId);
+                    var existingOptions = _topicFeedbackRepository.GetFeedbackQuestionOptionsById(
+                        topicFeedbackQuestionId
+                    );
                     _topicFeedbackRepository.RemoveFeedbackQuestionOptions(existingOptions);
 
                     if (options != null && options.Count > 0)
                     {
-                        var optionEntities = options.Select(option => new Feedbackquestionsoption
-                        {
-                            TopicFeedbackQuestionId = topicFeedbackQuestionId,
-                            OptionText = option.OptionText,
-                            CreatedAt = DateTime.UtcNow,
-                            CreatedBy = "Admin"
-                        }).ToList();
+                        var optionEntities = options
+                            .Select(option => new Feedbackquestionsoption
+                            {
+                                TopicFeedbackQuestionId = topicFeedbackQuestionId,
+                                OptionText = option.OptionText,
+                                CreatedAt = DateTime.Now,
+                                CreatedBy = "Admin"
+                            })
+                            .ToList();
 
                         _topicFeedbackRepository.AddFeedbackQuestionOptions(optionEntities);
                     }
@@ -128,6 +161,7 @@ namespace LXP.Core.Services
                         _topicFeedbackRepository.RemoveFeedbackQuestionOptions(relatedOptions);
                     }
 
+                    // Remove the FeedbackQuestion and related FeedbackResponses
                     _topicFeedbackRepository.RemoveFeedbackQuestion(existingQuestion);
                     _topicFeedbackRepository.ReorderQuestionNos(existingQuestion.TopicId, existingQuestion.QuestionNo);
 
@@ -166,7 +200,10 @@ namespace LXP.Core.Services
             }
         }
 
-        private bool ValidateOptionsByFeedbackQuestionType(string questionType, List<TopicFeedbackQuestionsOptionViewModel> options)
+        private bool ValidateOptionsByFeedbackQuestionType(
+            string questionType,
+            List<TopicFeedbackQuestionsOptionViewModel> options
+        )
         {
             questionType = questionType.ToUpper();
 

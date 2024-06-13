@@ -8,11 +8,16 @@ namespace LXP.Core.Services
     public class QuizService : IQuizService
     {
         private readonly IQuizRepository _quizRepository;
+        private readonly IFeedbackResponseRepository _feedbackResponseRepository;//new
+        private readonly IQuizFeedbackService _quizFeedbackService;
 
-        public QuizService(IQuizRepository quizRepository)
+        public QuizService(IQuizRepository quizRepository, IFeedbackResponseRepository feedbackResponseRepository, IQuizFeedbackService quizFeedbackService)
         {
             _quizRepository = quizRepository;
+            _feedbackResponseRepository = feedbackResponseRepository;
+            _quizFeedbackService = quizFeedbackService;
         }
+
 
         public void CreateQuiz(QuizViewModel quiz, Guid topicId)
         {
@@ -22,7 +27,6 @@ namespace LXP.Core.Services
 
             var courseId = topic.CourseId;
 
-            
             var existingQuiz = _quizRepository.GetQuizByTopicId(topicId);
             if (existingQuiz != null)
                 throw new Exception($"A quiz already exists for the topic with id {topicId}.");
@@ -38,8 +42,8 @@ namespace LXP.Core.Services
                 Duration = quiz.Duration,
                 PassMark = quiz.PassMark,
                 AttemptsAllowed = quiz.AttemptsAllowed,
-                CreatedBy = quiz.CreatedBy,
-                CreatedAt = quiz.CreatedAt
+                CreatedBy = "Admin", // Updated
+                CreatedAt = DateTime.Now // Updated
             };
 
             _quizRepository.AddQuiz(quizEntity);
@@ -61,21 +65,64 @@ namespace LXP.Core.Services
             }
         }
 
+        //public void DeleteQuiz(Guid quizId)
+        //{
+        //    var quizEntity = _quizRepository.GetQuizById(quizId);
+        //    if (quizEntity != null)
+        //    {
+        //        var quizFeedbackQuestions = _quizRepository.GetQuizFeedbackQuestionsByQuizId(quizId);
+        //        _quizFeedbackService.DeleteFeedbackQuestionsByQuizId(quizId);
+
+
+        //        foreach (var question in quizFeedbackQuestions)
+        //        {
+        //            _feedbackResponseRepository.DeleteFeedbackResponsesByQuizQuestionId(question.QuizFeedbackQuestionId);
+        //        }
+
+        //        _quizRepository.DeleteQuiz(quizEntity);
+        //    }
+        //}
+
         public void DeleteQuiz(Guid quizId)
         {
             var quizEntity = _quizRepository.GetQuizById(quizId);
             if (quizEntity != null)
             {
+                // Check if there are any learner attempts associated with the quiz
+                var learnerAttempts = _quizRepository.GetLearnerAttemptsByQuizId(quizId);
+                if (learnerAttempts.Any())
+                {
+                    
+                        // Delete learner attempts associated with the quiz
+                        foreach (var attempt in learnerAttempts)
+                        {
+                            _quizRepository.DeleteLearnerAttempt(attempt);
+                        }
+                   
+                }
+
+                // Delete related feedback questions and their options
+                _quizFeedbackService.DeleteFeedbackQuestionsByQuizId(quizId);
+
+                foreach (var question in _quizRepository.GetQuizFeedbackQuestionsByQuizId(quizId))
+                {
+                    _feedbackResponseRepository.DeleteFeedbackResponsesByQuizQuestionId(question.QuizFeedbackQuestionId);
+                }
+
                 _quizRepository.DeleteQuiz(quizEntity);
             }
         }
 
+
         public IEnumerable<QuizViewModel> GetAllQuizzes()
         {
-            return _quizRepository.GetAllQuizzes()
+            return _quizRepository
+                .GetAllQuizzes()
                 .Select(q => new QuizViewModel
                 {
                     QuizId = q.QuizId,
+                    CourseId = q.CourseId,
+                    TopicId = q.TopicId,
                     NameOfQuiz = q.NameOfQuiz,
                     Duration = q.Duration,
                     PassMark = q.PassMark,
@@ -93,6 +140,8 @@ namespace LXP.Core.Services
             return new QuizViewModel
             {
                 QuizId = quiz.QuizId,
+                CourseId = quiz.CourseId,
+                TopicId = quiz.TopicId,
                 NameOfQuiz = quiz.NameOfQuiz,
                 Duration = quiz.Duration,
                 PassMark = quiz.PassMark,
@@ -119,259 +168,3 @@ namespace LXP.Core.Services
         }
     }
 }
-
-// using LXP.Common.ViewModels.QuizViewModel;
-// using LXP.Core.IServices;
-// using LXP.Data.IRepository;
-// using System;
-// using System.Collections.Generic;
-
-// namespace LXP.Core.Services
-// {
-//     public class QuizService : IQuizService
-//     {
-//         private readonly IQuizRepository _quizRepository;
-
-//         public QuizService(IQuizRepository quizRepository)
-//         {
-//             _quizRepository = quizRepository;
-//         }
-
-//         public void CreateQuiz(QuizViewModel quiz, Guid TopicId)
-//         {
-//             _quizRepository.CreateQuiz(quiz, TopicId);
-//         }
-
-//         public void UpdateQuiz(QuizViewModel quiz)
-//         {
-//             _quizRepository.UpdateQuiz(quiz);
-//         }
-
-//         public void DeleteQuiz(Guid quizId)
-//         {
-//             _quizRepository.DeleteQuiz(quizId);
-//         }
-
-//         public IEnumerable<QuizViewModel> GetAllQuizzes()
-//         {
-//             return _quizRepository.GetAllQuizzes();
-//         }
-
-//         public QuizViewModel GetQuizById(Guid quizId)
-//         {
-//             return _quizRepository.GetQuizById(quizId);
-//         }
-
-//         public Guid? GetQuizIdByTopicId(Guid topicId)
-//         {
-//             return _quizRepository.GetQuizIdByTopicId(topicId);
-//         }
-//     }
-// }
-// //using LXP.Common.DTO;
-//using LXP.Core.IServices;
-//using LXP.Data.IRepository;
-//using System;
-//using System.Collections.Generic;
-
-//namespace LXP.Core.Services
-//{
-//    public class QuizService : IQuizService
-//    {
-//        private readonly IQuizRepository _quizRepository;
-
-//        public QuizService(IQuizRepository quizRepository)
-//        {
-//            _quizRepository = quizRepository;
-//        }
-
-//        public void CreateQuiz(QuizDto quiz, Guid TopicId)
-//        {
-//            _quizRepository.CreateQuiz(quiz, TopicId);
-//        }
-
-//        public void UpdateQuiz(QuizDto quiz)
-//        {
-//            _quizRepository.UpdateQuiz(quiz);
-//        }
-
-//        public void DeleteQuiz(Guid quizId)
-//        {
-//            _quizRepository.DeleteQuiz(quizId);
-//        }
-
-//        public IEnumerable<QuizDto> GetAllQuizzes()
-//        {
-//            return _quizRepository.GetAllQuizzes();
-//        }
-
-//        public QuizDto GetQuizById(Guid quizId)
-//        {
-//            return _quizRepository.GetQuizById(quizId);
-//        }
-//    }
-//}
-
-
-////using LXP.Common.DTO;
-////using LXP.Core.IServices;
-////using LXP.Data.IRepository;
-////using System;
-////using System.Collections.Generic;
-////using System.Threading.Tasks;
-
-////namespace LXP.Core.Services
-////{
-////    public class QuizService : IQuizService
-////    {
-////        private readonly IQuizRepository _quizRepository;
-
-////        public QuizService(IQuizRepository quizRepository)
-////        {
-////            _quizRepository = quizRepository;
-////        }
-
-////        public async Task<QuizDto> GetQuizByIdAsync(Guid quizId)
-////        {
-////            return await _quizRepository.GetQuizByIdAsync(quizId);
-////        }
-
-////        public async Task<IEnumerable<QuizDto>> GetAllQuizzesAsync()
-////        {
-////            return await _quizRepository.GetAllQuizzesAsync();
-////        }
-
-////        public async Task UpdateQuizAsync(QuizDto quiz)
-////        {
-////            await _quizRepository.UpdateQuizAsync(quiz);
-////        }
-
-////        public async Task DeleteQuizAsync(Guid quizId)
-////        {
-////            await _quizRepository.DeleteQuizAsync(quizId);
-////        }
-
-////        public async Task CreateQuizAsync(QuizDto quiz, Guid TopicId)
-////        {
-////            await _quizRepository.CreateQuizAsync(quiz, TopicId);
-////        }
-////    }
-////}
-
-
-//////using LXP.Common.DTO;
-//////using LXP.Core.IServices;
-//////using LXP.Data.IRepository;
-//////using System;
-//////using System.Collections.Generic;
-//////using System.Linq;
-//////using System.Text;
-//////using System.Threading.Tasks;
-
-//////namespace LXP.Core.Services
-//////{
-//////    public class QuizService : IQuizService
-//////    {
-//////        private readonly IQuizRepository _quizRepository;
-
-//////        public QuizService(IQuizRepository quizRepository)
-//////        {
-//////            _quizRepository = quizRepository;
-//////        }
-
-
-
-//////        public void UpdateQuiz(QuizDto quiz)
-//////        {
-//////            _quizRepository.UpdateQuiz(quiz);
-//////        }
-
-
-//////        public void DeleteQuiz(Guid quizId)
-//////        {
-//////            _quizRepository.DeleteQuiz(quizId);
-//////        }
-
-//////        public IEnumerable<QuizDto> GetAllQuizzes()
-//////        {
-//////            return _quizRepository.GetAllQuizzes();
-//////        }
-
-//////        public QuizDto GetQuizById(Guid quizId)
-//////        {
-//////            return _quizRepository.GetQuizById(quizId);
-//////        }
-//////        public void CreateQuiz(QuizDto quiz, Guid TopicId)
-//////        {
-//////            _quizRepository.CreateQuiz(quiz, TopicId);
-//////        }
-
-
-//////    }
-//////}
-
-////////public void CreateQuiz(QuizDto quiz)
-////////{
-////////    _quizRepository.CreateQuiz(quiz);
-////////}
-
-///////*
-////// * 
-////// * using LXP.Common.DTO;
-//////using LXP.Core.IServices;
-//////using LXP.Data.IRepository;
-//////using System;
-//////using System.Collections.Generic;
-
-//////namespace LXP.Core.Services
-//////{
-//////    public class QuizService : IQuizService
-//////    {
-//////        private readonly IQuizRepository _quizRepository;
-
-//////        public QuizService(IQuizRepository quizRepository)
-//////        {
-//////            _quizRepository = quizRepository;
-//////        }
-
-//////        public void CreateQuiz(QuizDto quiz)
-//////        {
-//////            _quizRepository.CreateQuiz(quiz);
-//////        }
-
-//////        public void UpdateQuiz(QuizDto quiz)
-//////        {
-//////            _quizRepository.UpdateQuiz(quiz);
-//////        }
-
-//////        public void DeleteQuiz(Guid quizId)
-//////        {
-//////            _quizRepository.DeleteQuiz(quizId);
-//////        }
-
-//////        public IEnumerable<QuizDto> GetAllQuizzes()
-//////        {
-//////            return _quizRepository.GetAllQuizzes();
-//////        }
-
-//////        public QuizDto GetQuizById(Guid quizId)
-//////        {
-//////            return _quizRepository.GetQuizById(quizId);
-//////        }
-//////    }
-//////}
-//////*/
-
-
-
-////////public void CreateQuiz(Guid quizId, Guid courseId, Guid topicId, string nameOfQuiz, int duration, int passMark, string createdBy, DateTime createdAt)
-////////{
-////////    _quizRepository.CreateQuiz(quizId, courseId, topicId, nameOfQuiz, duration, passMark, createdBy, createdAt);
-////////}
-
-
-
-////////public void CreateQuiz(Guid quizId, Guid courseId, Guid topicId, string nameOfQuiz, int duration, int passMark, string createdBy, DateTime createdAt)
-////////{
-////////    _quizRepository.CreateQuiz(quizId, courseId, topicId, nameOfQuiz, duration, passMark, createdBy, createdAt);
-////////}

@@ -1,4 +1,4 @@
-﻿namespace LXP.Common.ViewModels.TopicFeedbackQuestionViemModel
+﻿namespace LXP.Common.ViewModels.TopicFeedbackQuestionViewModel
 {
     public class TopicFeedbackQuestionsOptionViewModel
     {

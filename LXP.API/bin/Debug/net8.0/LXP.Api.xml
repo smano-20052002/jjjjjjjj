@@ -233,7 +233,7 @@
             <summary>
             Deletes a quiz by its ID.
             </summary>
-            <param name="quizId">The unique identifier of the quiz to delete.</param>
+            <param name="quizId" >The unique identifier of the quiz to delete.</param>
             <response code="204">No content on successful deletion.</response>
             <response code="404">Not found if no quiz exists with the provided ID.</response>
         </member>
@@ -256,7 +256,7 @@
             <summary>
             Add a new feedback question
             </summary>
-            <param name="quizfeedbackquestionDto">Feedback question details</param>
+            <param name="quizfeedbackquestion">Feedback question details</param>
             <response code="200">Feedback question added successfully</response>
             <response code="500">Internal server error</response>
         </member>
@@ -281,7 +281,7 @@
             Update a feedback question
             </summary>
             <param name="quizFeedbackQuestionId">Feedback question ID</param>
-            <param name="quizfeedbackquestionDto">Updated feedback question details</param>
+            <param name="quizfeedbackquestion">Updated feedback question details</param>
             <response code="204">Feedback question updated successfully</response>
             <response code="404">Feedback question not found</response>
             <response code="500">Internal server error</response>
@@ -313,11 +313,16 @@
             <response code="404">Feedback questions not found</response>
             <response code="500">Internal server error</response>
         </member>
+        <member name="T:LXP.Api.Controllers.QuizQuestionsController">
+            <summary>
+            Handles operations related to quiz questions.
+            </summary>
+        </member>
         <member name="M:LXP.Api.Controllers.QuizQuestionsController.AddQuestion(LXP.Common.ViewModels.QuizQuestionViewModel.QuizQuestionViewModel)">
             <summary>
             Add a new quiz question.
             </summary>
-            <param name="quizQuestionDto">The details of the quiz question to add.</param>
+            <param name="quizQuestion">The details of the quiz question to add.</param>
             <response code="200">Quiz question added successfully.</response>
             <response code="500">Internal server error.</response>
         </member>
@@ -326,7 +331,7 @@
             Update an existing quiz question.
             </summary>
             <param name="quizQuestionId">The ID of the quiz question to update.</param>
-            <param name="quizQuestionDto">The updated details of the quiz question.</param>
+            <param name="quizQuestion">The updated details of the quiz question.</param>
             <response code="200">Quiz question updated successfully.</response>
             <response code="404">Quiz question not found.</response>
             <response code="500">Internal server error.</response>
@@ -427,7 +432,7 @@
             Get profile id by learner id Ruban
             </summary>
         </member>
-        <member name="M:LXP.Api.Controllers.TopicFeedbackController.AddFeedbackQuestion(LXP.Common.ViewModels.TopicFeedbackQuestionViemModel.TopicFeedbackQuestionViewModel)">
+        <member name="M:LXP.Api.Controllers.TopicFeedbackController.AddFeedbackQuestion(LXP.Common.ViewModels.TopicFeedbackQuestionViewModel.TopicFeedbackQuestionViewModel)">
             <summary>
              Add a new feedback question.
             </summary>
@@ -452,7 +457,7 @@
             <response code="404">Feedback question not found.</response>
             <response code="500">Internal server error.</response>
         </member>
-        <member name="M:LXP.Api.Controllers.TopicFeedbackController.UpdateFeedbackQuestion(System.Guid,LXP.Common.ViewModels.TopicFeedbackQuestionViemModel.TopicFeedbackQuestionViewModel)">
+        <member name="M:LXP.Api.Controllers.TopicFeedbackController.UpdateFeedbackQuestion(System.Guid,LXP.Common.ViewModels.TopicFeedbackQuestionViewModel.TopicFeedbackQuestionViewModel)">
             <summary>
              Update an existing feedback question.
             </summary>
