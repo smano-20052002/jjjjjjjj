@@ -2,8 +2,6 @@
 using LXP.Common.Constants;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using LXP.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers
@@ -40,7 +38,7 @@ namespace LXP.Api.Controllers
             }
         }
 
-        [HttpGet("/lxp/course/{courseId}/topic")]
+        [HttpGet("/lxp/courses/{courseId}/topic")]
         public IActionResult GetAllCourseTopicByCourseId(string courseId)
         {
             var CourseTopic = _courseTopicServices.GetAllTopicDetailsByCourseId(courseId);

@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using LXP.Common.Entities;
-using OfficeOpenXml;
-using LXP.Data.IRepository;
-using LXP.Core.IServices;
-using Microsoft.AspNetCore.Http;
-using LXP.Common.ViewModels.QuizQuestionViewModel;
 using LXP.Common.Validators;
+using LXP.Common.ViewModels.QuizQuestionViewModel;
+using LXP.Core.IServices;
+using LXP.Data.IRepository;
+using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
 
 namespace LXP.Core.Services
 {
@@ -16,10 +16,12 @@ namespace LXP.Core.Services
         private readonly IQuizRepository _quizRepository;
         private readonly BulkQuizQuestionViewModelValidator _validator;
 
-        public BulkQuestionService(IBulkQuestionRepository bulkQuestionRepository,
-                                   IQuizQuestionRepository quizQuestionRepository,
-                                   IQuizRepository quizRepository,
-                                   BulkQuizQuestionViewModelValidator validator)
+        public BulkQuestionService(
+            IBulkQuestionRepository bulkQuestionRepository,
+            IQuizQuestionRepository quizQuestionRepository,
+            IQuizRepository quizRepository,
+            BulkQuizQuestionViewModelValidator validator
+        )
         {
             _bulkQuestionRepository = bulkQuestionRepository;
             _quizQuestionRepository = quizQuestionRepository;
@@ -43,7 +45,8 @@ namespace LXP.Core.Services
                     if (worksheet == null)
                         throw new ArgumentException("Worksheet not found.");
 
-                    List<BulkQuizQuestionViewModel> quizQuestions = new List<BulkQuizQuestionViewModel>();
+                    List<BulkQuizQuestionViewModel> quizQuestions =
+                        new List<BulkQuizQuestionViewModel>();
 
                     // Loop through each row in the worksheet
                     for (int row = 3; row <= worksheet.Dimension.End.Row; row++)
@@ -82,8 +85,18 @@ namespace LXP.Core.Services
                             else if (type == "MSQ")
                             {
                                 int optionCount = GetMSQOptionCount(worksheet, row);
-                                quizQuestion.Options = ExtractOptions(worksheet, row, 4, optionCount);
-                                quizQuestion.CorrectOptions = ExtractOptions(worksheet, row, 12, GetMSQCorrectOptionCount(optionCount));
+                                quizQuestion.Options = ExtractOptions(
+                                    worksheet,
+                                    row,
+                                    4,
+                                    optionCount
+                                );
+                                quizQuestion.CorrectOptions = ExtractOptions(
+                                    worksheet,
+                                    row,
+                                    12,
+                                    GetMSQCorrectOptionCount(optionCount)
+                                );
                                 // Validate MSQ options
                                 if (!ValidateMSQOptions(quizQuestion))
                                     continue;
@@ -99,10 +112,17 @@ namespace LXP.Core.Services
                         // Validate using FluentValidation
                         var validationResult = _validator.Validate(quizQuestion);
                         if (!validationResult.IsValid)
-                            throw new ArgumentException(string.Join(" ", validationResult.Errors.Select(e => e.ErrorMessage)));
+                            throw new ArgumentException(
+                                string.Join(
+                                    " ",
+                                    validationResult.Errors.Select(e => e.ErrorMessage)
+                                )
+                            );
 
                         // Get the next available question number
-                        int nextQuestionNo = await _quizQuestionRepository.GetNextQuestionNoAsync(quizId);
+                        int nextQuestionNo = await _quizQuestionRepository.GetNextQuestionNoAsync(
+                            quizId
+                        );
 
                         // Add question to the repository
                         QuizQuestion questionEntity = new QuizQuestion
@@ -116,7 +136,9 @@ namespace LXP.Core.Services
                         };
 
                         // Save the question to get the QuizQuestionId
-                        await _bulkQuestionRepository.AddQuestionsAsync(new List<QuizQuestion> { questionEntity });
+                        await _bulkQuestionRepository.AddQuestionsAsync(
+                            new List<QuizQuestion> { questionEntity }
+                        );
 
                         // Add options associated with the question
                         List<QuestionOption> optionEntities = new List<QuestionOption>();
@@ -128,7 +150,9 @@ namespace LXP.Core.Services
                                 {
                                     QuizQuestionId = questionEntity.QuizQuestionId,
                                     Option = quizQuestion.Options[i],
-                                    IsCorrect = quizQuestion.CorrectOptions.Contains(quizQuestion.Options[i]),
+                                    IsCorrect = quizQuestion.CorrectOptions.Contains(
+                                        quizQuestion.Options[i]
+                                    ),
                                     CreatedAt = DateTime.UtcNow,
                                     CreatedBy = "Admin",
                                     ModifiedBy = "Admin"
@@ -138,7 +162,10 @@ namespace LXP.Core.Services
                             }
                         }
 
-                        await _bulkQuestionRepository.AddOptionsAsync(optionEntities, questionEntity.QuizQuestionId);
+                        await _bulkQuestionRepository.AddOptionsAsync(
+                            optionEntities,
+                            questionEntity.QuizQuestionId
+                        );
                     }
                     return quizQuestions;
                 }
@@ -148,26 +175,40 @@ namespace LXP.Core.Services
         // Validate question type
         private bool ValidateQuestionType(BulkQuizQuestionViewModel quizQuestion)
         {
-            return quizQuestion.QuestionType == "MCQ" || quizQuestion.QuestionType == "TF" || quizQuestion.QuestionType == "MSQ";
+            return quizQuestion.QuestionType == "MCQ"
+                || quizQuestion.QuestionType == "TF"
+                || quizQuestion.QuestionType == "MSQ";
         }
 
         // Validate T/F options
         private bool ValidateTFOptions(BulkQuizQuestionViewModel quizQuestion)
         {
-            return quizQuestion.Options.Length == 2 &&
-                   !string.IsNullOrEmpty(quizQuestion.Options[0]) &&
-                   !string.IsNullOrEmpty(quizQuestion.Options[1]) &&
-                   !quizQuestion.Options[0].Equals(quizQuestion.Options[1], StringComparison.OrdinalIgnoreCase) &&
-                   (quizQuestion.CorrectOptions.Length == 1 && (quizQuestion.CorrectOptions[0].Equals("true", StringComparison.OrdinalIgnoreCase) || quizQuestion.CorrectOptions[0].Equals("false", StringComparison.OrdinalIgnoreCase)));
+            return quizQuestion.Options.Length == 2
+                && !string.IsNullOrEmpty(quizQuestion.Options[0])
+                && !string.IsNullOrEmpty(quizQuestion.Options[1])
+                && !quizQuestion
+                    .Options[0]
+                    .Equals(quizQuestion.Options[1], StringComparison.OrdinalIgnoreCase)
+                && (
+                    quizQuestion.CorrectOptions.Length == 1
+                    && (
+                        quizQuestion
+                            .CorrectOptions[0]
+                            .Equals("true", StringComparison.OrdinalIgnoreCase)
+                        || quizQuestion
+                            .CorrectOptions[0]
+                            .Equals("false", StringComparison.OrdinalIgnoreCase)
+                    )
+                );
         }
 
         // Validate MCQ options
         private bool ValidateMCQOptions(BulkQuizQuestionViewModel quizQuestion)
         {
-            return quizQuestion.Options.Length == 4 &&
-                   quizQuestion.Options.Distinct().Count() == 4 &&
-                   quizQuestion.CorrectOptions.Length == 1 &&
-                   quizQuestion.Options.Contains(quizQuestion.CorrectOptions[0]);
+            return quizQuestion.Options.Length == 4
+                && quizQuestion.Options.Distinct().Count() == 4
+                && quizQuestion.CorrectOptions.Length == 1
+                && quizQuestion.Options.Contains(quizQuestion.CorrectOptions[0]);
         }
 
         // Validate MSQ options
@@ -176,10 +217,10 @@ namespace LXP.Core.Services
             int optionCount = quizQuestion.Options.Length;
             int correctOptionCount = quizQuestion.CorrectOptions.Length;
 
-            return (optionCount >= 4 && optionCount <= 11) &&
-                   quizQuestion.Options.Distinct().Count() == optionCount &&
-                   (correctOptionCount >= 2 && correctOptionCount <= 3) &&
-                   quizQuestion.CorrectOptions.All(opt => quizQuestion.Options.Contains(opt));
+            return (optionCount >= 4 && optionCount <= 11)
+                && quizQuestion.Options.Distinct().Count() == optionCount
+                && (correctOptionCount >= 2 && correctOptionCount <= 3)
+                && quizQuestion.CorrectOptions.All(opt => quizQuestion.Options.Contains(opt));
         }
 
         // Get the count of MSQ options based on the filled rows
@@ -208,7 +249,12 @@ namespace LXP.Core.Services
         }
 
         // Extract options from Excel worksheet
-        private string[] ExtractOptions(ExcelWorksheet worksheet, int row, int startColumn, int count)
+        private string[] ExtractOptions(
+            ExcelWorksheet worksheet,
+            int row,
+            int startColumn,
+            int count
+        )
         {
             string[] options = new string[count];
             for (int i = 0; i < count; i++)
@@ -220,4 +266,3 @@ namespace LXP.Core.Services
         }
     }
 }
-

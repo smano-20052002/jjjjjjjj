@@ -154,7 +154,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
-                    
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -194,15 +194,16 @@ app.UseStaticFiles(
     }
 );
 
-app.UseStaticFiles(new StaticFileOptions
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(app.Environment.WebRootPath, "Images")
+        ),
 
-{
-
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "Images")),
-
-    RequestPath = "/wwwroot/Images"
-
-});
+        RequestPath = "/wwwroot/Images"
+    }
+);
 
 app.UseCors("_myAllowSpecificOrigins");
 app.UseHttpsRedirection();

@@ -139,10 +139,10 @@ namespace LXP.Data.Repository
                 };
             return result;
         }
+
         public IDbContextTransaction BeginTransaction()
         {
             return _lXPDbContext.Database.BeginTransaction();
         }
-        
     }
 }

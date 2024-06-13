@@ -119,26 +119,26 @@ namespace LXP.Core.Services
             Topic topic = await _courseTopicRepository.GetTopicByTopicId(
                 Guid.Parse(courseTopic.TopicId)
             );
-            List<Topic> topicsListByCourseId = await _courseTopicRepository.GetTopicsbycouresId(
-                topic.CourseId
-            );
-            topicsListByCourseId.Remove(topic);
-            bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
-                topics.Name == courseTopic.Name
-            );
-            if (!isTopicAlreadyExists)
-            {
-                topic.Name = courseTopic.Name;
-                topic.Description = courseTopic.Description;
-                topic.ModifiedBy = courseTopic.ModifiedBy;
-                topic.ModifiedAt = DateTime.Now;
-                await _courseTopicRepository.UpdateCourseTopic(topic);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //List<Topic> topicsListByCourseId = await _courseTopicRepository.GetTopicsbycouresId(
+            //    topic.CourseId
+            //);
+            //topicsListByCourseId.Remove(topic);
+            //bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
+            //    topics.Name == courseTopic.Name
+            //);
+            //if (!isTopicAlreadyExists)
+            //{
+            topic.Name = courseTopic.Name;
+            topic.Description = courseTopic.Description;
+            topic.ModifiedBy = courseTopic.ModifiedBy;
+            topic.ModifiedAt = DateTime.Now;
+            await _courseTopicRepository.UpdateCourseTopic(topic);
+            return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
 
         public async Task<bool> SoftDeleteTopic(string topicId)

@@ -456,7 +456,6 @@ namespace LXP.Data.Repository
                             selectedOption
                         ),
                         CreatedBy = "System"
-                        
                     };
 
                     _dbContext.LearnerAnswers.Add(learnerAnswer);

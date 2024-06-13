@@ -106,17 +106,12 @@ namespace LXP.Data.Repository
                                     MaterialId = material.MaterialId,
                                     MaterialName = material.Name,
                                     MaterialType = materialType.Type,
-                                    FilePath = FileConversion.Conversion(
-                                        material.MaterialType.Type,
-                                        String.Format(
-                                            "{0}://{1}{2}/wwwroot/CourseMaterial/{3}",
-                                            _contextAccessor.HttpContext.Request.Scheme,
-                                            _contextAccessor.HttpContext.Request.Host,
-                                            _contextAccessor.HttpContext.Request.PathBase,
-                                            material.FilePath
-                                        ),
-                                        _environment,
-                                        _contextAccessor
+                                    FilePath = String.Format(
+                                        "{0}://{1}{2}/wwwroot/CourseMaterial/{3}",
+                                        _contextAccessor.HttpContext.Request.Scheme,
+                                        _contextAccessor.HttpContext.Request.Host,
+                                        _contextAccessor.HttpContext.Request.PathBase,
+                                        material.FilePath
                                     ),
 
                                     MaterialDuration = material.Duration
