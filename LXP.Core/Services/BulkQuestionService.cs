@@ -1,13 +1,11 @@
-﻿using System.Data.Common;
-using System.Text;
-using System.Transactions;
+﻿using FluentValidation;
 using LXP.Common.Entities;
-using LXP.Common.Validators;
-using LXP.Common.ViewModels.QuizQuestionViewModel;
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
-using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using LXP.Data.IRepository;
+using LXP.Core.IServices;
+using Microsoft.AspNetCore.Http;
+using LXP.Common.ViewModels.QuizQuestionViewModel;
+using LXP.Common.Validators;
 
 namespace LXP.Core.Services
 {
@@ -18,12 +16,10 @@ namespace LXP.Core.Services
         private readonly IQuizRepository _quizRepository;
         private readonly BulkQuizQuestionViewModelValidator _validator;
 
-        public BulkQuestionService(
-            IBulkQuestionRepository bulkQuestionRepository,
-            IQuizQuestionRepository quizQuestionRepository,
-            IQuizRepository quizRepository,
-            BulkQuizQuestionViewModelValidator validator
-        )
+        public BulkQuestionService(IBulkQuestionRepository bulkQuestionRepository,
+                                   IQuizQuestionRepository quizQuestionRepository,
+                                   IQuizRepository quizRepository,
+                                   BulkQuizQuestionViewModelValidator validator)
         {
             _bulkQuestionRepository = bulkQuestionRepository;
             _quizQuestionRepository = quizQuestionRepository;
@@ -41,33 +37,30 @@ namespace LXP.Core.Services
                 await file.CopyToAsync(stream);
                 stream.Position = 0;
 
-                try
+                using (ExcelPackage package = new ExcelPackage(stream))
                 {
-                    using (ExcelPackage package = new ExcelPackage(stream))
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
+                    if (worksheet == null)
+                        throw new ArgumentException("Worksheet not found.");
+
+                    List<BulkQuizQuestionViewModel> quizQuestions = new List<BulkQuizQuestionViewModel>();
+
+                    // Loop through each row in the worksheet
+                    for (int row = 3; row <= worksheet.Dimension.End.Row; row++)
                     {
-                        ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
-                        if (worksheet == null)
-                            throw new ArgumentException("Worksheet not found.");
+                        string type = worksheet.Cells[row, 2].Value?.ToString();
 
-                        List<BulkQuizQuestionViewModel> quizQuestions =
-                            new List<BulkQuizQuestionViewModel>();
-
-                        // Loop through each row in the worksheet
-                        for (int row = 3; row <= worksheet.Dimension.End.Row; row++)
+                        if (type == "MCQ" || type == "TF" || type == "MSQ")
                         {
-                            string type = worksheet.Cells[row, 2].Value?.ToString();
-                            if (string.IsNullOrEmpty(type) || !ValidateQuestionType(type))
-                                continue;
-
-                            string question = worksheet.Cells[row, 3].Value?.ToString();
-                            if (string.IsNullOrEmpty(question))
-                                continue;
-
                             BulkQuizQuestionViewModel quizQuestion = new BulkQuizQuestionViewModel
                             {
                                 QuestionType = type,
-                                Question = question,
+                                Question = worksheet.Cells[row, 3].Value.ToString(),
                             };
+
+                            // Validate question type
+                            if (!ValidateQuestionType(quizQuestion))
+                                continue;
 
                             // Extract options based on question type
                             if (type == "MCQ")
@@ -78,7 +71,7 @@ namespace LXP.Core.Services
                                 if (!ValidateMCQOptions(quizQuestion))
                                     continue;
                             }
-                            else if (type == "T/F")
+                            else if (type == "TF")
                             {
                                 quizQuestion.Options = ExtractOptions(worksheet, row, 4, 2);
                                 quizQuestion.CorrectOptions = ExtractOptions(worksheet, row, 12, 1);
@@ -89,21 +82,8 @@ namespace LXP.Core.Services
                             else if (type == "MSQ")
                             {
                                 int optionCount = GetMSQOptionCount(worksheet, row);
-                                if (optionCount < 4 || optionCount > 11)
-                                    continue;
-
-                                quizQuestion.Options = ExtractOptions(
-                                    worksheet,
-                                    row,
-                                    4,
-                                    optionCount
-                                );
-                                quizQuestion.CorrectOptions = ExtractOptions(
-                                    worksheet,
-                                    row,
-                                    12,
-                                    GetMSQCorrectOptionCount(optionCount)
-                                );
+                                quizQuestion.Options = ExtractOptions(worksheet, row, 4, optionCount);
+                                quizQuestion.CorrectOptions = ExtractOptions(worksheet, row, 12, GetMSQCorrectOptionCount(optionCount));
                                 // Validate MSQ options
                                 if (!ValidateMSQOptions(quizQuestion))
                                     continue;
@@ -111,135 +91,83 @@ namespace LXP.Core.Services
 
                             quizQuestions.Add(quizQuestion);
                         }
+                    }
 
-                        // Loop through each question and add to repository
-                        foreach (var quizQuestion in quizQuestions)
+                    // Loop through each question and add to repository
+                    foreach (var quizQuestion in quizQuestions)
+                    {
+                        // Validate using FluentValidation
+                        var validationResult = _validator.Validate(quizQuestion);
+                        if (!validationResult.IsValid)
+                            throw new ArgumentException(string.Join(" ", validationResult.Errors.Select(e => e.ErrorMessage)));
+
+                        // Get the next available question number
+                        int nextQuestionNo = await _quizQuestionRepository.GetNextQuestionNoAsync(quizId);
+
+                        // Add question to the repository
+                        QuizQuestion questionEntity = new QuizQuestion
                         {
-                            // Validate using FluentValidation
-                            var validationResult = _validator.Validate(quizQuestion);
-                            if (!validationResult.IsValid)
-                                throw new ArgumentException(
-                                    string.Join(
-                                        " ",
-                                        validationResult.Errors.Select(e => e.ErrorMessage)
-                                    )
-                                );
+                            QuizId = quizId,
+                            QuestionNo = nextQuestionNo,
+                            QuestionType = quizQuestion.QuestionType,
+                            Question = quizQuestion.Question,
+                            CreatedBy = "Admin",
+                            CreatedAt = DateTime.UtcNow
+                        };
 
-                            // Using transaction scope to ensure atomicity
-                            using (
-                                var transaction = new TransactionScope(
-                                    TransactionScopeAsyncFlowOption.Enabled
-                                )
-                            )
+                        // Save the question to get the QuizQuestionId
+                        await _bulkQuestionRepository.AddQuestionsAsync(new List<QuizQuestion> { questionEntity });
+
+                        // Add options associated with the question
+                        List<QuestionOption> optionEntities = new List<QuestionOption>();
+                        for (int i = 0; i < quizQuestion.Options.Length; i++)
+                        {
+                            if (!string.IsNullOrEmpty(quizQuestion.Options[i]))
                             {
-                                // Get the next available question number
-                                int nextQuestionNo =
-                                    await _quizQuestionRepository.GetNextQuestionNoAsync(quizId);
-
-                                // Add question to the repository
-                                QuizQuestion questionEntity = new QuizQuestion
+                                QuestionOption optionEntity = new QuestionOption
                                 {
-                                    QuizId = quizId,
-                                    QuestionNo = nextQuestionNo,
-                                    QuestionType = quizQuestion.QuestionType,
-                                    Question = quizQuestion.Question,
+                                    QuizQuestionId = questionEntity.QuizQuestionId,
+                                    Option = quizQuestion.Options[i],
+                                    IsCorrect = quizQuestion.CorrectOptions.Contains(quizQuestion.Options[i]),
+                                    CreatedAt = DateTime.UtcNow,
                                     CreatedBy = "Admin",
-                                    CreatedAt = DateTime.Now
+                                    ModifiedBy = "Admin"
                                 };
 
-                                // Save the question to get the QuizQuestionId
-                                await _bulkQuestionRepository.AddQuestionsAsync(
-                                    new List<QuizQuestion> { questionEntity }
-                                );
-
-                                // Add options associated with the question
-                                List<QuestionOption> optionEntities = new List<QuestionOption>();
-                                for (int i = 0; i < quizQuestion.Options.Length; i++)
-                                {
-                                    if (!string.IsNullOrEmpty(quizQuestion.Options[i]))
-                                    {
-                                        QuestionOption optionEntity = new QuestionOption
-                                        {
-                                            QuizQuestionId = questionEntity.QuizQuestionId,
-                                            Option = quizQuestion.Options[i],
-                                            IsCorrect = quizQuestion.CorrectOptions.Contains(
-                                                quizQuestion.Options[i]
-                                            ),
-                                            CreatedAt = DateTime.Now,
-                                            CreatedBy = "Admin",
-                                            ModifiedBy = "Admin"
-                                        };
-
-                                        optionEntities.Add(optionEntity);
-                                    }
-                                }
-
-                                await _bulkQuestionRepository.AddOptionsAsync(
-                                    optionEntities,
-                                    questionEntity.QuizQuestionId
-                                );
-
-                                // Complete the transaction
-                                transaction.Complete();
+                                optionEntities.Add(optionEntity);
                             }
                         }
-                        return quizQuestions;
+
+                        await _bulkQuestionRepository.AddOptionsAsync(optionEntities, questionEntity.QuizQuestionId);
                     }
-                }
-                catch (DbException dbEx)
-                {
-                    // Log and handle database exceptions
-                    throw new ArgumentException(
-                        "Database operation failed. Please try again later.",
-                        dbEx
-                    );
-                }
-                catch (Exception ex)
-                {
-                    // Log and handle generic exceptions
-                    throw new ArgumentException(
-                        "An error occurred while processing the file. Please ensure the file is in the correct format.",
-                        ex
-                    );
+                    return quizQuestions;
                 }
             }
         }
 
         // Validate question type
-        private bool ValidateQuestionType(string questionType)
+        private bool ValidateQuestionType(BulkQuizQuestionViewModel quizQuestion)
         {
-            return questionType == "MCQ" || questionType == "T/F" || questionType == "MSQ";
+            return quizQuestion.QuestionType == "MCQ" || quizQuestion.QuestionType == "TF" || quizQuestion.QuestionType == "MSQ";
         }
 
         // Validate T/F options
         private bool ValidateTFOptions(BulkQuizQuestionViewModel quizQuestion)
         {
-            return quizQuestion.Options.Length == 2
-                && !string.IsNullOrEmpty(quizQuestion.Options[0])
-                && !string.IsNullOrEmpty(quizQuestion.Options[1])
-                && !quizQuestion
-                    .Options[0]
-                    .Equals(quizQuestion.Options[1], StringComparison.OrdinalIgnoreCase)
-                && (
-                    quizQuestion.CorrectOptions.Length == 1
-                    && (
-                        quizQuestion
-                            .CorrectOptions[0]
-                            .Equals("true", StringComparison.OrdinalIgnoreCase)
-                        || quizQuestion
-                            .CorrectOptions[0]
-                            .Equals("false", StringComparison.OrdinalIgnoreCase)
-                    )
-                );
+            return quizQuestion.Options.Length == 2 &&
+                   !string.IsNullOrEmpty(quizQuestion.Options[0]) &&
+                   !string.IsNullOrEmpty(quizQuestion.Options[1]) &&
+                   !quizQuestion.Options[0].Equals(quizQuestion.Options[1], StringComparison.OrdinalIgnoreCase) &&
+                   (quizQuestion.CorrectOptions.Length == 1 && (quizQuestion.CorrectOptions[0].Equals("true", StringComparison.OrdinalIgnoreCase) || quizQuestion.CorrectOptions[0].Equals("false", StringComparison.OrdinalIgnoreCase)));
         }
 
         // Validate MCQ options
         private bool ValidateMCQOptions(BulkQuizQuestionViewModel quizQuestion)
         {
-            return quizQuestion.Options.Length == 4
-                && quizQuestion.Options.Distinct().Count() == 4
-                && quizQuestion.CorrectOptions.Length == 1
-                && quizQuestion.Options.Contains(quizQuestion.CorrectOptions[0]);
+            return quizQuestion.Options.Length == 4 &&
+                   quizQuestion.Options.Distinct().Count() == 4 &&
+                   quizQuestion.CorrectOptions.Length == 1 &&
+                   quizQuestion.Options.Contains(quizQuestion.CorrectOptions[0]);
         }
 
         // Validate MSQ options
@@ -248,10 +176,10 @@ namespace LXP.Core.Services
             int optionCount = quizQuestion.Options.Length;
             int correctOptionCount = quizQuestion.CorrectOptions.Length;
 
-            return (optionCount >= 4 && optionCount <= 11)
-                && quizQuestion.Options.Distinct().Count() == optionCount
-                && (correctOptionCount >= 2 && correctOptionCount <= 3)
-                && quizQuestion.CorrectOptions.All(opt => quizQuestion.Options.Contains(opt));
+            return (optionCount >= 4 && optionCount <= 11) &&
+                   quizQuestion.Options.Distinct().Count() == optionCount &&
+                   (correctOptionCount >= 2 && correctOptionCount <= 3) &&
+                   quizQuestion.CorrectOptions.All(opt => quizQuestion.Options.Contains(opt));
         }
 
         // Get the count of MSQ options based on the filled rows
@@ -280,12 +208,7 @@ namespace LXP.Core.Services
         }
 
         // Extract options from Excel worksheet
-        private string[] ExtractOptions(
-            ExcelWorksheet worksheet,
-            int row,
-            int startColumn,
-            int count
-        )
+        private string[] ExtractOptions(ExcelWorksheet worksheet, int row, int startColumn, int count)
         {
             string[] options = new string[count];
             for (int i = 0; i < count; i++)
@@ -297,3 +220,4 @@ namespace LXP.Core.Services
         }
     }
 }
+

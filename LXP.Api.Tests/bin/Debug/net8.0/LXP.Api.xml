@@ -95,7 +95,7 @@
         </member>
         <member name="M:LXP.Api.Controllers.CourseController.Coursestatus(LXP.Common.ViewModels.Coursestatus)">
             <summary>
-            Update the course status 
+            Update the course status
             </summary>
             <response code="200">Success</response>
             <response code="405">Internal server Error</response>
@@ -138,24 +138,24 @@
         </member>
         <member name="M:LXP.Api.Controllers.ForgetPasswordController.ForgetPassword(LXP.Common.ViewModels.RandomPasswordEmail)">
             <summary>
-            Forget Password with Random passwordgenerator that sends to user Email 
+            Forget Password with Random passwordgenerator that sends to user Email
             </summary>
         </member>
         <member name="M:LXP.Api.Controllers.LearnerAttemptController.GetScoreByTopicIdAndLearnerId(System.String)">
             <summary>
-             Getting score by Topic Id and Learner ID  ---------------Ruban code    
+             Getting score by Topic Id and Learner ID  ---------------Ruban code
             </summary>
         </member>
         <member name="M:LXP.Api.Controllers.LearnerController.GetAllLearners">
             <summary>
-            Getting All learners 
+            Getting All learners
             </summary>
             <response code="200">Success</response>
-            <response code="404">Internal server Error</response>   
+            <response code="404">Internal server Error</response>
         </member>
         <member name="M:LXP.Api.Controllers.LearnerController.GetAllLearnerDetailsByLearnerId(System.Guid)">
             <summary>
-            Learner profile by learner id 
+            Learner profile by learner id
             </summary>
             <response code="200">Success</response>
         </member>
@@ -387,13 +387,13 @@
         </member>
         <member name="M:LXP.Api.Controllers.RegistrationController.Registration(LXP.Common.ViewModels.RegisterUserViewModel)">
             <summary>
-            Post the learner and profile details 
+            Post the learner and profile details
             </summary>
             
         </member>
         <member name="M:LXP.Api.Controllers.RegistrationController.GetAllCategory">
             <summary>
-            Fetch all the learner details 
+            Fetch all the learner details
             </summary>
             
         </member>
