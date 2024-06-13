@@ -12,11 +12,12 @@ namespace LXP.Api.Controllers
     public class DashboardController : BaseController
     {
         private readonly IDashboardService _dashboardService;
+
         public DashboardController(IDashboardService dashboardService)
         {
             _dashboardService = dashboardService;
         }
-        
+
         ///<summary>
         ///getting total number of enrollments according to month
         ///</summary>
@@ -82,7 +83,5 @@ namespace LXP.Api.Controllers
             var GetRecentfeedbackResponses = _dashboardService.GetRecentfeedbackResponses();
             return Ok(CreateSuccessResponse(GetRecentfeedbackResponses));
         }
-
-
     }
 }

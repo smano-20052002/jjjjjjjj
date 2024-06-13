@@ -1,10 +1,10 @@
-﻿using LXP.Common.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
 
 namespace LXP.Data.IRepository
 {
@@ -16,7 +16,10 @@ namespace LXP.Data.IRepository
         Task<LearnerProgress> GetLearnerProgressByMaterialId(Guid learnerId, Guid materialId);
 
         void UpdateLearnerProgress(LearnerProgress progress);
-        Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(Guid LearnerId, Guid MaterialId);
+        Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(
+            Guid LearnerId,
+            Guid MaterialId
+        );
 
         Task<List<LearnerProgress>> GetMaterialByTopic(Guid topicId, Guid learnerId);
         Task CalculateAndUpdateCourseCompletionAsync(Guid learnerId);

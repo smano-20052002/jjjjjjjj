@@ -1,5 +1,4 @@
-﻿
-//using LXP.Data.Repository;
+﻿//using LXP.Data.Repository;
 //using System;
 //using LXP.Common;
 //using System.Collections.Generic;
@@ -135,23 +134,22 @@
 //    }
 
 
-using LXP.Data.Repository;
 using System;
-using LXP.Common;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using LXP.Data.IRepository;
-using System.Threading.Tasks;
-using LXP.Common.ViewModels;
-using LXP.Data;
-using LXP.Core.IServices;
-using LXP.Common.Entities;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using LXP.Common.Utils;
 using System.Net.Http;
-
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
+using LXP.Common;
+using LXP.Common.Entities;
+using LXP.Common.Utils;
+using LXP.Common.ViewModels;
+using LXP.Core.IServices;
+using LXP.Data;
+using LXP.Data.IRepository;
+using LXP.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace LXP.Core.Services
 {
@@ -160,37 +158,50 @@ namespace LXP.Core.Services
         private readonly ILearnerRepository _learnerRepository;
         private readonly IProfileRepository _profileRepository;
         private readonly IProfilePasswordHistoryRepository _profilePasswordHistoryRepository;
-        // private readonly IPasswordHistoryRepository _passwordHistoryRepository;
-        private Mapper _learnerMapper;  //Mapper1
 
-        public LearnerService(ILearnerRepository learnerRepository, IProfileRepository profileRepository, IProfilePasswordHistoryRepository profilePasswordHistoryRepository)
+        // private readonly IPasswordHistoryRepository _passwordHistoryRepository;
+        private Mapper _learnerMapper; //Mapper1
+
+        public LearnerService(
+            ILearnerRepository learnerRepository,
+            IProfileRepository profileRepository,
+            IProfilePasswordHistoryRepository profilePasswordHistoryRepository
+        )
         {
             this._learnerRepository = learnerRepository;
             this._profileRepository = profileRepository;
             this._profilePasswordHistoryRepository = profilePasswordHistoryRepository;
-            var _configCategory = new MapperConfiguration(cfg => cfg.CreateMap<Learner, GetLearnerViewModel>().ReverseMap());//mapper 2
-            _learnerMapper = new Mapper(_configCategory);// mapper 3
+            var _configCategory = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Learner, GetLearnerViewModel>().ReverseMap()
+            ); //mapper 2
+            _learnerMapper = new Mapper(_configCategory); // mapper 3
             _profilePasswordHistoryRepository = profilePasswordHistoryRepository;
         }
 
         public async Task<bool> LearnerRegistration(RegisterUserViewModel registerUserViewModel)
         {
-            bool isLearnerExists = await _learnerRepository.AnyLearnerByEmail(registerUserViewModel.email);
+            bool isLearnerExists = await _learnerRepository.AnyLearnerByEmail(
+                registerUserViewModel.email
+            );
             if (!isLearnerExists)
             {
                 Learner newlearner = new Learner()
                 {
                     LearnerId = Guid.NewGuid(),
                     Email = registerUserViewModel.email,
-                    Password = SHA256Encrypt.ComputePasswordToSha256Hash(registerUserViewModel.password),
+                    Password = SHA256Encrypt.ComputePasswordToSha256Hash(
+                        registerUserViewModel.password
+                    ),
                     Role = registerUserViewModel.role,
                     UnblockRequest = false,
                     AccountStatus = true,
                     UserLastLogin = DateTime.Now,
                     CreatedAt = DateTime.Now,
-                    CreatedBy = $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
+                    CreatedBy =
+                        $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
                     ModifiedAt = DateTime.Now,
-                    ModifiedBy = $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}"
+                    ModifiedBy =
+                        $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}"
                 };
                 _learnerRepository.AddLearner(newlearner);
                 Learner learner = _learnerRepository.GetLearnerByLearnerEmail(newlearner.Email);
@@ -204,32 +215,30 @@ namespace LXP.Core.Services
                     ContactNumber = registerUserViewModel.contactNumber,
                     Stream = registerUserViewModel.stream,
                     CreatedAt = DateTime.Now,
-                    CreatedBy = $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
+                    CreatedBy =
+                        $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
                     LearnerId = learner.LearnerId,
-                    ModifiedBy = $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
+                    ModifiedBy =
+                        $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
                 };
-
 
                 PasswordHistory passwordHistory = new PasswordHistory()
                 {
-
-
                     PasswordId = Guid.NewGuid(),
 
                     LearnerId = learner.LearnerId,
 
                     NewPassword = learner.Password,
 
-                    CreatedBy = $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
+                    CreatedBy =
+                        $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}",
 
                     CreatedAt = DateTime.Now,
 
                     ModifiedAt = DateTime.Now,
 
-                    ModifiedBy = $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}"
-
-
-
+                    ModifiedBy =
+                        $"{registerUserViewModel.firstName} {registerUserViewModel.lastName}"
                 };
 
                 _profilePasswordHistoryRepository.AddPasswordHistory1(passwordHistory);
@@ -244,7 +253,10 @@ namespace LXP.Core.Services
 
         public async Task<List<GetLearnerViewModel>> GetAllLearner()
         {
-            List<GetLearnerViewModel> learner = _learnerMapper.Map<List<Learner>, List<GetLearnerViewModel>>(await _learnerRepository.GetAllLearner()); //mapper 4
+            List<GetLearnerViewModel> learner = _learnerMapper.Map<
+                List<Learner>,
+                List<GetLearnerViewModel>
+            >(await _learnerRepository.GetAllLearner()); //mapper 4
             return learner;
         }
 
@@ -261,9 +273,7 @@ namespace LXP.Core.Services
 
         public Learner GetLearnerById(string id)
         {
-
             return _learnerRepository.GetLearnerDetailsByLearnerId(Guid.Parse(id));
-
         }
 
         public async Task<LearnerAndProfileViewModel> LearnerGetLearnerById(string id)
@@ -272,12 +282,10 @@ namespace LXP.Core.Services
             var learner = _learnerRepository.GetLearnerDetailsByLearnerId(learnerId);
             var profile = await _profileRepository.GetProfileByLearnerId(learnerId);
 
-
             var result = new LearnerAndProfileViewModel
             {
                 Email = learner.Email,
                 Role = learner.Role,
-
 
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
@@ -285,11 +293,9 @@ namespace LXP.Core.Services
                 Gender = profile.Gender,
                 ContactNumber = profile.ContactNumber,
                 Stream = profile.Stream,
-
             };
 
             return result;
         }
-
     }
 }

@@ -9,7 +9,6 @@ namespace LXP.Api.Controllers
     ///</summary>
     [Route("api/[controller]")]
     [ApiController]
-    
     public class QuizQuestionsController : BaseController
     {
         private readonly IQuizQuestionService _quizQuestionService;

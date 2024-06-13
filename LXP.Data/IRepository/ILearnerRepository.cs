@@ -22,7 +22,6 @@ namespace LXP.Data.IRepository
 
         Task UpdateLearner(Learner learner);
 
-
         public IEnumerable<AllLearnersViewModel> GetLearners();
 
         object GetAllLearnerDetailsByLearnerId(Guid learnerId);

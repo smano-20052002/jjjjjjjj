@@ -1,18 +1,18 @@
-﻿using LXP.Common.Entities;
-using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LXP.Data.IRepository;
-using System.ComponentModel;
 using AutoMapper;
+using LXP.Common.Entities;
+using LXP.Common.ViewModels;
+using LXP.Core.IServices;
+using LXP.Data.IRepository;
 
 namespace LXP.Core.Services
 {
-    public class CategoryServices:ICategoryServices
+    public class CategoryServices : ICategoryServices
     {
         private readonly ICategoryRepository _categoryRepository;
         private Mapper _categoryMapper;
@@ -20,14 +20,17 @@ namespace LXP.Core.Services
         public CategoryServices(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
-            var _configCategory=new MapperConfiguration(cfg=>cfg.CreateMap<CourseCategory,CourseCategoryListViewModel>().ReverseMap());
+            var _configCategory = new MapperConfiguration(cfg =>
+                cfg.CreateMap<CourseCategory, CourseCategoryListViewModel>().ReverseMap()
+            );
             _categoryMapper = new Mapper(_configCategory);
-
         }
 
         public async Task<bool> AddCategory(CourseCategoryViewModel category)
         {
-            bool isCategoryExists = await _categoryRepository.AnyCategoryByCategoryName(category.Category);
+            bool isCategoryExists = await _categoryRepository.AnyCategoryByCategoryName(
+                category.Category
+            );
             if (!isCategoryExists)
             {
                 CourseCategory courseCategory = new CourseCategory()
@@ -43,18 +46,24 @@ namespace LXP.Core.Services
             else
             {
                 return false;
-
             }
-
         }
+
         public async Task<List<CourseCategoryListViewModel>> GetAllCategory()
         {
-            List<CourseCategoryListViewModel> category = _categoryMapper.Map<List<CourseCategory>, List<CourseCategoryListViewModel>>(await _categoryRepository.GetAllCategory());
+            List<CourseCategoryListViewModel> category = _categoryMapper.Map<
+                List<CourseCategory>,
+                List<CourseCategoryListViewModel>
+            >(await _categoryRepository.GetAllCategory());
             return category;
         }
+
         public Task<CourseCategoryListViewModel> GetCategoryByCategoryName(string categoryName)
         {
-            CourseCategoryListViewModel category = _categoryMapper.Map<CourseCategory, CourseCategoryListViewModel>(_categoryRepository.GetCategoryByCategoryName(categoryName));
+            CourseCategoryListViewModel category = _categoryMapper.Map<
+                CourseCategory,
+                CourseCategoryListViewModel
+            >(_categoryRepository.GetCategoryByCategoryName(categoryName));
             return Task.FromResult(category);
         }
     }

@@ -1,7 +1,4 @@
-﻿
-
-
-using LXP.Common.Entities;
+﻿using LXP.Common.Entities;
 using LXP.Common.ViewModels.QuizFeedbackQuestionViewModel;
 using LXP.Data.IRepository;
 
@@ -86,7 +83,9 @@ namespace LXP.Data.Repository
 
         public Quizfeedbackquestion GetFeedbackQuestionEntityById(Guid quizFeedbackQuestionId)
         {
-            return _dbContext.Quizfeedbackquestions.FirstOrDefault(q => q.QuizFeedbackQuestionId == quizFeedbackQuestionId);
+            return _dbContext.Quizfeedbackquestions.FirstOrDefault(q =>
+                q.QuizFeedbackQuestionId == quizFeedbackQuestionId
+            );
         }
 
         public void UpdateFeedbackQuestion(Quizfeedbackquestion questionEntity)
@@ -103,7 +102,11 @@ namespace LXP.Data.Repository
 
         public List<Feedbackquestionsoption> GetFeedbackQuestionOptions(Guid quizFeedbackQuestionId)
         {
-            return _dbContext.Feedbackquestionsoptions.Where(o => o.QuizFeedbackQuestionId == quizFeedbackQuestionId).ToList();
+            return _dbContext
+                .Feedbackquestionsoptions.Where(o =>
+                    o.QuizFeedbackQuestionId == quizFeedbackQuestionId
+                )
+                .ToList();
         }
 
         public void DeleteFeedbackQuestionOptions(List<Feedbackquestionsoption> options)
@@ -120,7 +123,9 @@ namespace LXP.Data.Repository
 
         public List<Feedbackresponse> GetFeedbackResponsesByQuestionId(Guid quizFeedbackQuestionId)
         {
-            return _dbContext.Feedbackresponses.Where(r => r.QuizFeedbackQuestionId == quizFeedbackQuestionId).ToList();
+            return _dbContext
+                .Feedbackresponses.Where(r => r.QuizFeedbackQuestionId == quizFeedbackQuestionId)
+                .ToList();
         }
     }
 }

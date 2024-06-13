@@ -1,8 +1,8 @@
-﻿using LXP.Common.ViewModels;
+﻿using System.Collections.Concurrent;
+using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Concurrent;
 
 namespace LXP.Api.Controllers
 {
@@ -11,7 +11,8 @@ namespace LXP.Api.Controllers
     public class EmailController : ControllerBase
     {
         private readonly IEmailService _emailService;
-        private static ConcurrentDictionary<string, string> emailOtpMap = new ConcurrentDictionary<string, string>();
+        private static ConcurrentDictionary<string, string> emailOtpMap =
+            new ConcurrentDictionary<string, string>();
         private static DateTime _currentTIme;
 
         public EmailController(IEmailService emailService)
@@ -51,17 +52,21 @@ namespace LXP.Api.Controllers
             {
                 _currentTIme = DateTime.Now;
                 // Return the generated OTP along with a success message
-                return Ok(new { Message = "Email sent successfully", Email = email, OTP = sOTP });
+                return Ok(
+                    new
+                    {
+                        Message = "Email sent successfully",
+                        Email = email,
+                        OTP = sOTP
+                    }
+                );
             }
             else
             {
                 // Handle failure (e.g., return an error response)
                 return BadRequest(new { Message = "Error sending email" });
             }
-
-
         }
-
 
         ///<summary>
         ///Validating the OTP
@@ -79,7 +84,6 @@ namespace LXP.Api.Controllers
                 // Check if the OTP is still valid (within 2 minutes)
                 TimeSpan timeDifference = currentTimestamp - storedTimestamp;
 
-
                 //if (otpData == userOTP)
                 //{
                 //    Console.WriteLine($"OTP verified successfully for email: {email}");
@@ -92,7 +96,9 @@ namespace LXP.Api.Controllers
                     {
                         string removeEmail = "";
                         emailOtpMap.Remove(otpverify.Email, out removeEmail);
-                        Console.WriteLine($"OTP verified successfully for email: {otpverify.Email}");
+                        Console.WriteLine(
+                            $"OTP verified successfully for email: {otpverify.Email}"
+                        );
 
                         return Ok("OTP verified successfully!");
                     }
@@ -102,7 +108,6 @@ namespace LXP.Api.Controllers
                         Console.WriteLine($"Invalid OTP provided for email: {otpverify.Email}");
                         return BadRequest("Invalid OTP provided.");
                     }
-
                 }
                 else
                 {
@@ -110,7 +115,9 @@ namespace LXP.Api.Controllers
                     string removeEmail = "";
                     emailOtpMap.Remove(otpverify.Email, out removeEmail);
                     Console.WriteLine($"OTP has expired for email: {otpverify.Email}");
-                    return BadRequest("OTP has expired." + storedTimestamp + "#####" + _currentTIme);
+                    return BadRequest(
+                        "OTP has expired." + storedTimestamp + "#####" + _currentTIme
+                    );
                 }
             }
             else
@@ -120,7 +127,6 @@ namespace LXP.Api.Controllers
                 return BadRequest("No OTP data found for the provided email.");
             }
         }
-
     }
 }
 

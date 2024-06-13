@@ -1,9 +1,9 @@
-﻿using LXP.Common.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
 
 namespace LXP.Common.ViewModels
 {
@@ -14,6 +14,7 @@ namespace LXP.Common.ViewModels
         ///</summary>
 
         public Guid CourseId { get; set; }
+
         ///<summary>
         ///Course Name
         /// </summary>
@@ -53,11 +54,9 @@ namespace LXP.Common.ViewModels
         /// </summary>
         public string? ProfilePhoto { get; set; }
 
-
         ///<summary>
         ///Email ID
         /// </summary>
         public string? EmailId { get; set; }
     }
-
 }

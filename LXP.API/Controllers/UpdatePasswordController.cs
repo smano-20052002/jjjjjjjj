@@ -9,7 +9,6 @@ namespace LXP.Api.Controllers
     [ApiController]
     public class UpdatePasswordController : ControllerBase
     {
-
         private readonly IUpdatePasswordService _services;
 
         public UpdatePasswordController(IUpdatePasswordService services)
@@ -17,22 +16,17 @@ namespace LXP.Api.Controllers
             _services = services;
         }
 
-
         ///<summary>
         ///Update Password once user use the Forgot Password operation
         ///</summary>
 
 
         [HttpPut]
-
         public ActionResult LeanerUpdatePassword([FromBody] UpdatePassword updatepassword)
         {
-            var result= _services.UpdatePassword(updatepassword);
+            var result = _services.UpdatePassword(updatepassword);
 
-            return Ok (result);
+            return Ok(result);
         }
-
     }
 }
-
-

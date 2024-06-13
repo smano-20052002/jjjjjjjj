@@ -6,5 +6,3 @@
         public const string DescriptiveQuestion = "Descriptive";
     }
 }
-
-

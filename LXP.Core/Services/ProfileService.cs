@@ -19,7 +19,7 @@
 
 //        public ProfileService( IProfileRepository profileRepository)
 //        {
-            
+
 //            this._profileRepository = profileRepository;
 //            var _configCategory = new MapperConfiguration(cfg => cfg.CreateMap<LearnerProfile, GetProfileViewModel>().ReverseMap());
 //            _learnerProfileMapper = new Mapper(_configCategory);
@@ -35,7 +35,7 @@
 //        public LearnerProfile GetLearnerProfileById(string id) {
 
 //            return _profileRepository.GetLearnerprofileDetailsByLearnerprofileId(Guid.Parse(id));
-        
+
 //        }
 
 //    }
@@ -50,6 +50,11 @@
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
@@ -59,11 +64,6 @@ using LXP.Data.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LXP.Core.Services
 {
@@ -73,29 +73,38 @@ namespace LXP.Core.Services
         private Mapper _learnerProfileMapper;
         private readonly IWebHostEnvironment _environment;
         private readonly IHttpContextAccessor _contextAccessor;
-        public ProfileService(IProfileRepository profileRepository, IWebHostEnvironment environment, IHttpContextAccessor httpContextAccessor)
-        {
 
+        public ProfileService(
+            IProfileRepository profileRepository,
+            IWebHostEnvironment environment,
+            IHttpContextAccessor httpContextAccessor
+        )
+        {
             this._profileRepository = profileRepository;
-            var _configCategory = new MapperConfiguration(cfg => cfg.CreateMap<LearnerProfile, GetProfileViewModel>().ReverseMap());
+            var _configCategory = new MapperConfiguration(cfg =>
+                cfg.CreateMap<LearnerProfile, GetProfileViewModel>().ReverseMap()
+            );
             _learnerProfileMapper = new Mapper(_configCategory);
             _environment = environment;
             _contextAccessor = httpContextAccessor;
-
         }
 
         public async Task<List<GetProfileViewModel>> GetAllLearnerProfile()
         {
-            List<GetProfileViewModel> learnerProfile = _learnerProfileMapper.Map<List<LearnerProfile>, List<GetProfileViewModel>>(await _profileRepository.GetAllLearnerProfile());
+            List<GetProfileViewModel> learnerProfile = _learnerProfileMapper.Map<
+                List<LearnerProfile>,
+                List<GetProfileViewModel>
+            >(await _profileRepository.GetAllLearnerProfile());
             return learnerProfile;
         }
 
         public LearnerProfile GetLearnerProfileById(string id)
         {
-
             //return _profileRepository.GetLearnerprofileDetailsByLearnerprofileId(Guid.Parse(id));
 
-            var profile = _profileRepository.GetLearnerprofileDetailsByLearnerprofileId(Guid.Parse(id));
+            var profile = _profileRepository.GetLearnerprofileDetailsByLearnerprofileId(
+                Guid.Parse(id)
+            );
             var profileIndividual = new LearnerProfile
             {
                 ProfileId = profile.ProfileId,
@@ -106,19 +115,23 @@ namespace LXP.Core.Services
                 Gender = profile.Gender,
                 Stream = profile.Stream,
                 ContactNumber = profile.ContactNumber,
-                ProfilePhoto = String.Format("{0}://{1}{2}/wwwroot/CourseThumbnailImages/{3}",
-                                             _contextAccessor.HttpContext.Request.Scheme,
-                                             _contextAccessor.HttpContext.Request.Host,
-                                             _contextAccessor.HttpContext.Request.PathBase,
-                                             profile.ProfilePhoto)
+                ProfilePhoto = String.Format(
+                    "{0}://{1}{2}/wwwroot/CourseThumbnailImages/{3}",
+                    _contextAccessor.HttpContext.Request.Scheme,
+                    _contextAccessor.HttpContext.Request.Host,
+                    _contextAccessor.HttpContext.Request.PathBase,
+                    profile.ProfilePhoto
+                )
             };
             return profileIndividual;
         }
 
-
         public async Task UpdateProfile(UpdateProfileViewModel model)
         {
-            LearnerProfile learnerProfile = _profileRepository.GetLearnerprofileDetailsByLearnerprofileId(Guid.Parse(model.ProfileId));
+            LearnerProfile learnerProfile =
+                _profileRepository.GetLearnerprofileDetailsByLearnerprofileId(
+                    Guid.Parse(model.ProfileId)
+                );
 
             if (model.ProfilePhoto != null)
             {
@@ -146,12 +159,9 @@ namespace LXP.Core.Services
             await _profileRepository.UpdateProfile(learnerProfile);
         }
 
-
         public Guid GetprofileId(Guid learnerId)
         {
             return _profileRepository.GetProfileId(learnerId);
         }
-
-
     }
 }

@@ -1,24 +1,23 @@
-﻿using AutoMapper;
-using LXP.Common.Entities;
-using LXP.Common.Utils;
-using LXP.Common.ViewModels;
-using LXP.Data.IRepository;
-using Mysqlx;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
+using AutoMapper;
+using LXP.Common.Entities;
+using LXP.Common.Utils;
+using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data;
+using LXP.Data.IRepository;
+using Mysqlx;
+
 namespace LXP.Core.Services
 {
     public class LoginService : ILoginService
     {
-
         private readonly ILoginRepository _repository;
         private Mapper _moviemapper;
 
@@ -35,43 +34,37 @@ namespace LXP.Core.Services
             _dbcontext = dbcontext;
         }
 
-
-
         public async Task<LoginRole> LoginLearner(LoginModel loginmodel)
-
         {
             LoginRole loginRole;
 
             LoginRole message = new LoginRole();
 
-
             var getlearners = await _repository.GetLearnerByEmail(loginmodel.Email);
 
             var user = await _repository.AnyUserByEmail(loginmodel.Email);
 
-
             if (user == true)
             {
-
-
                 using (SHA256 sha256 = SHA256.Create())
                 {
-                    byte[] inputHashPassword = sha256.ComputeHash(Encoding.UTF8.GetBytes(loginmodel.Password));
+                    byte[] inputHashPassword = sha256.ComputeHash(
+                        Encoding.UTF8.GetBytes(loginmodel.Password)
+                    );
 
                     StringBuilder stringBuilder = new StringBuilder();
 
                     for (int i = 0; i < inputHashPassword.Length; i++)
-
                     {
-
                         stringBuilder.Append(inputHashPassword[i].ToString("x2"));
-
                     }
 
                     string inputPasswordHashed = stringBuilder.ToString();
 
-
-                    bool checkpassword = await _repository.AnyLearnerByEmailAndPassword(loginmodel.Email, inputPasswordHashed);
+                    bool checkpassword = await _repository.AnyLearnerByEmailAndPassword(
+                        loginmodel.Email,
+                        inputPasswordHashed
+                    );
 
                     message.Role = getlearners.Role;
 
@@ -92,15 +85,10 @@ namespace LXP.Core.Services
                             loginRole.AccountStatus = message.AccountStatus;
 
                             loginRole.GetLearnerId = message.GetLearnerId;
-
-
-
-
                         }
 
                         return loginRole;
                     }
-
                     else
                     {
                         loginRole = new LoginRole();
@@ -112,11 +100,8 @@ namespace LXP.Core.Services
                         }
                         return loginRole;
                     }
-
                 }
-
             }
-
             else
             {
                 loginRole = new LoginRole();
@@ -125,14 +110,9 @@ namespace LXP.Core.Services
                     loginRole.Email = false;
 
                     loginRole.Password = false;
-
                 }
                 return loginRole;
-
-
             }
-
-
         }
 
         //public async Task<Guid> GetLearnerId(EmailViewModel emailViewModel)
@@ -185,7 +165,7 @@ namespace LXP.Core.Services
         //    if (learner.Password== Encryption.ComputePasswordToSha256Hash(updatePassword.OldPassword))
         //    {
         //        string encryptNewPassword = Encryption.ComputePasswordToSha256Hash(updatePassword.NewPassword);
-        //        learner.Password = encryptNewPassword; 
+        //        learner.Password = encryptNewPassword;
         //        await _repository.UpdatePassword(learner);
         //        result.success= true;
         //        return result;
@@ -198,8 +178,5 @@ namespace LXP.Core.Services
         //    }
 
         //}
-
-
     }
-
 }

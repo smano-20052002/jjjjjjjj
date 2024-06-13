@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace LXP.Common.ViewModels
 {
@@ -23,6 +23,7 @@ namespace LXP.Common.ViewModels
         ///<example>Beginner</example>
 
         public Guid LevelId { get; set; }
+
         ///<Summary>
         ///Course Category
         ///</Summary>
@@ -50,11 +51,11 @@ namespace LXP.Common.ViewModels
 
         [NotMapped]
         public IFormFile Thumbnailimage { get; set; }
+
         ///<Summary>
         ///Course ModifiedBy
         ///</Summary>
         ///<example>Admin</example>
         public string? ModifiedBy { get; set; }
-
     }
 }

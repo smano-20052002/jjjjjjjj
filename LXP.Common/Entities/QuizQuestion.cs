@@ -23,9 +23,11 @@ public partial class QuizQuestion
 
     public DateTime? ModifiedAt { get; set; }
 
-    public virtual ICollection<LearnerAnswer> LearnerAnswers { get; set; } = new List<LearnerAnswer>();
+    public virtual ICollection<LearnerAnswer> LearnerAnswers { get; set; } =
+        new List<LearnerAnswer>();
 
-    public virtual ICollection<QuestionOption> QuestionOptions { get; set; } = new List<QuestionOption>();
+    public virtual ICollection<QuestionOption> QuestionOptions { get; set; } =
+        new List<QuestionOption>();
 
     public virtual Quiz Quiz { get; set; } = null!;
 }

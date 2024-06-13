@@ -1,5 +1,5 @@
-using LXP.Common.ViewModels;
 using LXP.Common.Entities;
+using LXP.Common.ViewModels;
 
 namespace LXP.Core.IServices
 {
@@ -7,7 +7,6 @@ namespace LXP.Core.IServices
     {
         Task<CourseListViewModel> GetCourseDetailsByCourseId(string courseId);
         Course GetCourseByCourseId(Guid courseId);
-
 
         CourseListViewModel GetCourseDetailsByCourseName(string courseName);
         CourseListViewModel AddCourse(CourseViewModel course);

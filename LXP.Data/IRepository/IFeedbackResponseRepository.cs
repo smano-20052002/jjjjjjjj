@@ -19,7 +19,7 @@ namespace LXP.Data.IRepository
         void AddFeedbackResponse(Feedbackresponse feedbackResponse);
         Guid? GetOptionIdByText(Guid questionId, string optionText);
 
-        //new bug fix 
+        //new bug fix
         void DeleteFeedbackResponsesByQuizQuestionId(Guid quizFeedbackQuestionId);
         void DeleteFeedbackResponsesByTopicQuestionId(Guid topicFeedbackQuestionId);
         //LearnerProfile GetLearnerProfile(Guid learnerId);

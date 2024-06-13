@@ -1,10 +1,10 @@
-﻿using LXP.Common.Constants;
+﻿using System.Net;
+using System.Reflection;
+using LXP.Common.Constants;
 using LXP.Common.Enums;
 using LXP.Common.ViewModels;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LXP.Api.Interceptors
 {
@@ -32,10 +32,13 @@ namespace LXP.Api.Interceptors
 
         public Task OnExceptionAsync(ExceptionContext context)
         {
-            HttpStatusCode statusCode = ((context.Exception is WebException) &&
-                     ((HttpWebResponse)(context.Exception as WebException).Response) != null)
-                      ? ((HttpWebResponse)(context.Exception as WebException).Response).StatusCode
-                      : GetErrorCode(context.Exception.GetType());
+            HttpStatusCode statusCode =
+                (
+                    (context.Exception is WebException)
+                    && ((HttpWebResponse)(context.Exception as WebException).Response) != null
+                )
+                    ? ((HttpWebResponse)(context.Exception as WebException).Response).StatusCode
+                    : GetErrorCode(context.Exception.GetType());
 
             var exception = context.Exception;
             context.HttpContext.Response.StatusCode = (int)statusCode;
@@ -44,13 +47,20 @@ namespace LXP.Api.Interceptors
             var error = new APIResponse()
             {
                 StatusCode = (int)statusCode,
-                Message = (int)statusCode == (int)HttpStatusCode.InternalServerError ? MessageConstants.MsgServerError : exception.Message ?? exception.InnerException.Message
+                Message =
+                    (int)statusCode == (int)HttpStatusCode.InternalServerError
+                        ? MessageConstants.MsgServerError
+                        : exception.Message ?? exception.InnerException.Message
             };
 
             //Logs your technical exception with stack trace below
-            _logger.LogError("{FullName} Exception: {Message} Inner Exception: {InnerExceptionMessage} Stack Trace: {StackTrace}",
-                MethodBase.GetCurrentMethod().DeclaringType.FullName, exception.Message ?? "None",
-                exception.InnerException?.Message ?? "None", exception.StackTrace ?? "None");
+            _logger.LogError(
+                "{FullName} Exception: {Message} Inner Exception: {InnerExceptionMessage} Stack Trace: {StackTrace}",
+                MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                exception.Message ?? "None",
+                exception.InnerException?.Message ?? "None",
+                exception.StackTrace ?? "None"
+            );
 
             context.Result = new JsonResult(error);
             return Task.CompletedTask;

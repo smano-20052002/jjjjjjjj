@@ -8,16 +8,19 @@ namespace LXP.Core.Services
     public class QuizService : IQuizService
     {
         private readonly IQuizRepository _quizRepository;
-        private readonly IFeedbackResponseRepository _feedbackResponseRepository;//new
+        private readonly IFeedbackResponseRepository _feedbackResponseRepository; //new
         private readonly IQuizFeedbackService _quizFeedbackService;
 
-        public QuizService(IQuizRepository quizRepository, IFeedbackResponseRepository feedbackResponseRepository, IQuizFeedbackService quizFeedbackService)
+        public QuizService(
+            IQuizRepository quizRepository,
+            IFeedbackResponseRepository feedbackResponseRepository,
+            IQuizFeedbackService quizFeedbackService
+        )
         {
             _quizRepository = quizRepository;
             _feedbackResponseRepository = feedbackResponseRepository;
             _quizFeedbackService = quizFeedbackService;
         }
-
 
         public void CreateQuiz(QuizViewModel quiz, Guid topicId)
         {
@@ -92,13 +95,11 @@ namespace LXP.Core.Services
                 var learnerAttempts = _quizRepository.GetLearnerAttemptsByQuizId(quizId);
                 if (learnerAttempts.Any())
                 {
-                    
-                        // Delete learner attempts associated with the quiz
-                        foreach (var attempt in learnerAttempts)
-                        {
-                            _quizRepository.DeleteLearnerAttempt(attempt);
-                        }
-                   
+                    // Delete learner attempts associated with the quiz
+                    foreach (var attempt in learnerAttempts)
+                    {
+                        _quizRepository.DeleteLearnerAttempt(attempt);
+                    }
                 }
 
                 // Delete related feedback questions and their options
@@ -106,13 +107,14 @@ namespace LXP.Core.Services
 
                 foreach (var question in _quizRepository.GetQuizFeedbackQuestionsByQuizId(quizId))
                 {
-                    _feedbackResponseRepository.DeleteFeedbackResponsesByQuizQuestionId(question.QuizFeedbackQuestionId);
+                    _feedbackResponseRepository.DeleteFeedbackResponsesByQuizQuestionId(
+                        question.QuizFeedbackQuestionId
+                    );
                 }
 
                 _quizRepository.DeleteQuiz(quizEntity);
             }
         }
-
 
         public IEnumerable<QuizViewModel> GetAllQuizzes()
         {

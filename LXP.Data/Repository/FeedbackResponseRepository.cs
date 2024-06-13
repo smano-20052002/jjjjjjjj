@@ -86,11 +86,11 @@ namespace LXP.Data.Repository
             return option?.FeedbackQuestionOptionId;
         }
 
-        //new bug fix 
+        //new bug fix
         public void DeleteFeedbackResponsesByQuizQuestionId(Guid quizFeedbackQuestionId)
         {
-            var responses = _context.Feedbackresponses
-                .Where(r => r.QuizFeedbackQuestionId == quizFeedbackQuestionId)
+            var responses = _context
+                .Feedbackresponses.Where(r => r.QuizFeedbackQuestionId == quizFeedbackQuestionId)
                 .ToList();
             _context.Feedbackresponses.RemoveRange(responses);
             _context.SaveChanges();
@@ -98,13 +98,12 @@ namespace LXP.Data.Repository
 
         public void DeleteFeedbackResponsesByTopicQuestionId(Guid topicFeedbackQuestionId)
         {
-            var responses = _context.Feedbackresponses
-                .Where(r => r.TopicFeedbackQuestionId == topicFeedbackQuestionId)
+            var responses = _context
+                .Feedbackresponses.Where(r => r.TopicFeedbackQuestionId == topicFeedbackQuestionId)
                 .ToList();
             _context.Feedbackresponses.RemoveRange(responses);
             _context.SaveChanges();
         }
-
     }
 }
 

@@ -1,12 +1,12 @@
-﻿using LXP.Common.Constants;
+﻿using System;
+using System.Net;
+using LXP.Common.Constants;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net;
 
 namespace LXP.Api.Controllers
 {
@@ -18,10 +18,10 @@ namespace LXP.Api.Controllers
     public class LearnerProgressController : BaseController
     {
         //private readonly ILearnerProgressService _learnerProgressService;
-       private readonly ILearnerProgressService _Progress;
-        public LearnerProgressController( ILearnerProgressService Progress)
-        {
+        private readonly ILearnerProgressService _Progress;
 
+        public LearnerProgressController(ILearnerProgressService Progress)
+        {
             _Progress = Progress;
         }
 
@@ -40,15 +40,22 @@ namespace LXP.Api.Controllers
             var result = await _Progress.LearnerProgress(learnerProgress);
             return Ok(result);
         }
+
         [HttpGet("/lxp/course/learner/learnerprogress/watchtime")]
-        public async Task<IActionResult> GetLearnerProgressByLearnerIdAndMaterialId(string LearnerId, string MaterialId)
+        public async Task<IActionResult> GetLearnerProgressByLearnerIdAndMaterialId(
+            string LearnerId,
+            string MaterialId
+        )
         {
-            return Ok(CreateSuccessResponse(await _Progress.GetLearnerProgressByLearnerIdAndMaterialId(LearnerId, MaterialId)));
+            return Ok(
+                CreateSuccessResponse(
+                    await _Progress.GetLearnerProgressByLearnerIdAndMaterialId(
+                        LearnerId,
+                        MaterialId
+                    )
+                )
+            );
         }
-
-        
-
-
 
         //[HttpPost("/lxp/learner/learnerprogressStatus")]
         //public async Task MaterialCompleted(Guid learnerId, Guid courseId)
@@ -68,21 +75,38 @@ namespace LXP.Api.Controllers
             try
             {
                 await _Progress.CalculateAndUpdateCourseCompletionAsync(learnerId);
-                return Ok(new { Message = "Course completion percentage calculated and updated successfully." });
+                return Ok(
+                    new
+                    {
+                        Message = "Course completion percentage calculated and updated successfully."
+                    }
+                );
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "An error occurred while calculating the course completion.", Details = ex.Message });
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        Message = "An error occurred while calculating the course completion.",
+                        Details = ex.Message
+                    }
+                );
             }
         }
 
-
         [HttpGet("course-completion-percentage/{learnerId}/{enrollmentId}")]
-        public async Task<IActionResult> GetCourseCompletionPercentage(Guid learnerId, Guid enrollmentId)
+        public async Task<IActionResult> GetCourseCompletionPercentage(
+            Guid learnerId,
+            Guid enrollmentId
+        )
         {
             try
             {
-                var percentage = await _Progress.GetCourseCompletionPercentageAsync(learnerId, enrollmentId);
+                var percentage = await _Progress.GetCourseCompletionPercentageAsync(
+                    learnerId,
+                    enrollmentId
+                );
                 if (percentage.HasValue)
                 {
                     return Ok(new { CourseCompletionPercentage = percentage.Value });
@@ -94,13 +118,15 @@ namespace LXP.Api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "An error occurred while fetching the course completion percentage.", Details = ex.Message });
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        Message = "An error occurred while fetching the course completion percentage.",
+                        Details = ex.Message
+                    }
+                );
             }
         }
-
-
-
-
-
     }
 }

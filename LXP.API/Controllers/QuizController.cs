@@ -127,14 +127,14 @@ namespace LXP.Api.Controllers
         /// <response code="404">Not found if no quiz exists with the provided ID.</response>
 
         [HttpDelete("{quizId}")]
-        public IActionResult DeleteQuiz(Guid quizId )
+        public IActionResult DeleteQuiz(Guid quizId)
         {
             var existingQuiz = _quizService.GetQuizById(quizId);
 
             if (existingQuiz == null)
                 return NotFound(CreateFailureResponse($"Quiz with id {quizId} not found.", 404));
 
-            _quizService.DeleteQuiz(quizId );
+            _quizService.DeleteQuiz(quizId);
 
             return NoContent();
         }

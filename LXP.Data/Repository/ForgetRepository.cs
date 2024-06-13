@@ -7,17 +7,16 @@ namespace LXP.Data.Repository
     {
         private readonly LXPDbContext _dbcontext;
 
-
         public ForgetRepository(LXPDbContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
 
-
         public bool AnyUserByEmail(string loginmodel)
         {
             return _dbcontext.Learners.Any(learner => learner.Email == loginmodel);
         }
+
         //public async Task<bool> AnyLearnerByEmailAndPassword(string Email, string Password)
         //{
         //    return await _dbcontext.Learners.AnyAsync(learner => learner.Email == Email && learner.Password == Password);
@@ -27,7 +26,6 @@ namespace LXP.Data.Repository
             return _dbcontext.Learners.FirstOrDefault(learner => learner.Email == Email);
         }
 
-
         public void UpdateLearnerPassword(string Email, string Password)
         {
             Learner learner = GetLearnerByEmail(Email);
@@ -35,7 +33,6 @@ namespace LXP.Data.Repository
             _dbcontext.Learners.Update(learner);
             _dbcontext.SaveChangesAsync();
         }
-
 
         //public async Task UpdatePassword(Learner learner)
         //{

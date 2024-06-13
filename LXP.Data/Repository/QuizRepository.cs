@@ -50,14 +50,13 @@ namespace LXP.Data.Repository
             return _LXPDbContext.Quizzes.FirstOrDefault(q => q.TopicId == topicId);
         }
 
-
         //
         public IEnumerable<Quizfeedbackquestion> GetQuizFeedbackQuestionsByQuizId(Guid quizId)
         {
             return _LXPDbContext.Quizfeedbackquestions.Where(q => q.QuizId == quizId).ToList();
         }
 
-        //new 
+        //new
 
 
         public IEnumerable<LearnerAttempt> GetLearnerAttemptsByQuizId(Guid quizId)
@@ -67,13 +66,13 @@ namespace LXP.Data.Repository
 
         public void DeleteLearnerAttempt(LearnerAttempt attempt)
         {
-            var learnerAnswers = _LXPDbContext.LearnerAnswers.Where(a => a.LearnerAttemptId == attempt.LearnerAttemptId);
+            var learnerAnswers = _LXPDbContext.LearnerAnswers.Where(a =>
+                a.LearnerAttemptId == attempt.LearnerAttemptId
+            );
             _LXPDbContext.LearnerAnswers.RemoveRange(learnerAnswers);
 
             _LXPDbContext.LearnerAttempts.Remove(attempt);
             _LXPDbContext.SaveChanges();
         }
-
-
     }
 }

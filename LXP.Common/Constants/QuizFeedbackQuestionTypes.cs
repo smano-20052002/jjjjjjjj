@@ -1,6 +1,4 @@
-﻿
-
-namespace LXP.Common.Constants
+﻿namespace LXP.Common.Constants
 {
     public static class QuizFeedbackQuestionTypes
     {

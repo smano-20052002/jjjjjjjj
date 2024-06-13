@@ -12,17 +12,19 @@ namespace LXP.Core.Services
         private readonly IWebHostEnvironment _environment;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public LearnerServices(ILearnerRepository courseRepository, IWebHostEnvironment environment, IHttpContextAccessor httpContextAccess)
+        public LearnerServices(
+            ILearnerRepository courseRepository,
+            IWebHostEnvironment environment,
+            IHttpContextAccessor httpContextAccess
+        )
         {
             _LearnerRepository = courseRepository;
             _environment = environment;
             _contextAccessor = httpContextAccess;
-
         }
 
         public IEnumerable<AllLearnersViewModel> GetLearners()
         {
-
             var result = _LearnerRepository.GetLearners();
             return result;
         }
@@ -30,23 +32,11 @@ namespace LXP.Core.Services
         public object GetAllLearnerDetailsByLearnerId(Guid LearnerId)
         {
             return _LearnerRepository.GetAllLearnerDetailsByLearnerId(LearnerId);
-
         }
 
         public object GetLearnerEnrolledcourseByLearnerId(Guid LearnerId)
         {
             return _LearnerRepository.GetLearnerEnrolledcourseByLearnerId(LearnerId);
-
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

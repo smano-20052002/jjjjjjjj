@@ -14,6 +14,5 @@ namespace LXP.Common.Enums
         ArgumentOutOfRangeException,
         FormatException,
         InvalidEnumArgumentException,
-       
     }
 }

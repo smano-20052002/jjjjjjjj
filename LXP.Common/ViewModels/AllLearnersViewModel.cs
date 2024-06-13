@@ -9,7 +9,5 @@
 
         public DateTime? LastLogin { get; set; }
         public bool LearnerStatus { get; set; }
-
-
     }
 }

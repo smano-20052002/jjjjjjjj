@@ -1,13 +1,13 @@
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LXP.Common.ViewModels;
-using LXP.Common.Entities;
 using AutoMapper;
+using LXP.Common.Entities;
+using LXP.Common.ViewModels;
+using LXP.Core.IServices;
+using LXP.Data.IRepository;
 
 namespace LXP.Core.Services
 {
@@ -16,22 +16,36 @@ namespace LXP.Core.Services
         private readonly ICourseTopicRepository _courseTopicRepository;
         private readonly ICourseRepository _courseRepository;
         private Mapper _courseTopicMapper;
-        public CourseTopicServices(ICourseTopicRepository courseTopicRepository, ICourseRepository courseRepository)
+
+        public CourseTopicServices(
+            ICourseTopicRepository courseTopicRepository,
+            ICourseRepository courseRepository
+        )
         {
-            var _configCourseTopic = new MapperConfiguration(cfg => cfg.CreateMap<Topic, CourseTopicListViewModel>().ReverseMap());
+            var _configCourseTopic = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Topic, CourseTopicListViewModel>().ReverseMap()
+            );
             _courseTopicMapper = new Mapper(_configCourseTopic);
 
             _courseTopicRepository = courseTopicRepository;
             _courseRepository = courseRepository;
         }
+
         public object GetAllTopicDetailsByCourseId(string courseId)
         {
             return _courseTopicRepository.GetAllTopicDetailsByCourseId(courseId);
         }
-        public async Task<CourseTopicListViewModel> GetTopicDetailsByTopicNameAndCourseId(string topicName, string courseId)
+
+        public async Task<CourseTopicListViewModel> GetTopicDetailsByTopicNameAndCourseId(
+            string topicName,
+            string courseId
+        )
         {
             //Course course = _courseRepository.GetCourseDetailsByCourseId(Guid.Parse(courseId));
-            Topic topic = await _courseTopicRepository.GetTopicDetailsByTopicNameAndCourse(topicName, Guid.Parse(courseId));
+            Topic topic = await _courseTopicRepository.GetTopicDetailsByTopicNameAndCourse(
+                topicName,
+                Guid.Parse(courseId)
+            );
             CourseTopicListViewModel courseTopic = new CourseTopicListViewModel()
             {
                 TopicId = topic.TopicId,
@@ -46,6 +60,7 @@ namespace LXP.Core.Services
             };
             return courseTopic;
         }
+
         public async Task<CourseTopicListViewModel> GetTopicDetailsByTopicId(string topicId)
         {
             Topic topic = await _courseTopicRepository.GetTopicByTopicId(Guid.Parse(topicId));
@@ -63,6 +78,7 @@ namespace LXP.Core.Services
             };
             return courseTopic;
         }
+
         public object GetTopicDetails(string courseId)
         {
             return _courseTopicRepository.GetTopicDetails(courseId);
@@ -89,24 +105,27 @@ namespace LXP.Core.Services
                 };
                 _courseTopicRepository.AddCourseTopic(topic);
 
-                return _courseTopicMapper.Map<Topic, CourseTopicListViewModel>(topic); ;
+                return _courseTopicMapper.Map<Topic, CourseTopicListViewModel>(topic);
+                ;
             }
             else
             {
                 return null;
             }
-
-
-
         }
+
         public async Task<bool> UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
         {
-
-
-            Topic topic = await _courseTopicRepository.GetTopicByTopicId(Guid.Parse(courseTopic.TopicId));
-            List<Topic> topicsListByCourseId = await _courseTopicRepository.GetTopicsbycouresId(topic.CourseId);
+            Topic topic = await _courseTopicRepository.GetTopicByTopicId(
+                Guid.Parse(courseTopic.TopicId)
+            );
+            List<Topic> topicsListByCourseId = await _courseTopicRepository.GetTopicsbycouresId(
+                topic.CourseId
+            );
             topicsListByCourseId.Remove(topic);
-            bool isTopicAlreadyExists = topicsListByCourseId.Any(topics => topics.Name == courseTopic.Name);
+            bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
+                topics.Name == courseTopic.Name
+            );
             if (!isTopicAlreadyExists)
             {
                 topic.Name = courseTopic.Name;
@@ -120,27 +139,19 @@ namespace LXP.Core.Services
             {
                 return false;
             }
-
-
-
         }
+
         public async Task<bool> SoftDeleteTopic(string topicId)
         {
-
             Topic topic = await _courseTopicRepository.GetTopicByTopicId(Guid.Parse(topicId));
             topic.IsActive = false;
-            bool isTopicDeleted = await _courseTopicRepository.UpdateCourseTopic(topic) > 0 ? true : false;
+            bool isTopicDeleted =
+                await _courseTopicRepository.UpdateCourseTopic(topic) > 0 ? true : false;
             if (isTopicDeleted)
             {
                 return true;
             }
             return false;
-
         }
-
-
-
-
-
     }
 }

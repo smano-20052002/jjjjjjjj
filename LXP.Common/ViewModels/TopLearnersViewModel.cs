@@ -12,7 +12,6 @@ namespace LXP.Common.ViewModels
 
         public string? LearnerName { get; set; }
 
-        public string? ProfilePhoto {  get; set; }
-
+        public string? ProfilePhoto { get; set; }
     }
 }

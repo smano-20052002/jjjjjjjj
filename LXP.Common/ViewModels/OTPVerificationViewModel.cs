@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace LXP.Common.ViewModels
 {
-    public  class OTPVerificationViewModel
+    public class OTPVerificationViewModel
     {
-      
-
-
         public string? Email { get; set; }
 
-        public string? OTP {  get; set; }
-
+        public string? OTP { get; set; }
     }
 }

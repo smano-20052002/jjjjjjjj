@@ -1,10 +1,10 @@
-﻿using LXP.Common.Constants;
+﻿using System.Net;
+using LXP.Common.Constants;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace LXP.Api.Controllers
 {
@@ -13,6 +13,7 @@ namespace LXP.Api.Controllers
     public class CourseTopicController : BaseController
     {
         private readonly ICourseTopicServices _courseTopicServices;
+
         public CourseTopicController(ICourseTopicServices courseTopicServices)
         {
             _courseTopicServices = courseTopicServices;
@@ -21,16 +22,22 @@ namespace LXP.Api.Controllers
         [HttpPost("/lxp/course/topic")]
         public async Task<IActionResult> AddCourseTopic(CourseTopicViewModel courseTopic)
         {
-            CourseTopicListViewModel CreatedTopic = await _courseTopicServices.AddCourseTopic(courseTopic);
+            CourseTopicListViewModel CreatedTopic = await _courseTopicServices.AddCourseTopic(
+                courseTopic
+            );
             if (CreatedTopic != null)
             {
                 return Ok(CreateInsertResponse(CreatedTopic));
             }
             else
             {
-                return Ok(CreateFailureResponse(MessageConstants.MsgAlreadyExists, (int)HttpStatusCode.PreconditionFailed));
+                return Ok(
+                    CreateFailureResponse(
+                        MessageConstants.MsgAlreadyExists,
+                        (int)HttpStatusCode.PreconditionFailed
+                    )
+                );
             }
-
         }
 
         [HttpGet("/lxp/course/{courseId}/topic")]
@@ -46,11 +53,20 @@ namespace LXP.Api.Controllers
             bool updatedStatus = await _courseTopicServices.UpdateCourseTopic(courseTopic);
             if (updatedStatus)
             {
-                return Ok(CreateSuccessResponse(_courseTopicServices.GetTopicDetailsByTopicId(courseTopic.TopicId)));
+                return Ok(
+                    CreateSuccessResponse(
+                        _courseTopicServices.GetTopicDetailsByTopicId(courseTopic.TopicId)
+                    )
+                );
             }
-            return Ok(CreateFailureResponse(MessageConstants.MsgAlreadyExists, (int)HttpStatusCode.PreconditionFailed));
-
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgAlreadyExists,
+                    (int)HttpStatusCode.PreconditionFailed
+                )
+            );
         }
+
         [HttpDelete("/lxp/course/topic/{topicId}")]
         public async Task<IActionResult> DeleteCourseTopic(string topicId)
         {
@@ -59,7 +75,12 @@ namespace LXP.Api.Controllers
             {
                 return Ok(CreateSuccessResponse());
             }
-            return Ok(CreateFailureResponse(MessageConstants.MsgNotDeleted, (int)HttpStatusCode.MethodNotAllowed));
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgNotDeleted,
+                    (int)HttpStatusCode.MethodNotAllowed
+                )
+            );
         }
 
         [HttpGet("/lxp/course/topic/{topicId}")]
@@ -68,13 +89,12 @@ namespace LXP.Api.Controllers
             var CourseTopic = await _courseTopicServices.GetTopicDetailsByTopicId(topicId);
             return Ok(CreateSuccessResponse(CourseTopic));
         }
+
         [HttpGet("/lxp/course/{id}/topic")]
         public async Task<IActionResult> GetCourseTopicByCourseId(string id)
         {
             var CourseTopic = _courseTopicServices.GetTopicDetails(id);
             return Ok(CreateSuccessResponse(CourseTopic));
         }
-
-       
     }
 }

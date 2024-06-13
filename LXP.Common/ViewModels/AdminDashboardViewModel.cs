@@ -8,7 +8,6 @@
 
         public int NoOfActiveLearners { get; set; }
         public int NoofInactiveLearners { get; set; }
-        public List<string> EnrollmentYears { get;set; }
-
+        public List<string> EnrollmentYears { get; set; }
     }
 }

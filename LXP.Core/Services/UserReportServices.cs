@@ -1,17 +1,18 @@
-﻿using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.ViewModels;
+using LXP.Core.IServices;
+using LXP.Data.IRepository;
 
 namespace LXP.Core.Services
 {
     public class UserReportServices : IUserReportServices
     {
         private readonly IUserReportRepository _userReportRepository;
+
         public UserReportServices(IUserReportRepository userReportRepository)
         {
             _userReportRepository = userReportRepository;
@@ -19,7 +20,7 @@ namespace LXP.Core.Services
 
         public IEnumerable<UserReportViewModel> GetUserReport()
         {
-           return _userReportRepository.GetUserReport();
+            return _userReportRepository.GetUserReport();
         }
     }
 }

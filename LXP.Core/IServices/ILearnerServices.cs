@@ -8,12 +8,5 @@ namespace LXP.Core.IServices
         object GetAllLearnerDetailsByLearnerId(Guid learnerid);
 
         object GetLearnerEnrolledcourseByLearnerId(Guid learnerid);
-
-
-
-
-
-
-
     }
 }

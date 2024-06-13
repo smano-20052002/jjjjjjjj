@@ -8,7 +8,6 @@ namespace LXP.Common.ViewModels
 {
     public class LoginRole
     {
-
         public bool Email { get; set; }
 
         public bool Password { get; set; }
@@ -17,8 +16,6 @@ namespace LXP.Common.ViewModels
 
         public bool AccountStatus { get; set; }
 
-        public Guid GetLearnerId {  get; set; }
-
-
+        public Guid GetLearnerId { get; set; }
     }
 }

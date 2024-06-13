@@ -1,6 +1,5 @@
 ﻿namespace LXP.Common.ViewModels
 {
-
     ////<summary>
     ////API Response
     ///</summary>
@@ -23,7 +22,5 @@
         ///</summary>
 
         public object Data { get; set; }
-
-
     }
 }

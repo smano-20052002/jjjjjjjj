@@ -4,8 +4,6 @@ namespace LXP.Data.IRepository
 {
     public interface IUpdatePasswordRepository
     {
-
-
         //public Task<bool> AnyUserByEmail(string loginmodel);
 
 
@@ -17,7 +15,6 @@ namespace LXP.Data.IRepository
         //public Task UpdateLearnerPassword(string Email, string Password);
 
         public void UpdatePassword(Learner learner);
-
 
         Task<Learner> LearnerByEmailAndPassword(string Email, string Password);
     }

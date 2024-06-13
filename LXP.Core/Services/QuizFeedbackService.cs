@@ -1,6 +1,4 @@
-﻿
-
-using LXP.Common.Constants;
+﻿using LXP.Common.Constants;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels.QuizFeedbackQuestionViewModel;
 using LXP.Core.IServices;
@@ -17,7 +15,10 @@ namespace LXP.Core.Services
             _quizFeedbackRepository = quizFeedbackRepository;
         }
 
-        public Guid AddFeedbackQuestion(QuizfeedbackquestionViewModel quizfeedbackquestion, List<QuizFeedbackQuestionsOptionViewModel> options)
+        public Guid AddFeedbackQuestion(
+            QuizfeedbackquestionViewModel quizfeedbackquestion,
+            List<QuizFeedbackQuestionsOptionViewModel> options
+        )
         {
             // Normalize question type to uppercase
             var normalizedQuestionType = quizfeedbackquestion.QuestionType.ToUpper();
@@ -30,14 +31,19 @@ namespace LXP.Core.Services
 
             if (!ValidateOptionsByFeedbackQuestionType(quizfeedbackquestion.QuestionType, options))
             {
-                throw new ArgumentException("Invalid options for the given question type.", nameof(options));
+                throw new ArgumentException(
+                    "Invalid options for the given question type.",
+                    nameof(options)
+                );
             }
 
             // Create the feedback question entity
             var questionEntity = new Quizfeedbackquestion
             {
                 QuizId = quizfeedbackquestion.QuizId,
-                QuestionNo = _quizFeedbackRepository.GetNextFeedbackQuestionNo(quizfeedbackquestion.QuizId),
+                QuestionNo = _quizFeedbackRepository.GetNextFeedbackQuestionNo(
+                    quizfeedbackquestion.QuizId
+                ),
                 Question = quizfeedbackquestion.Question,
                 QuestionType = normalizedQuestionType,
                 CreatedBy = "Admin",
@@ -47,15 +53,21 @@ namespace LXP.Core.Services
             _quizFeedbackRepository.AddFeedbackQuestion(questionEntity);
 
             // Save the options only if the question type is MCQ
-            if (normalizedQuestionType == QuizFeedbackQuestionTypes.MultiChoiceQuestion.ToUpper() && options != null && options.Count > 0)
+            if (
+                normalizedQuestionType == QuizFeedbackQuestionTypes.MultiChoiceQuestion.ToUpper()
+                && options != null
+                && options.Count > 0
+            )
             {
-                var optionEntities = options.Select(option => new Feedbackquestionsoption
-                {
-                    QuizFeedbackQuestionId = questionEntity.QuizFeedbackQuestionId,
-                    OptionText = option.OptionText,
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = "Admin"
-                }).ToList();
+                var optionEntities = options
+                    .Select(option => new Feedbackquestionsoption
+                    {
+                        QuizFeedbackQuestionId = questionEntity.QuizFeedbackQuestionId,
+                        OptionText = option.OptionText,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = "Admin"
+                    })
+                    .ToList();
 
                 _quizFeedbackRepository.AddFeedbackQuestionOptions(optionEntities);
             }
@@ -70,14 +82,18 @@ namespace LXP.Core.Services
 
         public QuizfeedbackquestionNoViewModel GetFeedbackQuestionById(Guid quizFeedbackQuestionId)
         {
-            var feedbackQuestion = _quizFeedbackRepository.GetFeedbackQuestionEntityById(quizFeedbackQuestionId);
+            var feedbackQuestion = _quizFeedbackRepository.GetFeedbackQuestionEntityById(
+                quizFeedbackQuestionId
+            );
 
             if (feedbackQuestion == null)
             {
                 return null;
             }
 
-            var options = _quizFeedbackRepository.GetFeedbackQuestionOptions(feedbackQuestion.QuizFeedbackQuestionId);
+            var options = _quizFeedbackRepository.GetFeedbackQuestionOptions(
+                feedbackQuestion.QuizFeedbackQuestionId
+            );
 
             return new QuizfeedbackquestionNoViewModel
             {
@@ -86,13 +102,24 @@ namespace LXP.Core.Services
                 QuestionNo = feedbackQuestion.QuestionNo,
                 Question = feedbackQuestion.Question,
                 QuestionType = feedbackQuestion.QuestionType,
-                Options = options.Select(o => new QuizFeedbackQuestionsOptionViewModel { OptionText = o.OptionText }).ToList()
+                Options = options
+                    .Select(o => new QuizFeedbackQuestionsOptionViewModel
+                    {
+                        OptionText = o.OptionText
+                    })
+                    .ToList()
             };
         }
 
-        public bool UpdateFeedbackQuestion(Guid quizFeedbackQuestionId, QuizfeedbackquestionViewModel quizfeedbackquestion, List<QuizFeedbackQuestionsOptionViewModel> options)
+        public bool UpdateFeedbackQuestion(
+            Guid quizFeedbackQuestionId,
+            QuizfeedbackquestionViewModel quizfeedbackquestion,
+            List<QuizFeedbackQuestionsOptionViewModel> options
+        )
         {
-            var existingQuestion = _quizFeedbackRepository.GetFeedbackQuestionEntityById(quizFeedbackQuestionId);
+            var existingQuestion = _quizFeedbackRepository.GetFeedbackQuestionEntityById(
+                quizFeedbackQuestionId
+            );
 
             if (existingQuestion == null)
             {
@@ -100,7 +127,12 @@ namespace LXP.Core.Services
             }
 
             // Check if the question type is being modified
-            if (!existingQuestion.QuestionType.Equals(quizfeedbackquestion.QuestionType, StringComparison.OrdinalIgnoreCase))
+            if (
+                !existingQuestion.QuestionType.Equals(
+                    quizfeedbackquestion.QuestionType,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 throw new InvalidOperationException("Question type cannot be modified.");
             }
@@ -112,25 +144,32 @@ namespace LXP.Core.Services
             _quizFeedbackRepository.UpdateFeedbackQuestion(existingQuestion);
 
             // Handle options only if the question type is MCQ
-            if (existingQuestion.QuestionType == QuizFeedbackQuestionTypes.MultiChoiceQuestion.ToUpper())
+            if (
+                existingQuestion.QuestionType
+                == QuizFeedbackQuestionTypes.MultiChoiceQuestion.ToUpper()
+            )
             {
                 if (!ValidateOptionsByFeedbackQuestionType(existingQuestion.QuestionType, options))
                 {
                     throw new ArgumentException("Invalid options for the given question type.");
                 }
 
-                var existingOptions = _quizFeedbackRepository.GetFeedbackQuestionOptions(quizFeedbackQuestionId);
+                var existingOptions = _quizFeedbackRepository.GetFeedbackQuestionOptions(
+                    quizFeedbackQuestionId
+                );
                 _quizFeedbackRepository.DeleteFeedbackQuestionOptions(existingOptions);
 
                 if (options != null && options.Count > 0)
                 {
-                    var optionEntities = options.Select(option => new Feedbackquestionsoption
-                    {
-                        QuizFeedbackQuestionId = quizFeedbackQuestionId,
-                        OptionText = option.OptionText,
-                        CreatedAt = DateTime.Now,
-                        CreatedBy = "Admin"
-                    }).ToList();
+                    var optionEntities = options
+                        .Select(option => new Feedbackquestionsoption
+                        {
+                            QuizFeedbackQuestionId = quizFeedbackQuestionId,
+                            OptionText = option.OptionText,
+                            CreatedAt = DateTime.Now,
+                            CreatedBy = "Admin"
+                        })
+                        .ToList();
 
                     _quizFeedbackRepository.AddFeedbackQuestionOptions(optionEntities);
                 }
@@ -141,22 +180,26 @@ namespace LXP.Core.Services
 
         public bool DeleteFeedbackQuestion(Guid quizFeedbackQuestionId)
         {
-            var existingQuestion = _quizFeedbackRepository.GetFeedbackQuestionEntityById(quizFeedbackQuestionId);
+            var existingQuestion = _quizFeedbackRepository.GetFeedbackQuestionEntityById(
+                quizFeedbackQuestionId
+            );
 
             if (existingQuestion == null)
             {
                 return false;
             }
 
-            var relatedResponses = _quizFeedbackRepository.GetFeedbackResponsesByQuestionId(quizFeedbackQuestionId);
+            var relatedResponses = _quizFeedbackRepository.GetFeedbackResponsesByQuestionId(
+                quizFeedbackQuestionId
+            );
             if (relatedResponses.Any())
             {
-                _quizFeedbackRepository.DeleteFeedbackResponses(relatedResponses
-
-);
+                _quizFeedbackRepository.DeleteFeedbackResponses(relatedResponses);
             }
 
-            var relatedOptions = _quizFeedbackRepository.GetFeedbackQuestionOptions(quizFeedbackQuestionId);
+            var relatedOptions = _quizFeedbackRepository.GetFeedbackQuestionOptions(
+                quizFeedbackQuestionId
+            );
             if (relatedOptions.Any())
             {
                 _quizFeedbackRepository.DeleteFeedbackQuestionOptions(relatedOptions);
@@ -190,7 +233,10 @@ namespace LXP.Core.Services
             return true;
         }
 
-        private bool ValidateOptionsByFeedbackQuestionType(string questionType, List<QuizFeedbackQuestionsOptionViewModel> options)
+        private bool ValidateOptionsByFeedbackQuestionType(
+            string questionType,
+            List<QuizFeedbackQuestionsOptionViewModel> options
+        )
         {
             questionType = questionType.ToUpper();
 
@@ -203,14 +249,17 @@ namespace LXP.Core.Services
 
         private void ReorderQuestionNos(Guid quizId, int deletedQuestionNo)
         {
-            var questionsToUpdate = _quizFeedbackRepository.GetFeedbackQuestionsByQuizId(quizId)
+            var questionsToUpdate = _quizFeedbackRepository
+                .GetFeedbackQuestionsByQuizId(quizId)
                 .Where(q => q.QuestionNo > deletedQuestionNo)
                 .OrderBy(q => q.QuestionNo)
                 .ToList();
 
             foreach (var question in questionsToUpdate)
             {
-                var questionEntity = _quizFeedbackRepository.GetFeedbackQuestionEntityById(question.QuizFeedbackQuestionId);
+                var questionEntity = _quizFeedbackRepository.GetFeedbackQuestionEntityById(
+                    question.QuizFeedbackQuestionId
+                );
                 if (questionEntity != null)
                 {
                     questionEntity.QuestionNo--;

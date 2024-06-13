@@ -23,9 +23,11 @@ public partial class Topicfeedbackquestion
 
     public DateTime? ModifiedAt { get; set; }
 
-    public virtual ICollection<Feedbackquestionsoption> Feedbackquestionsoptions { get; set; } = new List<Feedbackquestionsoption>();
+    public virtual ICollection<Feedbackquestionsoption> Feedbackquestionsoptions { get; set; } =
+        new List<Feedbackquestionsoption>();
 
-    public virtual ICollection<Feedbackresponse> Feedbackresponses { get; set; } = new List<Feedbackresponse>();
+    public virtual ICollection<Feedbackresponse> Feedbackresponses { get; set; } =
+        new List<Feedbackresponse>();
 
     public virtual Topic Topic { get; set; } = null!;
 }

@@ -1,4 +1,6 @@
+using System.Reflection;
 using FluentValidation.AspNetCore;
+using LXP.Api.Interceptors;
 using LXP.Common.Entities;
 using LXP.Common.Validators;
 using LXP.Common.ViewModels;
@@ -12,25 +14,23 @@ using LXP.Services.IServices;
 using Microsoft.Extensions.FileProviders;
 using OfficeOpenXml;
 using Serilog;
-using LXP.Api.Interceptors;
-using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region CORS setting for API
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "_myAllowSpecificOrigins",
-    policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowAnyMethod();
-    }
-
+    options.AddPolicy(
+        name: "_myAllowSpecificOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowAnyMethod();
+        }
     );
 });
 
 #endregion
-// Add services to the container.
-// Add services to the container.
+
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IForgetRepository, ForgetRepository>();
@@ -41,7 +41,8 @@ builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IUpdatePasswordService, UpdatePasswordService>();
 builder.Services.AddScoped<IUpdatePasswordRepository, UpdatePasswordRepository>();
-//Course 
+
+//Course
 builder.Services.AddScoped<ICategoryServices, CategoryServices>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
@@ -59,6 +60,7 @@ builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 builder.Services.AddScoped<IMaterialServices, MaterialServices>();
 builder.Services.AddScoped<IUserReportServices, UserReportServices>();
 builder.Services.AddScoped<IUserReportRepository, UserReportRepository>();
+
 //Learner
 builder.Services.AddScoped<ILearnerServices, LearnerServices>();
 builder.Services.AddScoped<ILearnerRepository, LearnerRepository>();
@@ -69,12 +71,9 @@ builder.Services.AddScoped<ILearnerAttemptRepository, LearnerAttemptRepository>(
 builder.Services.AddScoped<ILearnerProgressRepository, LearnerProgressRepository>();
 builder.Services.AddScoped<ILearnerProgressService, LearnerProgressService>();
 
-
 builder.Services.AddScoped<LXPDbContext>();
 
-
-
-//Quiz 
+//Quiz
 // Register the IQuizRepository and QuizRepository
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 builder.Services.AddScoped<IQuizQuestionService, QuizQuestionService>();
@@ -92,7 +91,7 @@ builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IQuizReportServices, QuizReportServices>();
 builder.Services.AddScoped<IQuizReportRepository, QuizReportRepository>();
 builder.Services.AddScoped<IFeedbackResponseRepository, FeedbackResponseRepository>();
-builder.Services.AddScoped<IFeedbackResponseService,FeedbackResponseService>();
+builder.Services.AddScoped<IFeedbackResponseService, FeedbackResponseService>();
 builder.Services.AddScoped<IExcelToJsonService, ExcelToJsonService>();
 builder.Services.AddScoped<IQuizQuestionJsonRepository, QuizQuestionJsonRepository>();
 
@@ -104,10 +103,6 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IPasswordHistoryService, PasswordHistoryService>();
 builder.Services.AddScoped<IPasswordHistoryRepository, PasswordHistoryRepository>();
 
-
-
-
-
 builder.Services.AddScoped<IQuizEngineRepository, QuizEngineRepository>();
 builder.Services.AddScoped<IQuizEngineService, QuizEngineService>();
 
@@ -116,16 +111,22 @@ builder.Services.AddScoped<IProfilePasswordHistoryRepository, ProfilePasswordHis
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 
+//builder.Services.AddAntiforgery(options => options.HeaderName = "XSRF-TOKEN");
+
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+    options.IncludeXmlComments(
+        Path.Combine(
+            AppContext.BaseDirectory,
+            $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"
+        )
+    );
 });
 
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 builder.Host.UseSerilog();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -135,20 +136,19 @@ builder.Services.AddMvc(options =>
     options.Filters.Add<ApiExceptionInterceptor>();
 });
 
-builder.Services.AddControllers()
+builder
+    .Services.AddControllers()
     .AddFluentValidation(v =>
     {
         v.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     });
 
-
-
 builder.Services.AddTransient<BulkQuizQuestionViewModelValidator>();
 builder.Services.AddTransient<TopicFeedbackResponseViewModelValidator>();
 builder.Services.AddTransient<QuizFeedbackResponseViewModelValidator>();
 
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -164,23 +164,35 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "CourseThumbnailImages")),
-    RequestPath = "/wwwroot/CourseThumbnailImages"
-});
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(app.Environment.WebRootPath, "CourseThumbnailImages")
+        ),
+        RequestPath = "/wwwroot/CourseThumbnailImages"
+    }
+);
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "LearnerProfileImages")),
-    RequestPath = "/wwwroot/LearnerProfileImages"
-});
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(app.Environment.WebRootPath, "LearnerProfileImages")
+        ),
+        RequestPath = "/wwwroot/LearnerProfileImages"
+    }
+);
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "CourseMaterial")),
-    RequestPath = "/wwwroot/CourseMaterial"
-});
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(app.Environment.WebRootPath, "CourseMaterial")
+        ),
+        RequestPath = "/wwwroot/CourseMaterial"
+    }
+);
 app.UseCors("_myAllowSpecificOrigins");
 app.UseHttpsRedirection();
 

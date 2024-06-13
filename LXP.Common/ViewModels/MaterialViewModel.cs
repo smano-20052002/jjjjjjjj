@@ -1,16 +1,15 @@
-﻿using LXP.Common.Entities;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace LXP.Common.ViewModels
 {
     public class MaterialViewModel
     {
-
         public string TopicId { get; set; }
 
         public string MaterialTypeId { get; set; }
@@ -21,9 +20,6 @@ namespace LXP.Common.ViewModels
 
         public TimeOnly Duration { get; set; }
 
-        
-        public string CreatedBy { get; set; } 
-
-      
+        public string CreatedBy { get; set; }
     }
 }

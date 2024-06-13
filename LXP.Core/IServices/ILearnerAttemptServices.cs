@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LXP.Core.IServices
 {
-    public interface  ILearnerAttemptServices
+    public interface ILearnerAttemptServices
     {
-        object GetScoreByTopicIdAndLernerId( string LearnerId);
+        object GetScoreByTopicIdAndLernerId(string LearnerId);
 
         object GetScoreByLearnerId(string LearnerId);
     }

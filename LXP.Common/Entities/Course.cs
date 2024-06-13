@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace LXP.Common.Entities;
+
 public partial class Course
 {
     public Guid CourseId { get; set; }
@@ -34,7 +35,8 @@ public partial class Course
 
     public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 
-    public virtual ICollection<LearnerProgress> LearnerProgresses { get; set; } = new List<LearnerProgress>();
+    public virtual ICollection<LearnerProgress> LearnerProgresses { get; set; } =
+        new List<LearnerProgress>();
 
     public virtual CourseLevel Level { get; set; } = null!;
 

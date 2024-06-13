@@ -1,10 +1,10 @@
-﻿using LXP.Common.Entities;
-using LXP.Common.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
+using LXP.Common.ViewModels;
 
 namespace LXP.Data.IRepository
 {
@@ -13,9 +13,6 @@ namespace LXP.Data.IRepository
         void AddCourse(Course course);
         bool AnyCourseByCourseTitle(string courseTitle);
         Course GetCourseDetailsByCourseName(string courseName);
-
-
-
 
         Course GetCourseDetailsByCourseId(Guid CourseId);
 

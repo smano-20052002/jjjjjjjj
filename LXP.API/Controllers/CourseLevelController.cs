@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LXP.Core.IServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using LXP.Core.IServices;
 
 namespace LXP.Api.Controllers
 {
@@ -9,6 +9,7 @@ namespace LXP.Api.Controllers
     public class CourseLevelController : BaseController
     {
         private readonly ICourseLevelServices _courseLevelServices;
+
         public CourseLevelController(ICourseLevelServices courseLevelServices)
         {
             this._courseLevelServices = courseLevelServices;

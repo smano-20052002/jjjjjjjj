@@ -3,12 +3,12 @@ using LXP.Common.ViewModels;
 using LXP.Data.IRepository;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace LXP.Data.Repository
 {
     public class LearnerProgressRepository : ILearnerProgressRepository
     {
         private readonly LXPDbContext _context;
+
         public LearnerProgressRepository(LXPDbContext context)
         {
             _context = context;
@@ -19,24 +19,42 @@ namespace LXP.Data.Repository
             await _context.LearnerProgresses.AddAsync(learnerProgress);
             await _context.SaveChangesAsync();
         }
-        public async Task<bool> AnyLearnerProgressByLearnerIdAndMaterialId(Guid LearnerId, Guid MaterialId)
+
+        public async Task<bool> AnyLearnerProgressByLearnerIdAndMaterialId(
+            Guid LearnerId,
+            Guid MaterialId
+        )
         {
-            return await _context.LearnerProgresses.AnyAsync(learnerProgress => learnerProgress.MaterialId == MaterialId && learnerProgress.LearnerId == LearnerId);
+            return await _context.LearnerProgresses.AnyAsync(learnerProgress =>
+                learnerProgress.MaterialId == MaterialId && learnerProgress.LearnerId == LearnerId
+            );
         }
-        public async Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(Guid LearnerId, Guid MaterialId)
+
+        public async Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(
+            Guid LearnerId,
+            Guid MaterialId
+        )
         {
-            return await _context.LearnerProgresses.FirstAsync(learnerProgress => learnerProgress.MaterialId == MaterialId && learnerProgress.LearnerId == LearnerId);
+            return await _context.LearnerProgresses.FirstAsync(learnerProgress =>
+                learnerProgress.MaterialId == MaterialId && learnerProgress.LearnerId == LearnerId
+            );
         }
 
         public async Task<LearnerProgress> GetLearnerProgressById(Guid learnerId, Guid courseId)
         {
-            return await _context.LearnerProgresses.FirstOrDefaultAsync(progress => progress.LearnerId == learnerId && progress.CourseId == courseId);
-
+            return await _context.LearnerProgresses.FirstOrDefaultAsync(progress =>
+                progress.LearnerId == learnerId && progress.CourseId == courseId
+            );
         }
-        public async Task<LearnerProgress> GetLearnerProgressByMaterialId(Guid learnerId, Guid materialId)
-        {
-            return await _context.LearnerProgresses.FirstOrDefaultAsync(progress => progress.LearnerId == learnerId && progress.MaterialId == materialId);
 
+        public async Task<LearnerProgress> GetLearnerProgressByMaterialId(
+            Guid learnerId,
+            Guid materialId
+        )
+        {
+            return await _context.LearnerProgresses.FirstOrDefaultAsync(progress =>
+                progress.LearnerId == learnerId && progress.MaterialId == materialId
+            );
         }
 
         public void UpdateLearnerProgress(LearnerProgress progress)
@@ -44,18 +62,20 @@ namespace LXP.Data.Repository
             _context.LearnerProgresses.Update(progress);
             _context.SaveChanges();
         }
+
         public async Task<List<LearnerProgress>> GetMaterialByTopic(Guid topicId, Guid learnerId)
         {
-            return await _context.LearnerProgresses.Where(material => material.TopicId == topicId && material.LearnerId == learnerId).ToListAsync();
+            return await _context
+                .LearnerProgresses.Where(material =>
+                    material.TopicId == topicId && material.LearnerId == learnerId
+                )
+                .ToListAsync();
         }
-
-
-
 
         public async Task CalculateAndUpdateCourseCompletionAsync(Guid learnerId)
         {
-            var enrollments = await _context.Enrollments
-                .Where(e => e.LearnerId == learnerId)
+            var enrollments = await _context
+                .Enrollments.Where(e => e.LearnerId == learnerId)
                 .Select(e => new LearnerProgressEnrollmentViewModel
                 {
                     EnrollmentId = e.EnrollmentId,
@@ -78,40 +98,47 @@ namespace LXP.Data.Repository
                         CreatedAt = e.Course.CreatedAt,
                         ModifiedBy = e.Course.ModifiedBy,
                         ModifiedAt = e.Course.ModifiedAt,
-                        Topics = e.Course.Topics.Select(t => new LearnerProgressTopicViewModel
-                        {
-                            TopicId = t.TopicId,
-                            Name = t.Name,
-                            Materials = t.Materials.Select(m => new LearnerProgressMaterialViewModel
+                        Topics = e
+                            .Course.Topics.Select(t => new LearnerProgressTopicViewModel
                             {
-                                MaterialId = m.MaterialId,
-                                Name = m.Name,
-                                FilePath = m.FilePath,
-                                Duration = m.Duration,
-                                IsActive = m.IsActive,
-                                IsAvailable = m.IsAvailable
-                            }).ToList()
-                        }).ToList()
+                                TopicId = t.TopicId,
+                                Name = t.Name,
+                                Materials = t
+                                    .Materials.Select(m => new LearnerProgressMaterialViewModel
+                                    {
+                                        MaterialId = m.MaterialId,
+                                        Name = m.Name,
+                                        FilePath = m.FilePath,
+                                        Duration = m.Duration,
+                                        IsActive = m.IsActive,
+                                        IsAvailable = m.IsAvailable
+                                    })
+                                    .ToList()
+                            })
+                            .ToList()
                     }
-                }).ToListAsync();
+                })
+                .ToListAsync();
 
             foreach (var enrollment in enrollments)
             {
                 var course = enrollment.Course;
 
                 // Total course duration in hours
-                var totalCourseDuration = course.Topics
-                    .SelectMany(t => t.Materials)
+                var totalCourseDuration = course
+                    .Topics.SelectMany(t => t.Materials)
                     .Sum(m => m.Duration.ToTimeSpan().TotalHours);
 
                 // Fetch learner progress records
-                var learnerProgresses = await _context.LearnerProgresses
-                    .Where(lp => lp.LearnerId == learnerId && lp.CourseId == course.CourseId)
+                var learnerProgresses = await _context
+                    .LearnerProgresses.Where(lp =>
+                        lp.LearnerId == learnerId && lp.CourseId == course.CourseId
+                    )
                     .ToListAsync();
 
                 // Calculate watched duration in hours
                 var watchedDuration = learnerProgresses
-                    .Where(lp => lp.IsWatched==1)
+                    .Where(lp => lp.IsWatched == 1)
                     .Sum(lp => lp.CourseWatchtime.ToTimeSpan().TotalHours);
 
                 // Ensure totalCourseDuration is not zero to avoid division by zero
@@ -121,8 +148,10 @@ namespace LXP.Data.Repository
                 }
 
                 // Get the learner's last attempt score from the learner attempt table
-                var lastAttempt = await _context.LearnerAttempts
-                    .Where(la => la.LearnerId == learnerId && la.Quiz.CourseId == course.CourseId)
+                var lastAttempt = await _context
+                    .LearnerAttempts.Where(la =>
+                        la.LearnerId == learnerId && la.Quiz.CourseId == course.CourseId
+                    )
                     .OrderByDescending(la => la.EndTime)
                     .FirstOrDefaultAsync();
 
@@ -140,19 +169,22 @@ namespace LXP.Data.Repository
                 // Calculate the course completion percentage
                 var materialCompletionPercentage = (watchedDuration / totalCourseDuration) * 70;
                 var quizCompletionPercentage = (quizScore / (double)maxQuizScore) * 30;
-                var courseCompletionPercentage = materialCompletionPercentage + quizCompletionPercentage;
+                var courseCompletionPercentage =
+                    materialCompletionPercentage + quizCompletionPercentage;
 
                 // Cap the course completion percentage at 100%
                 courseCompletionPercentage = Math.Min(courseCompletionPercentage, 100);
 
                 // Update the enrollment table with the calculated percentage
-                var enrollmentToUpdate = await _context.Enrollments.FindAsync(enrollment.EnrollmentId);
+                var enrollmentToUpdate = await _context.Enrollments.FindAsync(
+                    enrollment.EnrollmentId
+                );
                 if (enrollmentToUpdate != null)
                 {
-                    enrollmentToUpdate.CourseCompletionPercentage = (decimal)courseCompletionPercentage;
+                    enrollmentToUpdate.CourseCompletionPercentage =
+                        (decimal)courseCompletionPercentage;
                     if (enrollmentToUpdate.CourseCompletionPercentage == 100)
                     {
-
                         enrollmentToUpdate.CompletedStatus = 1;
                     }
                     _context.Enrollments.Update(enrollmentToUpdate);
@@ -161,21 +193,6 @@ namespace LXP.Data.Repository
 
             await _context.SaveChangesAsync();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //public async Task CalculateAndUpdateCourseCompletionAsync(Guid learnerId)
         //{
@@ -265,11 +282,9 @@ namespace LXP.Data.Repository
 
         public async Task<Enrollment> GetEnrollmentByIdAsync(Guid learnerId, Guid enrollmentId)
         {
-            return await _context.Enrollments
-                .FirstOrDefaultAsync(e => e.LearnerId == learnerId && e.EnrollmentId == enrollmentId);
+            return await _context.Enrollments.FirstOrDefaultAsync(e =>
+                e.LearnerId == learnerId && e.EnrollmentId == enrollmentId
+            );
         }
-
-
-       
     }
 }

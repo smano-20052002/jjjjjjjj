@@ -97,13 +97,13 @@
 
 
 
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Core.IServices;
+using LXP.Data.IRepository;
 
 namespace LXP.Core.Services
 {
@@ -112,15 +112,24 @@ namespace LXP.Core.Services
         private readonly IPasswordHistoryRepository _passwordHistoryRepository;
         private readonly ILearnerRepository _learnerRepository; // Add this line
 
-        public PasswordHistoryService(IPasswordHistoryRepository passwordHistoryRepository, ILearnerRepository learnerRepository) // Modify this line
+        public PasswordHistoryService(
+            IPasswordHistoryRepository passwordHistoryRepository,
+            ILearnerRepository learnerRepository
+        ) // Modify this line
         {
             _passwordHistoryRepository = passwordHistoryRepository;
             _learnerRepository = learnerRepository; // Add this line
         }
 
-        public async Task<bool> UpdatePassword(string learnerId, string oldPassword, string newPassword)
+        public async Task<bool> UpdatePassword(
+            string learnerId,
+            string oldPassword,
+            string newPassword
+        )
         {
-            var passwordHistory = await _passwordHistoryRepository.GetPasswordHistory(Guid.Parse(learnerId));
+            var passwordHistory = await _passwordHistoryRepository.GetPasswordHistory(
+                Guid.Parse(learnerId)
+            );
             var oldPasswordHash = HashPassword(oldPassword);
             if (passwordHistory.NewPassword != oldPasswordHash)
             {
@@ -130,7 +139,6 @@ namespace LXP.Core.Services
             var newPasswordHash = HashPassword(newPassword);
             passwordHistory.NewPassword = newPasswordHash;
             await _passwordHistoryRepository.UpdatePasswordHistory(passwordHistory);
-
 
             var learner = _learnerRepository.GetLearnerDetailsByLearnerId(Guid.Parse(learnerId));
             learner.Password = newPasswordHash;

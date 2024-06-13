@@ -13,7 +13,7 @@
 
 //        Task<List<LearnerProfile>> GetAllLearnerProfile();
 
-        
+
 //        LearnerProfile GetLearnerprofileDetailsByLearnerprofileId(Guid ProfileId);
 //    }
 //}

@@ -1,7 +1,7 @@
-﻿using LXP.Core.IServices;
+﻿using System.Security.Cryptography.X509Certificates;
+using LXP.Core.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LXP.Api.Controllers
 {
@@ -23,7 +23,5 @@ namespace LXP.Api.Controllers
 
             return Ok(CreateSuccessResponse(dashboard));
         }
-
-
     }
 }

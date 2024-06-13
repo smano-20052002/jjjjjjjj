@@ -11,7 +11,5 @@ namespace LXP.Common.ViewModels
         public Guid LevelId { get; set; }
 
         public string Level { get; set; }
-
-
     }
 }

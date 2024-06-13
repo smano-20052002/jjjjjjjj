@@ -6,17 +6,9 @@ namespace LXP.Core.IServices
     {
         public Task<LoginRole> LoginLearner(LoginModel loginmodel);
 
-
         //Task<bool> ForgetPassword(string Email);
 
 
         //Task<ResultUpdatePassword> UpdatePassword(UpdatePassword updatePassword);
-
     }
 }
-
-
-
-
-
-

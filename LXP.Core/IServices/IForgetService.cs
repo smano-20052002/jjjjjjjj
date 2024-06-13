@@ -3,6 +3,5 @@
     public interface IForgetService
     {
         bool ForgetPassword(string Email);
-
     }
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LXP.Common.ViewModels;
 using LXP.Common.Entities;
+using LXP.Common.ViewModels;
 
 namespace LXP.Core.IServices
 {
@@ -16,10 +16,13 @@ namespace LXP.Core.IServices
 
         public IEnumerable<EnrollmentReportViewModel> GetEnrollmentsReport();
         public IEnumerable<EnrolledUserViewModel> GetEnrolledUsers(Guid courseId);
-        public IEnumerable<EnrollmentReportViewModel> GetEnrolledInprogressLearnerbyCourseId(Guid courseId);
-        public IEnumerable<EnrollmentReportViewModel> GetEnrolledCompletedLearnerbyCourseId(Guid courseId);
+        public IEnumerable<EnrollmentReportViewModel> GetEnrolledInprogressLearnerbyCourseId(
+            Guid courseId
+        );
+        public IEnumerable<EnrollmentReportViewModel> GetEnrolledCompletedLearnerbyCourseId(
+            Guid courseId
+        );
 
         Task<bool> DeleteEnrollment(Guid enrollmentId);
-
     }
 }

@@ -133,8 +133,10 @@ namespace LXP.Data.Repository
         public void RemoveFeedbackQuestion(Topicfeedbackquestion questionEntity)
         {
             // Delete related FeedbackResponses first
-            var relatedResponses = _dbContext.Feedbackresponses
-                .Where(r => r.TopicFeedbackQuestionId == questionEntity.TopicFeedbackQuestionId)
+            var relatedResponses = _dbContext
+                .Feedbackresponses.Where(r =>
+                    r.TopicFeedbackQuestionId == questionEntity.TopicFeedbackQuestionId
+                )
                 .ToList();
 
             if (relatedResponses.Any())

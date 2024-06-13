@@ -1,10 +1,10 @@
-﻿using LXP.Common.Entities;
-using LXP.Common.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
+using LXP.Common.ViewModels;
 
 namespace LXP.Data.IRepository
 {
@@ -17,11 +17,14 @@ namespace LXP.Data.IRepository
         object GetCourseandTopicsByLearnerId(Guid learnerId);
         public IEnumerable<EnrollmentReportViewModel> GetEnrollmentReport();
         public IEnumerable<EnrolledUserViewModel> GetEnrolledUser(Guid courseId);
-        public IEnumerable<EnrollmentReportViewModel> GetEnrolledInprogressLearnerbyCourseId(Guid courseId);
-        public IEnumerable<EnrollmentReportViewModel> GetEnrolledCompletedLearnerbyCourseId(Guid courseId);
+        public IEnumerable<EnrollmentReportViewModel> GetEnrolledInprogressLearnerbyCourseId(
+            Guid courseId
+        );
+        public IEnumerable<EnrollmentReportViewModel> GetEnrolledCompletedLearnerbyCourseId(
+            Guid courseId
+        );
 
         Enrollment FindEnrollmentId(Guid enrollmentId);
         Task DeleteEnrollment(Enrollment enrollment);
-
     }
 }

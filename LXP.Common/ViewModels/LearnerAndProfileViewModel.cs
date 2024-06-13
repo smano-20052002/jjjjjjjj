@@ -8,7 +8,6 @@ namespace LXP.Common.ViewModels
 {
     public class LearnerAndProfileViewModel
     {
-
         public string Email { get; set; }
         public string Role { get; set; }
 
@@ -18,8 +17,5 @@ namespace LXP.Common.ViewModels
         public string Gender { get; set; }
         public string ContactNumber { get; set; }
         public string Stream { get; set; }
-
-
     }
-
 }

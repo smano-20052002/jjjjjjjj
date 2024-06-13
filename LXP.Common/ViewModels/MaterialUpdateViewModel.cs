@@ -1,16 +1,15 @@
-﻿using LXP.Common.Entities;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace LXP.Common.ViewModels
 {
     public class MaterialUpdateViewModel
     {
-
         public string MaterialId { get; set; }
 
         public string Name { get; set; } = null!;
@@ -18,11 +17,5 @@ namespace LXP.Common.ViewModels
         public IFormFile Material { get; set; } = null!;
 
         public string? ModifiedBy { get; set; }
-
-       
-
-       
     }
-
 }
-

@@ -22,6 +22,7 @@ namespace LXP.Common.ViewModels
         public string? ModifiedBy { get; set; }
         public DateTime? ModifiedAt { get; set; }
 
-        public ICollection<LearnerProgressTopicViewModel> Topics { get; set; } = new List<LearnerProgressTopicViewModel>();
+        public ICollection<LearnerProgressTopicViewModel> Topics { get; set; } =
+            new List<LearnerProgressTopicViewModel>();
     }
 }

@@ -9,17 +9,16 @@ namespace LXP.Api.Controllers
     public class QuizReportController : BaseController
     {
         private readonly IQuizReportServices _quizReportServices;
+
         public QuizReportController(IQuizReportServices quizReportServices)
         {
             _quizReportServices = quizReportServices;
-
         }
 
         /// <summary>
         /// Report for Quiz
         /// </summary>
         [HttpGet("QuizReport")]
-
         public IActionResult GetQuizReport()
         {
             var report = _quizReportServices.GetQuizReports();
@@ -30,7 +29,6 @@ namespace LXP.Api.Controllers
         /// GetPassdLearnersList
         /// </summary>
         [HttpGet("QuizReport/passedlearnersReport/{Quizid}!")]
-
         public IActionResult GetPassdLearnersList(Guid Quizid)
         {
             var PassesLearners = _quizReportServices.GetPassdLearnersList(Quizid);
@@ -41,14 +39,10 @@ namespace LXP.Api.Controllers
         /// GetFailedLearnersList
         /// </summary>
         [HttpGet("QuizReport/FailedlearnersReport/{Quizid}")]
-
         public IActionResult GetFailedLearnersList(Guid Quizid)
         {
             var PassesLearners = _quizReportServices.GetFailedLearnersList(Quizid);
             return Ok(CreateSuccessResponse(PassesLearners));
-
         }
-
-
     }
 }

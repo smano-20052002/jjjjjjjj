@@ -8,7 +8,6 @@ namespace LXP.Common.ViewModels
 {
     public class RegisterUserViewModel
     {
-
         public string email { get; set; } = null!;
 
         public string? password { get; set; }
@@ -32,6 +31,5 @@ namespace LXP.Common.ViewModels
         public string? Newpassword { get; set; }
 
         //public string? ProfilePhoto { get; set; }
-
     }
 }

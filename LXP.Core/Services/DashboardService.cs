@@ -7,6 +7,7 @@ namespace LXP.Core.Services
     public class DashboardService : IDashboardService
     {
         private readonly IDashboardRepository _dashboardRepository;
+
         public DashboardService(IDashboardRepository dashboardRepository)
         {
             _dashboardRepository = dashboardRepository;
@@ -29,12 +30,27 @@ namespace LXP.Core.Services
 
         public Array GetMonthEnrollmentList(string year)
         {
-            string[] month = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct","Nov","Dec"];
+            string[] month =
+            [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec"
+            ];
             var list = _dashboardRepository.GetMonthWiseEnrollments(year).ToList();
-            var query = from c in list
-                        orderby c.EnrollmentDate.Month
-                        group c by c.EnrollmentDate.Month into g
-                        select new { EnrollMonth = month[g.Key-1], EnrollCount = g.Count() };
+            var query =
+                from c in list
+                orderby c.EnrollmentDate.Month
+                group c by c.EnrollmentDate.Month into g
+                select new { EnrollMonth = month[g.Key - 1], EnrollCount = g.Count() };
             var output = query.ToList();
             return output.ToArray();
         }
@@ -42,9 +58,10 @@ namespace LXP.Core.Services
         public Array GetCourseCreatedList()
         {
             var list = _dashboardRepository.GetCourseCreated().ToList();
-            var query = from c in list
-                        group c by c.CreatedAt.Year into g
-                        select new { CreatedYear = g.Key, CourseCount = g.Count() };
+            var query =
+                from c in list
+                group c by c.CreatedAt.Year into g
+                select new { CreatedYear = g.Key, CourseCount = g.Count() };
             Console.WriteLine(query);
             var output = query.ToList();
             return output.ToArray();
@@ -77,7 +94,6 @@ namespace LXP.Core.Services
                 //GetTopFeedback = _dashboardRepository.GetFeedbackresponses(),
             };
             return AdminDashboard;
-
         }
 
         public IEnumerable<TopLearnersViewModel> GetTopLearner()
@@ -94,7 +110,5 @@ namespace LXP.Core.Services
         {
             return _dashboardRepository.GetRecentfeedbackResponses();
         }
-
-      
     }
 }

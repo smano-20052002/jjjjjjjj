@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace LXP.Common.Utils
 {
-    public  class RandomPassword
+    public class RandomPassword
     {
-
         public static string Randompasswordgenerator()
         {
             Random random = new Random();
@@ -22,8 +21,5 @@ namespace LXP.Common.Utils
             }
             return password.ToString();
         }
-
-
-
     }
 }

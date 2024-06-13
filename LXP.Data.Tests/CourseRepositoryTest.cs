@@ -47,12 +47,12 @@
 //                ModifiedBy = "Sanjai",
 //                ModifiedAt = DateTime.Now
 //            };
-//            var course2 = new Course { 
+//            var course2 = new Course {
 //                CourseId = Guid.NewGuid(),
-//                Title = "Course 2", 
+//                Title = "Course 2",
 //                Description = "Description",
 //                Thumbnail = "image",
-//                CreatedBy = "kavin", 
+//                CreatedBy = "kavin",
 //                CreatedAt = DateTime.Now,
 //                ModifiedBy = "sanjai",
 //                ModifiedAt = DateTime.Now };

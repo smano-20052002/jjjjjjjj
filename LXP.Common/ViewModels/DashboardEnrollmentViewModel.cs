@@ -6,6 +6,5 @@
         public Guid LearnerId { get; set; }
         public Guid CourseId { get; set; }
         public DateTime EnrollmentDate { get; set; }
-
     }
 }

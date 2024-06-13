@@ -7,11 +7,11 @@ namespace LXP.Common.Validators
     {
         public QuestionOptionViewModelValidator()
         {
-            RuleFor(option => option.Option)
-                .NotEmpty().WithMessage("Option text is required.");
+            RuleFor(option => option.Option).NotEmpty().WithMessage("Option text is required.");
 
             RuleFor(option => option.IsCorrect)
-                .NotNull().WithMessage("IsCorrect must be provided.");
+                .NotNull()
+                .WithMessage("IsCorrect must be provided.");
         }
     }
 }

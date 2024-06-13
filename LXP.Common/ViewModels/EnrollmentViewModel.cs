@@ -32,7 +32,5 @@
         ///</summary>
 
         public bool EnrollRequestStatus { get; set; }
-
-
     }
 }

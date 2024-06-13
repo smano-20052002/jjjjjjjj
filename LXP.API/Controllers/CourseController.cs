@@ -1,11 +1,10 @@
+using System.Net;
+using LXP.Common.Constants;
+using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using Microsoft.AspNetCore.Http;
-using LXP.Common.Entities;
 using Microsoft.AspNetCore.Mvc;
-using LXP.Common.Constants;
-using System.Net;
-
 
 namespace LXP.Api.Controllers
 {
@@ -14,10 +13,12 @@ namespace LXP.Api.Controllers
     public class CourseController : BaseController
     {
         private readonly ICourseServices _courseServices;
+
         public CourseController(ICourseServices courseServices)
         {
             _courseServices = courseServices;
         }
+
         [HttpPost("/lxp/course")]
         public IActionResult AddCourseDetails(CourseViewModel course)
         {
@@ -32,10 +33,14 @@ namespace LXP.Api.Controllers
             {
                 return Ok(CreateInsertResponse(CreatedCourse));
             }
-            return Ok(CreateFailureResponse(MessageConstants.MsgAlreadyExists, (int)HttpStatusCode.PreconditionFailed));
-
-
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgAlreadyExists,
+                    (int)HttpStatusCode.PreconditionFailed
+                )
+            );
         }
+
         [HttpGet("/lxp/course/{id}")]
         public async Task<IActionResult> GetCourseDetailsByCourseId(string id)
         {
@@ -49,7 +54,7 @@ namespace LXP.Api.Controllers
         /////<response code="200">Success</response>
         /////<response code="404">Internal server Error</response>
         //[HttpGet("get/course/{courseId}")]
-        //public ActionResult<Course> GetById(Guid courseId) 
+        //public ActionResult<Course> GetById(Guid courseId)
         //{
         //    var course = _courseServices.GetCourseByCourseId(courseId);
         //    if(course == null)
@@ -74,9 +79,13 @@ namespace LXP.Api.Controllers
                 return Ok(CreateSuccessResponse(updatecourse));
             }
 
-            return Ok(CreateFailureResponse(MessageConstants.MsgNotUpdated, (int)HttpStatusCode.MethodNotAllowed));
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgNotUpdated,
+                    (int)HttpStatusCode.MethodNotAllowed
+                )
+            );
         }
-
 
         ///<summary>
         ///Delete the course
@@ -92,12 +101,16 @@ namespace LXP.Api.Controllers
             {
                 return Ok(CreateSuccessResponse(course));
             }
-            return Ok(CreateFailureResponse(MessageConstants.MsgCourseNotDeleted, (int)HttpStatusCode.MethodNotAllowed));
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgCourseNotDeleted,
+                    (int)HttpStatusCode.MethodNotAllowed
+                )
+            );
         }
 
-
         ///<summary>
-        ///Update the course status 
+        ///Update the course status
         ///</summary>
         ///<response code="200">Success</response>
         ///<response code="405">Internal server Error</response>
@@ -111,10 +124,13 @@ namespace LXP.Api.Controllers
             {
                 return Ok(CreateSuccessResponse(Coursestatus));
             }
-            return Ok(CreateFailureResponse(MessageConstants.MsgNotUpdated, (int)HttpStatusCode.MethodNotAllowed));
-
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgNotUpdated,
+                    (int)HttpStatusCode.MethodNotAllowed
+                )
+            );
         }
-
 
         [HttpGet("lxp/GetAllCourse")]
         public IActionResult GetAllCourse()
@@ -122,7 +138,6 @@ namespace LXP.Api.Controllers
             var courses = _courseServices.GetAllCourse();
             return Ok(CreateSuccessResponse(courses));
         }
-
 
         [HttpGet("lxp/Getninecourse")]
         public IActionResult GetLimitedCourse()
@@ -136,16 +151,13 @@ namespace LXP.Api.Controllers
         ///</summary>
 
         [HttpGet("/lxp/view/course")]
-
         public IActionResult GetAllCourseDetails()
         {
             var course = _courseServices.GetAllCourseDetails();
             return Ok(CreateSuccessResponse(course));
-
         }
 
         [HttpGet("/lxp/view/Getallcoursebylearnerid/{learnerId}")]
-
         public async Task<IActionResult> GetAllCourseDetailsByLearnerId(string learnerId)
         {
             var Courses = _courseServices.GetAllCourseDetailsByLearnerId(learnerId);

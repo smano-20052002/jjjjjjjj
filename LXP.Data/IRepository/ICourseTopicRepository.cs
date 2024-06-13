@@ -1,9 +1,9 @@
-﻿using LXP.Common.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
 
 namespace LXP.Data.IRepository
 {
@@ -19,6 +19,5 @@ namespace LXP.Data.IRepository
         Task<Topic> GetTopicByTopicId(Guid topicId);
         Task<List<Topic>> GetTopicsbycouresId(Guid courseId);
         Task<List<LearnerProgress>> GetTopicsbyLearnerId(Guid courseId, Guid LearnerId);
-
     }
 }

@@ -4,13 +4,12 @@ namespace LXP.Common.ViewModels
 {
     public class CourseDetailsViewModel
     {
-
-
         ///<summary>
         ///CourseId
         /// </summary>
 
         public Guid CourseId { get; set; }
+
         ///<Summary>
         ///CourseTitle
         ///</Summary>
@@ -31,14 +30,12 @@ namespace LXP.Common.ViewModels
 
         public string Category { get; set; }
 
-
         ///<Summary>
         ///Course Duration
         ///</Summary>
         ///<example>10.00</example>
 
         public TimeOnly Duration { get; set; }
-
 
         public string Description { get; set; }
 
@@ -56,15 +53,11 @@ namespace LXP.Common.ViewModels
         [NotMapped]
         public string Thumbnailimage { get; set; }
 
-
         public Guid LevelId { get; set; }
-
 
         public Guid CategoryId { get; set; }
 
         public bool Status { get; set; }
         public string ModifiedAt { get; set; }
-
     }
-
 }

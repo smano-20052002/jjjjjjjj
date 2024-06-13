@@ -1,13 +1,13 @@
 ﻿// BaseController.cs
-using LXP.Common.ViewModels;
-using LXP.Common.Constants;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
+using LXP.Common.Constants;
+using LXP.Common.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers
 {
@@ -86,8 +86,13 @@ namespace LXP.Api.Controllers
 
             if (validationResults.Any())
             {
-                var errorMessage = string.Join(" | ", validationResults.Select(x => x.ErrorMessage));
-                return BadRequest(CreateFailureResponse(errorMessage, (int)HttpStatusCode.BadRequest));
+                var errorMessage = string.Join(
+                    " | ",
+                    validationResults.Select(x => x.ErrorMessage)
+                );
+                return BadRequest(
+                    CreateFailureResponse(errorMessage, (int)HttpStatusCode.BadRequest)
+                );
             }
 
             return null;

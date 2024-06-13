@@ -13,5 +13,3 @@ namespace LXP.Common.ViewModels
         public string? Category { get; set; }
     }
 }
-
-

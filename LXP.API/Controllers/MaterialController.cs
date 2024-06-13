@@ -1,13 +1,11 @@
-﻿using LXP.Core.IServices;
+﻿using System.Net;
+using LXP.Common.Constants;
+using LXP.Common.Entities;
+using LXP.Common.ViewModels;
+using LXP.Core.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using LXP.Common.ViewModels;
 
-
-
-using LXP.Common.Constants;
-using System.Net;
-using LXP.Common.Entities;
 namespace LXP.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -15,6 +13,7 @@ namespace LXP.Api.Controllers
     public class MaterialController : BaseController
     {
         private readonly IMaterialServices _materialService;
+
         public MaterialController(IMaterialServices materialService)
         {
             _materialService = materialService;
@@ -30,16 +29,27 @@ namespace LXP.Api.Controllers
             }
             else
             {
-                return Ok(CreateFailureResponse(MessageConstants.MsgAlreadyExists, (int)HttpStatusCode.PreconditionFailed));
-
+                return Ok(
+                    CreateFailureResponse(
+                        MessageConstants.MsgAlreadyExists,
+                        (int)HttpStatusCode.PreconditionFailed
+                    )
+                );
             }
         }
 
         [HttpGet("/lxp/course/topic/{topicId}/materialtype/{materialTypeId}/")]
-        public async Task<List<MaterialListViewModel>> GetAllMaterialDetailsByTopicAndMaterialType(string topicId, string materialTypeId)
+        public async Task<List<MaterialListViewModel>> GetAllMaterialDetailsByTopicAndMaterialType(
+            string topicId,
+            string materialTypeId
+        )
         {
-            return await _materialService.GetAllMaterialDetailsByTopicAndType(topicId, materialTypeId);
+            return await _materialService.GetAllMaterialDetailsByTopicAndType(
+                topicId,
+                materialTypeId
+            );
         }
+
         ///<summary>
         /// updating the material
         ///</summary>
@@ -57,8 +67,14 @@ namespace LXP.Api.Controllers
                 return Ok(CreateSuccessResponse());
             }
 
-            return Ok(CreateFailureResponse(MessageConstants.MsgAlreadyExists, (int)HttpStatusCode.PreconditionFailed));
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgAlreadyExists,
+                    (int)HttpStatusCode.PreconditionFailed
+                )
+            );
         }
+
         ///<summary>
         /// deleting the material using materialId
         ///</summary>
@@ -72,8 +88,14 @@ namespace LXP.Api.Controllers
             {
                 return Ok(CreateSuccessResponse());
             }
-            return Ok(CreateFailureResponse(MessageConstants.MsgNotDeleted, (int)HttpStatusCode.MethodNotAllowed));
+            return Ok(
+                CreateFailureResponse(
+                    MessageConstants.MsgNotDeleted,
+                    (int)HttpStatusCode.MethodNotAllowed
+                )
+            );
         }
+
         ///<summary>
         /// getting the particular material using materialId
         ///</summary>
@@ -87,17 +109,17 @@ namespace LXP.Api.Controllers
             var material = await _materialService.GetMaterialDetailsByMaterialId(materialId);
             return Ok(CreateSuccessResponse(material));
         }
+
         [HttpGet("/lxp/course/material/withoutpdfconversion/{materialId}")]
-        public async Task<IActionResult> GetMaterialByMaterialIdWithoutPDFConversionForUpdate(string materialId)
+        public async Task<IActionResult> GetMaterialByMaterialIdWithoutPDFConversionForUpdate(
+            string materialId
+        )
         {
-            var material = await _materialService.GetMaterialDetailsByMaterialIdWithoutPDFConversionForUpdate(materialId);
+            var material =
+                await _materialService.GetMaterialDetailsByMaterialIdWithoutPDFConversionForUpdate(
+                    materialId
+                );
             return Ok(CreateSuccessResponse(material));
         }
-
-
-       
-
-
-
     }
 }

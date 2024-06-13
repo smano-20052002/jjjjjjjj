@@ -1,6 +1,4 @@
-﻿
-
-using LXP.Common.ViewModels.QuizQuestionViewModel;
+﻿using LXP.Common.ViewModels.QuizQuestionViewModel;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
 

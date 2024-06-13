@@ -8,11 +8,9 @@ namespace LXP.Data.IRepository
 
         public bool AnyUserByEmail(string loginmodel);
 
-
         //public Task<bool> AnyLearnerByEmailAndPassword(string Email, string Password);
 
         public Learner GetLearnerByEmail(string Email);
-
 
         public void UpdateLearnerPassword(string Email, string Password);
 

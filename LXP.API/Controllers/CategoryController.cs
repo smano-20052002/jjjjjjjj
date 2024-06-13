@@ -1,9 +1,9 @@
-﻿using LXP.Common.ViewModels;
+﻿using System.Net;
+using LXP.Common.Constants;
+using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using LXP.Common.Constants;
-using System.Net;
 
 namespace LXP.Api.Controllers
 {
@@ -15,10 +15,12 @@ namespace LXP.Api.Controllers
     public class CategoryController : BaseController
     {
         private readonly ICategoryServices _categoryServices;
+
         public CategoryController(ICategoryServices categoryServices)
         {
             _categoryServices = categoryServices;
         }
+
         ///<summary>
         ///getting all category name and its id
         ///</summary>
@@ -30,6 +32,7 @@ namespace LXP.Api.Controllers
             List<CourseCategoryListViewModel> categories = await _categoryServices.GetAllCategory();
             return Ok(CreateSuccessResponse(categories));
         }
+
         ///<summary>
         ///adding new category
         ///</summary>
@@ -42,12 +45,18 @@ namespace LXP.Api.Controllers
             bool categoryExists = await _categoryServices.AddCategory(category);
             if (categoryExists)
             {
-                List<CourseCategoryListViewModel> categories = await _categoryServices.GetAllCategory();
+                List<CourseCategoryListViewModel> categories =
+                    await _categoryServices.GetAllCategory();
                 return Ok(CreateSuccessResponse(categories));
             }
             else
             {
-                return Ok(CreateFailureResponse(MessageConstants.MsgAlreadyExists, (int)HttpStatusCode.PreconditionFailed));
+                return Ok(
+                    CreateFailureResponse(
+                        MessageConstants.MsgAlreadyExists,
+                        (int)HttpStatusCode.PreconditionFailed
+                    )
+                );
             }
         }
     }

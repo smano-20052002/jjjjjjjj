@@ -9,11 +9,13 @@ namespace LXP.Api.Controllers
     [ApiController]
     public class MaterialTypeController : BaseController
     {
-        private readonly IMaterialTypeServices _materialTypeServices;   
-        public MaterialTypeController(IMaterialTypeServices materialTypeServices) 
+        private readonly IMaterialTypeServices _materialTypeServices;
+
+        public MaterialTypeController(IMaterialTypeServices materialTypeServices)
         {
             _materialTypeServices = materialTypeServices;
         }
+
         [HttpGet("/lxp/course/materialtype")]
         public IActionResult GetAllMaterialType()
         {

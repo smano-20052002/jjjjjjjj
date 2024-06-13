@@ -1,6 +1,4 @@
-﻿
-
-using LXP.Common.Entities;
+﻿using LXP.Common.Entities;
 using LXP.Common.ViewModels.QuizFeedbackQuestionViewModel;
 
 namespace LXP.Data.IRepository

@@ -1,10 +1,10 @@
-﻿using LXP.Common.Entities;
-using LXP.Common.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
+using LXP.Common.ViewModels;
 
 namespace LXP.Core.IServices
 {
@@ -13,10 +13,12 @@ namespace LXP.Core.IServices
         Task<bool> Progress(LearnerProgressViewModel learnerProgress);
         Task<bool> materialCompletion(Guid learnerId, Guid materialId);
         Task<bool> UpdateProgress(Guid learnerId, Guid materialId, TimeOnly watchtime);
+
         //Task<double> materialCompletionPercentage(Guid learnerId, Guid materialId);
 
         Task<double> TopicTotalTime(Guid topicId);
         Task<double> CourseTotalTime(Guid courseId);
+
         // Task<LearnerProgressViewModel> GetProgressById(Guid learnerProgressId);
 
         Task<double> TopicWatchTime(Guid topicId, Guid learnerId);
@@ -25,11 +27,12 @@ namespace LXP.Core.IServices
         Task CalculateAndUpdateCourseCompletionAsync(Guid learnerId);
 
         Task<decimal?> GetCourseCompletionPercentageAsync(Guid learnerId, Guid enrollmentId);
-        Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(string LearnerId, string MaterialId);
-
+        Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(
+            string LearnerId,
+            string MaterialId
+        );
 
         Task<bool> LearnerProgress(ProgressViewModel learnerProgress);
-
     }
     //public interface ILearnerProgressService
     //{

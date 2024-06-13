@@ -1,27 +1,24 @@
-﻿using LXP.Common.Entities;
-using LXP.Data.IRepository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LXP.Common.Entities;
+using LXP.Data.IRepository;
 
 namespace LXP.Data.Repository
 {
-    public class  LearnerAttemptRepository : ILearnerAttemptRepository
+    public class LearnerAttemptRepository : ILearnerAttemptRepository
     {
         private readonly LXPDbContext _dbcontext;
-
 
         public LearnerAttemptRepository(LXPDbContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
 
-
-        public object GetScoreByTopicIdAndLernerId( Guid LearnerId)
+        public object GetScoreByTopicIdAndLernerId(Guid LearnerId)
         {
-
             //var result = from attempt in _dbcontext.LearnerAttempts
             //             join quiz in _dbcontext.Quizzes on attempt.QuizId equals quiz.QuizId
             //             join topic in _dbcontext.Topics on quiz.TopicId equals topic.TopicId
@@ -41,76 +38,69 @@ namespace LXP.Data.Repository
 
             //             };
 
-        
-var result = from attempt in _dbcontext.LearnerAttempts
 
-             join quiz in _dbcontext.Quizzes on attempt.QuizId equals quiz.QuizId
+            var result =
+                from attempt in _dbcontext.LearnerAttempts
 
-             join topic in _dbcontext.Topics on quiz.TopicId equals topic.TopicId
+                join quiz in _dbcontext.Quizzes on attempt.QuizId equals quiz.QuizId
 
-             join course in _dbcontext.Courses on topic.CourseId equals course.CourseId
+                join topic in _dbcontext.Topics on quiz.TopicId equals topic.TopicId
 
-             where attempt.LearnerId == LearnerId
+                join course in _dbcontext.Courses on topic.CourseId equals course.CourseId
 
-             group attempt.Score by new
+                where attempt.LearnerId == LearnerId
 
-             {
+                group attempt.Score by new
+                {
+                    quiz.QuizId,
 
-                 quiz.QuizId,
+                    CourseName = course.Title,
 
-                 CourseName = course.Title,
+                    attempt.LearnerId,
 
-                 attempt.LearnerId,
+                    TopicName = topic.Name,
 
-                 TopicName = topic.Name,
+                    topic.TopicId,
 
-                 topic.TopicId,
+                    course.CourseId
+                } into grouped
 
-                 course.CourseId
+                select new
+                {
+                    Score = grouped.Sum(),
 
-             } into grouped
+                    grouped.Key.QuizId,
 
-             select new
+                    grouped.Key.TopicName,
 
-             {
+                    grouped.Key.LearnerId,
 
-                 Score = grouped.Sum(),
+                    grouped.Key.CourseName,
 
-                 grouped.Key.QuizId,
+                    grouped.Key.TopicId,
 
-                 grouped.Key.TopicName,
-
-                 grouped.Key.LearnerId,
-
-                 grouped.Key.CourseName,
-
-                 grouped.Key.TopicId,
-
-                 grouped.Key.CourseId
-
-             };
+                    grouped.Key.CourseId
+                };
 
             return result;
         }
-
 
         public object GetScoreByLearnerId(Guid LearnerId)
         {
-            var result = from attempt in _dbcontext.LearnerAttempts
-                         join quiz in _dbcontext.Quizzes on attempt.QuizId equals quiz.QuizId
-                         join topic in _dbcontext.Topics on quiz.TopicId equals topic.TopicId
-                         join course in _dbcontext.Courses on topic.CourseId equals course.CourseId
-                         where attempt.LearnerId == LearnerId
-                         group attempt by course into groupedScores
-                         select new
-                         {
-                             CourseId = groupedScores.Key.CourseId,
-                             CourseName = groupedScores.Key.Title,
-                             TotalScore = groupedScores.Sum(attempt => attempt.Score)
-                         };
+            var result =
+                from attempt in _dbcontext.LearnerAttempts
+                join quiz in _dbcontext.Quizzes on attempt.QuizId equals quiz.QuizId
+                join topic in _dbcontext.Topics on quiz.TopicId equals topic.TopicId
+                join course in _dbcontext.Courses on topic.CourseId equals course.CourseId
+                where attempt.LearnerId == LearnerId
+                group attempt by course into groupedScores
+                select new
+                {
+                    CourseId = groupedScores.Key.CourseId,
+                    CourseName = groupedScores.Key.Title,
+                    TotalScore = groupedScores.Sum(attempt => attempt.Score)
+                };
             return result;
         }
-
-
     }
 }

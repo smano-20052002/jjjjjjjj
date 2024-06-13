@@ -13,6 +13,5 @@
         ///</Summary>
         ///<example>True</example>
         public bool IsAvailable { get; set; }
-
     }
 }

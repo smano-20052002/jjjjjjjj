@@ -151,10 +151,14 @@ namespace LXP.Core.Services
         {
             try
             {
-                var existingQuestion = _topicFeedbackRepository.GetTopicFeedbackQuestionEntityById(topicFeedbackQuestionId);
+                var existingQuestion = _topicFeedbackRepository.GetTopicFeedbackQuestionEntityById(
+                    topicFeedbackQuestionId
+                );
                 if (existingQuestion != null)
                 {
-                    var relatedOptions = _topicFeedbackRepository.GetFeedbackQuestionOptionsById(topicFeedbackQuestionId);
+                    var relatedOptions = _topicFeedbackRepository.GetFeedbackQuestionOptionsById(
+                        topicFeedbackQuestionId
+                    );
 
                     if (relatedOptions.Any())
                     {
@@ -163,14 +167,20 @@ namespace LXP.Core.Services
 
                     // Remove the FeedbackQuestion and related FeedbackResponses
                     _topicFeedbackRepository.RemoveFeedbackQuestion(existingQuestion);
-                    _topicFeedbackRepository.ReorderQuestionNos(existingQuestion.TopicId, existingQuestion.QuestionNo);
+                    _topicFeedbackRepository.ReorderQuestionNos(
+                        existingQuestion.TopicId,
+                        existingQuestion.QuestionNo
+                    );
 
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred while deleting the feedback question.", ex);
+                throw new InvalidOperationException(
+                    "An error occurred while deleting the feedback question.",
+                    ex
+                );
             }
             return false;
         }
