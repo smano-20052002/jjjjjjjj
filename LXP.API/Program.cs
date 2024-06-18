@@ -94,6 +94,8 @@ builder.Services.AddScoped<IFeedbackResponseRepository, FeedbackResponseReposito
 builder.Services.AddScoped<IFeedbackResponseService, FeedbackResponseService>();
 builder.Services.AddScoped<IExcelToJsonService, ExcelToJsonService>();
 builder.Services.AddScoped<IQuizQuestionJsonRepository, QuizQuestionJsonRepository>();
+builder.Services.AddScoped<IFeedbackResponseDetailsRepository, FeedbackResponseDetailsRepository>();
+builder.Services.AddScoped<IFeedbackResponseDetailsService, FeedbackResponseDetailsService>();
 
 builder.Services.AddSingleton<LXPDbContext>();
 builder.Services.AddScoped<ILearnerRepository, LearnerRepository>();
