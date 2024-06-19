@@ -238,11 +238,11 @@ namespace LXP.Core.Services
         }
 
         private async Task<int> CalculateQuestionScore(
-            Guid quizQuestionId,
-            bool isAnswerCorrect,
-            float individualQuestionMarks,
-            AnswerSubmissionModel answerSubmissionModel
-        )
+    Guid quizQuestionId,
+    bool isAnswerCorrect,
+    float individualQuestionMarks,
+    AnswerSubmissionModel answerSubmissionModel
+)
         {
             var questionType = await _quizEngineRepository.GetQuestionTypeByIdAsync(quizQuestionId);
             switch (questionType)
@@ -279,9 +279,7 @@ namespace LXP.Core.Services
                     // If some correct options are selected but not all, award partial marks
                     else if (correctlySelectedOptions > 0)
                     {
-                        var partialMark =
-                            (individualQuestionMarks / correctOptionCount)
-                            * correctlySelectedOptions;
+                        var partialMark = (individualQuestionMarks / correctOptionCount) * correctlySelectedOptions;
                         return (int)Math.Round(partialMark);
                     }
                     // If no correct options are selected, no marks awarded
