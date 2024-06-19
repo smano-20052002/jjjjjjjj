@@ -22,5 +22,3 @@
 //    public string Response { get; set; }
 //    public string OptionText { get; set; }
 //}
-
-

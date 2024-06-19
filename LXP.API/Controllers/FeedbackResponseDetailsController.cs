@@ -11,7 +11,9 @@ namespace LXP.API.Controllers
     {
         private readonly IFeedbackResponseDetailsService _feedbackResponseDetailsService;
 
-        public FeedbackResponseDetailsController(IFeedbackResponseDetailsService feedbackResponseDetailsService)
+        public FeedbackResponseDetailsController(
+            IFeedbackResponseDetailsService feedbackResponseDetailsService
+        )
         {
             _feedbackResponseDetailsService = feedbackResponseDetailsService;
         }
@@ -33,14 +35,20 @@ namespace LXP.API.Controllers
         [HttpGet("quiz/{quizId}/learner/{learnerId}")]
         public IActionResult GetQuizFeedbackResponsesByLearner(Guid quizId, Guid learnerId)
         {
-            var responses = _feedbackResponseDetailsService.GetQuizFeedbackResponsesByLearner(quizId, learnerId);
+            var responses = _feedbackResponseDetailsService.GetQuizFeedbackResponsesByLearner(
+                quizId,
+                learnerId
+            );
             return Ok(responses);
         }
 
         [HttpGet("topic/{topicId}/learner/{learnerId}")]
         public IActionResult GetTopicFeedbackResponsesByLearner(Guid topicId, Guid learnerId)
         {
-            var responses = _feedbackResponseDetailsService.GetTopicFeedbackResponsesByLearner(topicId, learnerId);
+            var responses = _feedbackResponseDetailsService.GetTopicFeedbackResponsesByLearner(
+                topicId,
+                learnerId
+            );
             return Ok(responses);
         }
     }

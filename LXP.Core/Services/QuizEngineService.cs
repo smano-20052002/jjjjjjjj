@@ -237,7 +237,7 @@ namespace LXP.Core.Services
             return attempt.LearnerAttemptId;
         }
 
-        private async Task<float> CalculateQuestionScore(
+        private async Task<int> CalculateQuestionScore(
             Guid quizQuestionId,
             bool isAnswerCorrect,
             float individualQuestionMarks,
@@ -249,7 +249,7 @@ namespace LXP.Core.Services
             {
                 case "MCQ":
                 case "T/F":
-                    return isAnswerCorrect ? individualQuestionMarks : 0;
+                    return isAnswerCorrect ? (int)Math.Round(individualQuestionMarks) : 0;
 
                 case "MSQ":
                     var correctOptions =
@@ -271,20 +271,20 @@ namespace LXP.Core.Services
                         .Intersect(correctOptions)
                         .Count();
 
-                    // If all correct options are selected, full marks
+                    // If all correct options are selected, award full marks
                     if (correctlySelectedOptions == correctOptionCount)
                     {
-                        return individualQuestionMarks;
+                        return (int)Math.Round(individualQuestionMarks);
                     }
-                    // If some correct options are selected but not all,  partial marks
+                    // If some correct options are selected but not all, award partial marks
                     else if (correctlySelectedOptions > 0)
                     {
                         var partialMark =
                             (individualQuestionMarks / correctOptionCount)
                             * correctlySelectedOptions;
-                        return partialMark;
+                        return (int)Math.Round(partialMark);
                     }
-                    // If no correct options are selected, no marks
+                    // If no correct options are selected, no marks awarded
                     else
                     {
                         return 0;

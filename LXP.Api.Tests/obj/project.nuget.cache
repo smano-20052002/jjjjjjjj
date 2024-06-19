@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LSNlBW4U5GYPt/Qk8LAiC8u3REDCB4g5yq4REU/pamqDMCiE3wVT+FaqTv7/wyQjSqLxBVunmPEoOPBm2LgRow==",
+  "dgSpecHash": "pZiaBCp5atIyt7vbHnVgffRHxunJNa6KAPfxI5Wy1aBl9BG5eXiz4oSvQ7MdgmU0Yf8zfwAZTdCyrjJcr6qD9A==",
   "success": true,
-  "projectFilePath": "D:\\Relevantz.LXP\\LXP.Api.Tests\\LXP.Api.Tests.csproj",
+  "projectFilePath": "D:\\scorecalculation\\LXP.Api.Tests\\LXP.Api.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gokul.jawahar\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\gokul.jawahar\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

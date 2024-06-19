@@ -9,7 +9,9 @@ namespace LXP.Services
     {
         private readonly IFeedbackResponseDetailsRepository _feedbackResponseDetailsRepository;
 
-        public FeedbackResponseDetailsService(IFeedbackResponseDetailsRepository feedbackResponseDetailsRepository)
+        public FeedbackResponseDetailsService(
+            IFeedbackResponseDetailsRepository feedbackResponseDetailsRepository
+        )
         {
             _feedbackResponseDetailsRepository = feedbackResponseDetailsRepository;
         }
@@ -24,14 +26,26 @@ namespace LXP.Services
             return _feedbackResponseDetailsRepository.GetTopicFeedbackResponses(topicId);
         }
 
-        public List<QuizFeedbackResponseDetailsViewModel> GetQuizFeedbackResponsesByLearner(Guid quizId, Guid learnerId)
+        public List<QuizFeedbackResponseDetailsViewModel> GetQuizFeedbackResponsesByLearner(
+            Guid quizId,
+            Guid learnerId
+        )
         {
-            return _feedbackResponseDetailsRepository.GetQuizFeedbackResponsesByLearner(quizId, learnerId);
+            return _feedbackResponseDetailsRepository.GetQuizFeedbackResponsesByLearner(
+                quizId,
+                learnerId
+            );
         }
 
-        public List<TopicFeedbackResponseDetailsViewModel> GetTopicFeedbackResponsesByLearner(Guid topicId, Guid learnerId)
+        public List<TopicFeedbackResponseDetailsViewModel> GetTopicFeedbackResponsesByLearner(
+            Guid topicId,
+            Guid learnerId
+        )
         {
-            return _feedbackResponseDetailsRepository.GetTopicFeedbackResponsesByLearner(topicId, learnerId);
+            return _feedbackResponseDetailsRepository.GetTopicFeedbackResponsesByLearner(
+                topicId,
+                learnerId
+            );
         }
     }
 }

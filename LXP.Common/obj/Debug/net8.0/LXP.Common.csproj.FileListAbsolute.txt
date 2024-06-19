@@ -268,3 +268,16 @@ D:\Relevantz.LXP\LXP.Common\obj\Debug\net8.0\LXP.Common.dll
 D:\Relevantz.LXP\LXP.Common\obj\Debug\net8.0\refint\LXP.Common.dll
 D:\Relevantz.LXP\LXP.Common\obj\Debug\net8.0\LXP.Common.pdb
 D:\Relevantz.LXP\LXP.Common\obj\Debug\net8.0\ref\LXP.Common.dll
+D:\scorecalculation\LXP.Common\bin\Debug\net8.0\LXP.Common.deps.json
+D:\scorecalculation\LXP.Common\bin\Debug\net8.0\LXP.Common.dll
+D:\scorecalculation\LXP.Common\bin\Debug\net8.0\LXP.Common.pdb
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.csproj.AssemblyReference.cache
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.AssemblyInfoInputs.cache
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.AssemblyInfo.cs
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.csproj.CoreCompileInputs.cache
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.sourcelink.json
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.dll
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\refint\LXP.Common.dll
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\LXP.Common.pdb
+D:\scorecalculation\LXP.Common\obj\Debug\net8.0\ref\LXP.Common.dll
