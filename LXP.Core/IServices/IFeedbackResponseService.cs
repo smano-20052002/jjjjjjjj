@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
 
 namespace LXP.Services.IServices
@@ -9,5 +10,7 @@ namespace LXP.Services.IServices
         void SubmitFeedbackResponse(TopicFeedbackResponseViewModel feedbackResponse);
         void SubmitFeedbackResponses(IEnumerable<QuizFeedbackResponseViewModel> feedbackResponses);
         void SubmitFeedbackResponses(IEnumerable<TopicFeedbackResponseViewModel> feedbackResponses);
+
+        IEnumerable<LearnerFeedbackViewModel> GetLearnerFeedbackStatus(Guid learnerId);
     }
 }

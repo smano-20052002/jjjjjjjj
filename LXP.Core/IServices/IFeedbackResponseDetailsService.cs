@@ -15,5 +15,7 @@ namespace LXP.Services.IServices
             Guid topicId,
             Guid learnerId
         );
+        List<QuizFeedbackResponseDetailsViewModel> GetAllQuizFeedbackResponses();
+        List<TopicFeedbackResponseDetailsViewModel> GetAllTopicFeedbackResponses();
     }
 }

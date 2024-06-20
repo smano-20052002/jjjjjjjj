@@ -77,5 +77,27 @@ namespace LXP.API.Controllers
             );
             return Ok(responses);
         }
+
+        /// <summary>
+        /// Retrieves all feedback responses for quizzes.
+        /// </summary>
+        /// <response code="200">Success on finding the feedback responses. The response body contains the list of all feedback responses for quizzes.</response>
+        [HttpGet("quiz")]
+        public IActionResult GetAllQuizFeedbackResponses()
+        {
+            var responses = _feedbackResponseDetailsService.GetAllQuizFeedbackResponses();
+            return Ok(responses);
+        }
+
+        /// <summary>
+        /// Retrieves all feedback responses for topics.
+        /// </summary>
+        /// <response code="200">Success on finding the feedback responses. The response body contains the list of all feedback responses for topics.</response>
+        [HttpGet("topic")]
+        public IActionResult GetAllTopicFeedbackResponses()
+        {
+            var responses = _feedbackResponseDetailsService.GetAllTopicFeedbackResponses();
+            return Ok(responses);
+        }
     }
 }

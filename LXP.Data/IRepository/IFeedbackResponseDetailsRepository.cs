@@ -16,5 +16,8 @@ namespace LXP.Data.IRepository
             Guid topicId,
             Guid learnerId
         );
+
+        List<QuizFeedbackResponseDetailsViewModel> GetAllQuizFeedbackResponses();
+        List<TopicFeedbackResponseDetailsViewModel> GetAllTopicFeedbackResponses();
     }
 }

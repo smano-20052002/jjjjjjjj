@@ -22,7 +22,13 @@ namespace LXP.Data.IRepository
         //new bug fix
         void DeleteFeedbackResponsesByQuizQuestionId(Guid quizFeedbackQuestionId);
         void DeleteFeedbackResponsesByTopicQuestionId(Guid topicFeedbackQuestionId);
+
         //LearnerProfile GetLearnerProfile(Guid learnerId);
+
+        IEnumerable<Guid> GetQuizIdsForLearner(Guid learnerId);
+        IEnumerable<Guid> GetTopicIdsForLearner(Guid learnerId);
+        bool IsQuizFeedbackGivenByLearner(Guid learnerId, Guid quizId);
+        bool IsTopicFeedbackGivenByLearner(Guid learnerId, Guid topicId);
     }
 }
 

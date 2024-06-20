@@ -2,6 +2,7 @@
 using LXP.Common.Constants;
 using LXP.Common.Entities;
 using LXP.Common.Validators;
+using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
 using LXP.Data.IRepository;
 using LXP.Services.IServices;
@@ -195,6 +196,50 @@ namespace LXP.Services
 
             _feedbackResponseRepository.AddFeedbackResponse(response);
             feedbackResponse.TopicId = question.TopicId;
+        }
+
+        public IEnumerable<LearnerFeedbackViewModel> GetLearnerFeedbackStatus(Guid learnerId)
+        {
+            var quizIds = _feedbackResponseRepository.GetQuizIdsForLearner(learnerId);
+            var topicIds = _feedbackResponseRepository.GetTopicIdsForLearner(learnerId);
+
+            var feedbackStatus = new List<LearnerFeedbackViewModel>();
+
+            foreach (var quizId in quizIds)
+            {
+                var isQuizFeedbackGiven = _feedbackResponseRepository.IsQuizFeedbackGivenByLearner(
+                    learnerId,
+                    quizId
+                );
+                feedbackStatus.Add(
+                    new LearnerFeedbackViewModel
+                    {
+                        LearnerId = learnerId,
+                        QuizId = quizId,
+                        TopicId = Guid.Empty,
+                        IsQuizFeedbackGiven = isQuizFeedbackGiven,
+                        IsTopicFeedbackGiven = false
+                    }
+                );
+            }
+
+            foreach (var topicId in topicIds)
+            {
+                var isTopicFeedbackGiven =
+                    _feedbackResponseRepository.IsTopicFeedbackGivenByLearner(learnerId, topicId);
+                feedbackStatus.Add(
+                    new LearnerFeedbackViewModel
+                    {
+                        LearnerId = learnerId,
+                        QuizId = Guid.Empty,
+                        TopicId = topicId,
+                        IsQuizFeedbackGiven = false,
+                        IsTopicFeedbackGiven = isTopicFeedbackGiven
+                    }
+                );
+            }
+
+            return feedbackStatus;
         }
     }
 }

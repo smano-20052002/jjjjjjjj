@@ -238,11 +238,11 @@ namespace LXP.Core.Services
         }
 
         private async Task<int> CalculateQuestionScore(
-    Guid quizQuestionId,
-    bool isAnswerCorrect,
-    float individualQuestionMarks,
-    AnswerSubmissionModel answerSubmissionModel
-)
+            Guid quizQuestionId,
+            bool isAnswerCorrect,
+            float individualQuestionMarks,
+            AnswerSubmissionModel answerSubmissionModel
+        )
         {
             var questionType = await _quizEngineRepository.GetQuestionTypeByIdAsync(quizQuestionId);
             switch (questionType)
@@ -279,7 +279,9 @@ namespace LXP.Core.Services
                     // If some correct options are selected but not all, award partial marks
                     else if (correctlySelectedOptions > 0)
                     {
-                        var partialMark = (individualQuestionMarks / correctOptionCount) * correctlySelectedOptions;
+                        var partialMark =
+                            (individualQuestionMarks / correctOptionCount)
+                            * correctlySelectedOptions;
                         return (int)Math.Round(partialMark);
                     }
                     // If no correct options are selected, no marks awarded
@@ -355,11 +357,15 @@ namespace LXP.Core.Services
 
         // new batch
 
-        public async Task<IEnumerable<LearnerQuizResultViewModel>> GetLearnerQuizResultAsync(Guid learnerId)
+        public async Task<IEnumerable<LearnerQuizResultViewModel>> GetLearnerQuizResultAsync(
+            Guid learnerId
+        )
         {
             var learnerQuizResults = new List<LearnerQuizResultViewModel>();
 
-            var existingAttempts = await _quizEngineRepository.GetLearnerAttemptsForLearnerAsync(learnerId);
+            var existingAttempts = await _quizEngineRepository.GetLearnerAttemptsForLearnerAsync(
+                learnerId
+            );
 
             foreach (var attempt in existingAttempts)
             {
@@ -374,16 +380,17 @@ namespace LXP.Core.Services
                 var attemptsRemaining = totalAttemptsAllowed - attempt.AttemptCount;
                 var hasAttemptsRemaining = attemptsRemaining > 0;
 
-                learnerQuizResults.Add(new LearnerQuizResultViewModel
-                {
-                    IsLearnerPassed = hasPassedQuiz,
-                    HasAttemptsRemaining = hasAttemptsRemaining
-                });
+                learnerQuizResults.Add(
+                    new LearnerQuizResultViewModel
+                    {
+                        IsLearnerPassed = hasPassedQuiz,
+                        HasAttemptsRemaining = hasAttemptsRemaining
+                    }
+                );
             }
 
             return learnerQuizResults;
-        }//20062024
-
+        } //20062024
 
         public async Task SubmitAnswerBatchAsync(AnswerSubmissionBatchModel model)
         {

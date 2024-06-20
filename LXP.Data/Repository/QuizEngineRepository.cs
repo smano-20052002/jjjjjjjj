@@ -314,11 +314,12 @@ namespace LXP.Data.Repository
                     .FirstOrDefaultAsync() ?? new ViewQuizDetailsViewModel();
         }
 
-        public async Task<IEnumerable<LearnerAttemptViewModel>> GetLearnerAttemptsForLearnerAsync(Guid learnerId)
+        public async Task<IEnumerable<LearnerAttemptViewModel>> GetLearnerAttemptsForLearnerAsync(
+            Guid learnerId
+        )
         {
             return await _dbContext
-                .LearnerAttempts
-                .Where(a => a.LearnerId == learnerId)
+                .LearnerAttempts.Where(a => a.LearnerId == learnerId)
                 .Select(a => new LearnerAttemptViewModel
                 {
                     LearnerAttemptId = a.LearnerAttemptId,
@@ -330,7 +331,7 @@ namespace LXP.Data.Repository
                     Score = a.Score
                 })
                 .ToListAsync();
-        }//20062024
+        } //20062024
 
         public async Task<LearnerQuizAttemptViewModel> GetLearnerQuizAttemptAsync(Guid attemptId)
         {

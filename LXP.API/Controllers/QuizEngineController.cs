@@ -147,6 +147,7 @@ namespace LXP.Api.Controllers
             var attemptId = await _quizEngineService.RetakeQuizAsync(learnerId, quizId);
             return Ok(attemptId);
         }
+
         /// <summary>
         /// Api  Endpoint in development stage not ready to use yet
         /// </summary>
@@ -184,6 +185,7 @@ namespace LXP.Api.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+
         /// <summary>
         /// Api  Endpoint in development stage not ready to use yet
         /// </summary>
@@ -202,5 +204,3 @@ namespace LXP.Api.Controllers
         }
     }
 }
-
-

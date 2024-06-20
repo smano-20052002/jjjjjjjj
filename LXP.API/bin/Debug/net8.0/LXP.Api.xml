@@ -646,5 +646,17 @@
             <response code="200">Success on finding the feedback responses. The response body contains the list of feedback responses for the topic by the learner.</response>
             <response code="404">Not found if no feedback responses exist for the provided topic ID and learner ID.</response>
         </member>
+        <member name="M:LXP.API.Controllers.FeedbackResponseDetailsController.GetAllQuizFeedbackResponses">
+            <summary>
+            Retrieves all feedback responses for quizzes.
+            </summary>
+            <response code="200">Success on finding the feedback responses. The response body contains the list of all feedback responses for quizzes.</response>
+        </member>
+        <member name="M:LXP.API.Controllers.FeedbackResponseDetailsController.GetAllTopicFeedbackResponses">
+            <summary>
+            Retrieves all feedback responses for topics.
+            </summary>
+            <response code="200">Success on finding the feedback responses. The response body contains the list of all feedback responses for topics.</response>
+        </member>
     </members>
 </doc>

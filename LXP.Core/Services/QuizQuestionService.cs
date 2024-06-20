@@ -1,10 +1,10 @@
-﻿using LXP.Common.ViewModels.QuizQuestionViewModel;
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
-using LXP.Common.Constants;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LXP.Common.Constants;
+using LXP.Common.ViewModels.QuizQuestionViewModel;
+using LXP.Core.IServices;
+using LXP.Data.IRepository;
 
 namespace LXP.Core.Services
 {
@@ -17,28 +17,49 @@ namespace LXP.Core.Services
             _quizQuestionRepository = quizQuestionRepository;
         }
 
-        public async Task<Guid> AddQuestionAsync(QuizQuestionViewModel quizQuestion, List<QuestionOptionViewModel> options)
+        public async Task<Guid> AddQuestionAsync(
+            QuizQuestionViewModel quizQuestion,
+            List<QuestionOptionViewModel> options
+        )
         {
             if (string.IsNullOrWhiteSpace(quizQuestion.Question))
-                throw new ArgumentException("Question cannot be null or empty.", nameof(quizQuestion.Question));
+                throw new ArgumentException(
+                    "Question cannot be null or empty.",
+                    nameof(quizQuestion.Question)
+                );
 
             if (string.IsNullOrWhiteSpace(quizQuestion.QuestionType))
-                throw new ArgumentException("QuestionType cannot be null or empty.", nameof(quizQuestion.QuestionType));
+                throw new ArgumentException(
+                    "QuestionType cannot be null or empty.",
+                    nameof(quizQuestion.QuestionType)
+                );
 
             quizQuestion.QuestionType = quizQuestion.QuestionType.ToUpper();
 
             if (!IsValidQuestionType(quizQuestion.QuestionType))
-                throw new ArgumentException("Invalid question type.", nameof(quizQuestion.QuestionType));
+                throw new ArgumentException(
+                    "Invalid question type.",
+                    nameof(quizQuestion.QuestionType)
+                );
 
             if (!ValidateOptions(quizQuestion.QuestionType, options))
-                throw new ArgumentException("Invalid options for the given question type.", nameof(options));
+                throw new ArgumentException(
+                    "Invalid options for the given question type.",
+                    nameof(options)
+                );
 
             return await _quizQuestionRepository.AddQuestionAsync(quizQuestion, options);
         }
 
-        public async Task<bool> UpdateQuestionAsync(Guid quizQuestionId, QuizQuestionViewModel quizQuestion, List<QuestionOptionViewModel> options)
+        public async Task<bool> UpdateQuestionAsync(
+            Guid quizQuestionId,
+            QuizQuestionViewModel quizQuestion,
+            List<QuestionOptionViewModel> options
+        )
         {
-            var existingQuestion = await _quizQuestionRepository.GetQuestionByIdAsync(quizQuestionId);
+            var existingQuestion = await _quizQuestionRepository.GetQuestionByIdAsync(
+                quizQuestionId
+            );
             if (existingQuestion == null)
                 throw new ArgumentException("Question not found.", nameof(quizQuestionId));
 
@@ -46,21 +67,33 @@ namespace LXP.Core.Services
                 throw new InvalidOperationException("Question type cannot be updated.");
 
             if (!ValidateOptions(existingQuestion.QuestionType, options))
-                throw new ArgumentException("Invalid options for the given question type.", nameof(options));
+                throw new ArgumentException(
+                    "Invalid options for the given question type.",
+                    nameof(options)
+                );
 
-            return await _quizQuestionRepository.UpdateQuestionAsync(quizQuestionId, quizQuestion, options);
+            return await _quizQuestionRepository.UpdateQuestionAsync(
+                quizQuestionId,
+                quizQuestion,
+                options
+            );
         }
 
         public async Task<bool> DeleteQuestionAsync(Guid quizQuestionId)
         {
-            var existingQuestion = await _quizQuestionRepository.GetQuestionByIdAsync(quizQuestionId);
+            var existingQuestion = await _quizQuestionRepository.GetQuestionByIdAsync(
+                quizQuestionId
+            );
             if (existingQuestion == null)
                 return false;
 
             bool deleted = await _quizQuestionRepository.DeleteQuestionAsync(quizQuestionId);
             if (deleted)
             {
-                _quizQuestionRepository.ReorderQuestionNos(existingQuestion.QuizId, existingQuestion.QuestionNo);
+                _quizQuestionRepository.ReorderQuestionNos(
+                    existingQuestion.QuizId,
+                    existingQuestion.QuestionNo
+                );
             }
             return deleted;
         }
@@ -117,7 +150,10 @@ namespace LXP.Core.Services
             return distinctOptions == options.Count;
         }
 
-        private bool ValidateOptionsByQuestionType(string questionType, List<QuestionOptionViewModel> options)
+        private bool ValidateOptionsByQuestionType(
+            string questionType,
+            List<QuestionOptionViewModel> options
+        )
         {
             switch (questionType)
             {

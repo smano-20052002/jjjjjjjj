@@ -21,7 +21,6 @@ namespace LXP.Core.IServices
         Task CacheAnswersAsync(CachedAnswerSubmissionModel model);
         Task SubmitCachedAnswersAsync(Guid learnerAttemptId);
 
-
-        Task<IEnumerable<LearnerQuizResultViewModel>> GetLearnerQuizResultAsync(Guid learnerId);//2062024
+        Task<IEnumerable<LearnerQuizResultViewModel>> GetLearnerQuizResultAsync(Guid learnerId); //2062024
     }
 }

@@ -47,5 +47,15 @@ namespace LXP.Services
                 learnerId
             );
         }
+
+        public List<QuizFeedbackResponseDetailsViewModel> GetAllQuizFeedbackResponses()
+        {
+            return _feedbackResponseDetailsRepository.GetAllQuizFeedbackResponses();
+        }
+
+        public List<TopicFeedbackResponseDetailsViewModel> GetAllTopicFeedbackResponses()
+        {
+            return _feedbackResponseDetailsRepository.GetAllTopicFeedbackResponses();
+        }
     }
 }

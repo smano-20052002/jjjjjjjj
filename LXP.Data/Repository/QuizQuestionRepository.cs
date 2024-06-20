@@ -11,10 +11,15 @@ namespace LXP.Data.Repository
 
         public QuizQuestionRepository(LXPDbContext dbContext)
         {
-            _LXPDbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext), "DB context cannot be null.");
+            _LXPDbContext =
+                dbContext
+                ?? throw new ArgumentNullException(nameof(dbContext), "DB context cannot be null.");
         }
 
-        public async Task<Guid> AddQuestionAsync(QuizQuestionViewModel quizQuestion, List<QuestionOptionViewModel> options)
+        public async Task<Guid> AddQuestionAsync(
+            QuizQuestionViewModel quizQuestion,
+            List<QuestionOptionViewModel> options
+        )
         {
             var quizQuestionEntity = new QuizQuestion
             {
@@ -48,7 +53,11 @@ namespace LXP.Data.Repository
             return quizQuestionEntity.QuizQuestionId;
         }
 
-        public async Task<bool> UpdateQuestionAsync(Guid quizQuestionId, QuizQuestionViewModel quizQuestion, List<QuestionOptionViewModel> options)
+        public async Task<bool> UpdateQuestionAsync(
+            Guid quizQuestionId,
+            QuizQuestionViewModel quizQuestion,
+            List<QuestionOptionViewModel> options
+        )
         {
             var quizQuestionEntity = await _LXPDbContext.QuizQuestions.FindAsync(quizQuestionId);
             if (quizQuestionEntity == null)
@@ -56,7 +65,9 @@ namespace LXP.Data.Repository
 
             quizQuestionEntity.Question = quizQuestion.Question;
 
-            var existingOptions = _LXPDbContext.QuestionOptions.Where(o => o.QuizQuestionId == quizQuestionId).ToList();
+            var existingOptions = _LXPDbContext
+                .QuestionOptions.Where(o => o.QuizQuestionId == quizQuestionId)
+                .ToList();
             _LXPDbContext.QuestionOptions.RemoveRange(existingOptions);
 
             foreach (var option in options)
@@ -84,7 +95,9 @@ namespace LXP.Data.Repository
             if (quizQuestionEntity == null)
                 return false;
 
-            _LXPDbContext.QuestionOptions.RemoveRange(_LXPDbContext.QuestionOptions.Where(o => o.QuizQuestionId == quizQuestionId));
+            _LXPDbContext.QuestionOptions.RemoveRange(
+                _LXPDbContext.QuestionOptions.Where(o => o.QuizQuestionId == quizQuestionId)
+            );
             _LXPDbContext.QuizQuestions.Remove(quizQuestionEntity);
             await _LXPDbContext.SaveChangesAsync();
 
@@ -93,16 +106,16 @@ namespace LXP.Data.Repository
 
         public async Task<List<QuizQuestionNoViewModel>> GetAllQuestionsAsync()
         {
-            return await _LXPDbContext.QuizQuestions
-                .Select(q => new QuizQuestionNoViewModel
+            return await _LXPDbContext
+                .QuizQuestions.Select(q => new QuizQuestionNoViewModel
                 {
                     QuizId = q.QuizId,
                     QuizQuestionId = q.QuizQuestionId,
                     Question = q.Question,
                     QuestionType = q.QuestionType,
                     QuestionNo = q.QuestionNo,
-                    Options = _LXPDbContext.QuestionOptions
-                        .Where(o => o.QuizQuestionId == q.QuizQuestionId)
+                    Options = _LXPDbContext
+                        .QuestionOptions.Where(o => o.QuizQuestionId == q.QuizQuestionId)
                         .Select(o => new QuestionOptionViewModel
                         {
                             Option = o.Option,
@@ -115,8 +128,8 @@ namespace LXP.Data.Repository
 
         public async Task<List<QuizQuestionNoViewModel>> GetAllQuestionsByQuizIdAsync(Guid quizId)
         {
-            return await _LXPDbContext.QuizQuestions
-                .Where(q => q.QuizId == quizId)
+            return await _LXPDbContext
+                .QuizQuestions.Where(q => q.QuizId == quizId)
                 .Select(q => new QuizQuestionNoViewModel
                 {
                     QuizId = q.QuizId,
@@ -124,8 +137,8 @@ namespace LXP.Data.Repository
                     Question = q.Question,
                     QuestionType = q.QuestionType,
                     QuestionNo = q.QuestionNo,
-                    Options = _LXPDbContext.QuestionOptions
-                        .Where(o => o.QuizQuestionId == q.QuizQuestionId)
+                    Options = _LXPDbContext
+                        .QuestionOptions.Where(o => o.QuizQuestionId == q.QuizQuestionId)
                         .Select(o => new QuestionOptionViewModel
                         {
                             Option = o.Option,
@@ -138,8 +151,8 @@ namespace LXP.Data.Repository
 
         public async Task<QuizQuestionNoViewModel> GetQuestionByIdAsync(Guid quizQuestionId)
         {
-            var quizQuestion = await _LXPDbContext.QuizQuestions
-                .Where(q => q.QuizQuestionId == quizQuestionId)
+            var quizQuestion = await _LXPDbContext
+                .QuizQuestions.Where(q => q.QuizQuestionId == quizQuestionId)
                 .Select(q => new
                 {
                     q.QuizId,
@@ -147,8 +160,8 @@ namespace LXP.Data.Repository
                     q.Question,
                     q.QuestionType,
                     q.QuestionNo,
-                    Options = _LXPDbContext.QuestionOptions
-                        .Where(o => o.QuizQuestionId == q.QuizQuestionId)
+                    Options = _LXPDbContext
+                        .QuestionOptions.Where(o => o.QuizQuestionId == q.QuizQuestionId)
                         .Select(o => new QuestionOptionViewModel
                         {
                             Option = o.Option,
@@ -176,7 +189,9 @@ namespace LXP.Data.Repository
 
         public async Task<int> GetNextQuestionNoAsync(Guid quizId)
         {
-            int count = await _LXPDbContext.QuizQuestions.Where(q => q.QuizId == quizId).CountAsync();
+            int count = await _LXPDbContext
+                .QuizQuestions.Where(q => q.QuizId == quizId)
+                .CountAsync();
             return count + 1;
         }
 

@@ -88,6 +88,13 @@ namespace LXP.API.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+
+        [HttpGet("learnerfeedbackinfo")]
+        public IActionResult GetLearnerFeedbackStatus(Guid learnerId)
+        {
+            var feedbackStatus = _feedbackResponseService.GetLearnerFeedbackStatus(learnerId);
+            return Ok(feedbackStatus);
+        }
     }
 }
 
