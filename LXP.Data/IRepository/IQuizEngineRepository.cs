@@ -55,5 +55,9 @@ namespace LXP.Data.IRepository
             Dictionary<Guid, List<string>> questionAnswers
         );
         Task SubmitAnswerAsync(AnswerSubmissionModel answerSubmissionModel);
+
+
+
+        Task<IEnumerable<LearnerAttemptViewModel>> GetLearnerAttemptsForLearnerAsync(Guid learnerId);//20062024
     }
 }

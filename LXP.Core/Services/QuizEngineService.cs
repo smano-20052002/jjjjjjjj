@@ -355,6 +355,35 @@ namespace LXP.Core.Services
 
         // new batch
 
+        public async Task<IEnumerable<LearnerQuizResultViewModel>> GetLearnerQuizResultAsync(Guid learnerId)
+        {
+            var learnerQuizResults = new List<LearnerQuizResultViewModel>();
+
+            var existingAttempts = await _quizEngineRepository.GetLearnerAttemptsForLearnerAsync(learnerId);
+
+            foreach (var attempt in existingAttempts)
+            {
+                var quiz = await _quizEngineRepository.GetQuizByIdAsync(attempt.QuizId);
+                if (quiz == null)
+                    continue;
+
+                var passMark = quiz.PassMark;
+                var hasPassedQuiz = attempt.Score >= passMark;
+
+                var totalAttemptsAllowed = quiz.AttemptsAllowed ?? int.MaxValue;
+                var attemptsRemaining = totalAttemptsAllowed - attempt.AttemptCount;
+                var hasAttemptsRemaining = attemptsRemaining > 0;
+
+                learnerQuizResults.Add(new LearnerQuizResultViewModel
+                {
+                    IsLearnerPassed = hasPassedQuiz,
+                    HasAttemptsRemaining = hasAttemptsRemaining
+                });
+            }
+
+            return learnerQuizResults;
+        }//20062024
+
 
         public async Task SubmitAnswerBatchAsync(AnswerSubmissionBatchModel model)
         {
