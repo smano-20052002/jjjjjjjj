@@ -31,6 +31,20 @@ namespace LXP.Api.Controllers
                 Data = result
             };
         }
+        /// <summary>
+        /// Creates a success response with optional data.
+        /// </summary>
+        [NonAction]
+        public APIResponse CreateSuccessResponseForDelete(dynamic result = null)
+        {
+            return new APIResponse()
+            {
+                StatusCode = (int)HttpStatusCode.OK,
+                Message = MessageConstants.DeleteCourseSucessMessage,
+                Data = result
+            };
+        }
+
 
         /// <summary>
         /// Creates a failure response with specified message and status code.

@@ -166,5 +166,13 @@ namespace LXP.Data.Repository
                 )
                 .ToListAsync();
         }
+        public List<Topic> GetAllTopics()
+        {
+            return _lXPDbContext
+                .Topics.ToList();
+
+        }
+
+
     }
 }

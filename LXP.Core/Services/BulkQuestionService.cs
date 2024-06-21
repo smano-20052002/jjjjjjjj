@@ -15,19 +15,16 @@ namespace LXP.Core.Services
     {
         private readonly IBulkQuestionRepository _bulkQuestionRepository;
         private readonly IQuizQuestionRepository _quizQuestionRepository;
-        private readonly IQuizRepository _quizRepository;
         private readonly BulkQuizQuestionViewModelValidator _validator;
 
         public BulkQuestionService(
             IBulkQuestionRepository bulkQuestionRepository,
             IQuizQuestionRepository quizQuestionRepository,
-            IQuizRepository quizRepository,
             BulkQuizQuestionViewModelValidator validator
         )
         {
             _bulkQuestionRepository = bulkQuestionRepository;
             _quizQuestionRepository = quizQuestionRepository;
-            _quizRepository = quizRepository;
             _validator = validator;
         }
 

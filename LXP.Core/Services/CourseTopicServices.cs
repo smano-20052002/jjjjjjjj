@@ -114,31 +114,57 @@ namespace LXP.Core.Services
             }
         }
 
-        public async Task<bool> UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
+        //public async Task<bool> UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
+        //{
+        //    Topic topic = await _courseTopicRepository.GetTopicByTopicId(
+        //        Guid.Parse(courseTopic.TopicId)
+        //    );
+        //    //List<Topic> topicsListByCourseId = await _courseTopicRepository.GetTopicsbycouresId(
+        //    //    topic.CourseId
+        //    //);
+        //    //topicsListByCourseId.Remove(topic);
+        //    //bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
+        //    //    topics.Name == courseTopic.Name
+        //    //);
+        //    //if (!isTopicAlreadyExists)
+        //    //{
+        //    topic.Name = courseTopic.Name;
+        //    topic.Description = courseTopic.Description;
+        //    topic.ModifiedBy = courseTopic.ModifiedBy;
+        //    topic.ModifiedAt = DateTime.Now;
+        //    await _courseTopicRepository.UpdateCourseTopic(topic);
+        //    return true;
+        //    //}
+        //    //else
+        //    //{
+        //    //    return false;
+        //    //}
+        //}
+        public bool UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
         {
-            Topic topic = await _courseTopicRepository.GetTopicByTopicId(
-                Guid.Parse(courseTopic.TopicId)
+            //Topic topic = await _courseTopicRepository.GetTopicByTopicId(
+            //    Guid.Parse(courseTopic.TopicId)
+            //);
+            List<Topic> topicsList = _courseTopicRepository.GetAllTopics();
+            Topic topic = topicsList.FirstOrDefault(topic => topic.TopicId == Guid.Parse(courseTopic.TopicId));
+            List<Topic> topicsListByCourseId = topicsList.Where(topics => topics.CourseId == topic.CourseId).ToList();
+            topicsListByCourseId.Remove(topic);
+            bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
+                topics.Name == courseTopic.Name
             );
-            //List<Topic> topicsListByCourseId = await _courseTopicRepository.GetTopicsbycouresId(
-            //    topic.CourseId
-            //);
-            //topicsListByCourseId.Remove(topic);
-            //bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
-            //    topics.Name == courseTopic.Name
-            //);
-            //if (!isTopicAlreadyExists)
-            //{
-            topic.Name = courseTopic.Name;
-            topic.Description = courseTopic.Description;
-            topic.ModifiedBy = courseTopic.ModifiedBy;
-            topic.ModifiedAt = DateTime.Now;
-            await _courseTopicRepository.UpdateCourseTopic(topic);
-            return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+            if (!isTopicAlreadyExists)
+            {
+                topic.Name = courseTopic.Name;
+                topic.Description = courseTopic.Description;
+                topic.ModifiedBy = courseTopic.ModifiedBy;
+                topic.ModifiedAt = DateTime.Now;
+                _courseTopicRepository.UpdateCourseTopic(topic);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<bool> SoftDeleteTopic(string topicId)

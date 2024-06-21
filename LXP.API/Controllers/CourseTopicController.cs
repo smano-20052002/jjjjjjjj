@@ -45,15 +45,43 @@ namespace LXP.Api.Controllers
             return Ok(CreateSuccessResponse(CourseTopic));
         }
 
+        //[HttpPut("/lxp/course/topic")]
+        //public async Task<IActionResult> UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
+        //{
+        //    bool updatedStatus = await _courseTopicServices.UpdateCourseTopic(courseTopic);
+        //    if (updatedStatus)
+        //    {
+        //        return Ok(
+        //            CreateSuccessResponse(
+        //                null
+        //            )
+        //        );
+        //    }
+
+        //    if (updatedStatus)
+        //    {
+        //        return Ok(
+        //            CreateSuccessResponse(
+        //                _courseTopicServices.GetTopicDetailsByTopicId(courseTopic.TopicId)
+        //            )
+        //        );
+        //    }
+        //    return Ok(
+        //        CreateFailureResponse(
+        //            MessageConstants.MsgAlreadyExists,
+        //            (int)HttpStatusCode.PreconditionFailed
+        //        )
+        //    );
+        //}
         [HttpPut("/lxp/course/topic")]
-        public async Task<IActionResult> UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
+        public IActionResult UpdateCourseTopic(CourseTopicUpdateModel courseTopic)
         {
-            bool updatedStatus = await _courseTopicServices.UpdateCourseTopic(courseTopic);
+            bool updatedStatus = _courseTopicServices.UpdateCourseTopic(courseTopic);
             if (updatedStatus)
             {
                 return Ok(
                     CreateSuccessResponse(
-                        _courseTopicServices.GetTopicDetailsByTopicId(courseTopic.TopicId)
+                        null
                     )
                 );
             }
@@ -64,6 +92,7 @@ namespace LXP.Api.Controllers
                 )
             );
         }
+       
 
         [HttpDelete("/lxp/course/topic/{topicId}")]
         public async Task<IActionResult> DeleteCourseTopic(string topicId)

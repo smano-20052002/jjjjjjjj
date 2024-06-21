@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentValidation;
+using LXP.Common.Constants;
 using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.QuizQuestionViewModel;
 
@@ -28,26 +29,30 @@ namespace LXP.Common.Validators
 
         private bool BeAValidQuestionType(string questionType)
         {
-            return questionType == "MCQ" || questionType == "TF" || questionType == "MSQ";
+            return questionType == QuizQuestionTypes.MultiChoiceQuestion ||
+                   questionType == QuizQuestionTypes.TrueFalseQuestion ||
+                   questionType == QuizQuestionTypes.MultiSelectQuestion;
         }
 
         private bool ValidateOptions(BulkQuizQuestionViewModel quizQuestion)
         {
-            if (quizQuestion.QuestionType == "MCQ")
+            if (quizQuestion.QuestionType == QuizQuestionTypes.MultiChoiceQuestion)
             {
                 return quizQuestion.Options != null
                     && quizQuestion.Options.Length == 4
                     && quizQuestion.Options.Distinct().Count() == 4;
             }
-            else if (quizQuestion.QuestionType == "TF")
+            else if (quizQuestion.QuestionType == QuizQuestionTypes.TrueFalseQuestion)
             {
                 return quizQuestion.Options != null
                     && quizQuestion.Options.Length == 2
-                    && !quizQuestion
-                        .Options[0]
-                        .Equals(quizQuestion.Options[1], System.StringComparison.OrdinalIgnoreCase);
+                    && quizQuestion.Options.Distinct().Count() == 2
+                    && (
+                        quizQuestion.Options.Any(opt => opt.Equals("True", System.StringComparison.OrdinalIgnoreCase) || opt == "1") &&
+                        quizQuestion.Options.Any(opt => opt.Equals("False", System.StringComparison.OrdinalIgnoreCase) || opt == "0")
+                    );
             }
-            else if (quizQuestion.QuestionType == "MSQ")
+            else if (quizQuestion.QuestionType == QuizQuestionTypes.MultiSelectQuestion)
             {
                 int optionCount = quizQuestion.Options?.Length ?? 0;
                 return quizQuestion.Options != null
@@ -60,26 +65,24 @@ namespace LXP.Common.Validators
 
         private bool ValidateCorrectOptions(BulkQuizQuestionViewModel quizQuestion)
         {
-            if (quizQuestion.QuestionType == "MCQ")
+            if (quizQuestion.QuestionType == QuizQuestionTypes.MultiChoiceQuestion)
             {
                 return quizQuestion.CorrectOptions != null
                     && quizQuestion.CorrectOptions.Length == 1
                     && quizQuestion.Options.Contains(quizQuestion.CorrectOptions[0]);
             }
-            else if (quizQuestion.QuestionType == "TF")
+            else if (quizQuestion.QuestionType == QuizQuestionTypes.TrueFalseQuestion)
             {
                 return quizQuestion.CorrectOptions != null
                     && quizQuestion.CorrectOptions.Length == 1
                     && (
-                        quizQuestion
-                            .CorrectOptions[0]
-                            .Equals("true", System.StringComparison.OrdinalIgnoreCase)
-                        || quizQuestion
-                            .CorrectOptions[0]
-                            .Equals("false", System.StringComparison.OrdinalIgnoreCase)
+                        quizQuestion.CorrectOptions[0].Equals("True", System.StringComparison.OrdinalIgnoreCase) ||
+                        quizQuestion.CorrectOptions[0].Equals("False", System.StringComparison.OrdinalIgnoreCase) ||
+                        quizQuestion.CorrectOptions[0] == "1" ||
+                        quizQuestion.CorrectOptions[0] == "0"
                     );
             }
-            else if (quizQuestion.QuestionType == "MSQ")
+            else if (quizQuestion.QuestionType == QuizQuestionTypes.MultiSelectQuestion)
             {
                 int correctOptionCount = quizQuestion.CorrectOptions?.Length ?? 0;
                 return quizQuestion.CorrectOptions != null

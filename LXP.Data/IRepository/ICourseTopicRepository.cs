@@ -10,6 +10,7 @@ namespace LXP.Data.IRepository
     public interface ICourseTopicRepository
     {
         object GetTopicDetails(string courseId);
+        List<Topic> GetAllTopics();
         Task AddCourseTopic(Topic topic);
         bool AnyTopicByTopicName(string topicName);
         Task<Topic> GetTopicDetailsByTopicNameAndCourse(string topicName, Guid courseId);

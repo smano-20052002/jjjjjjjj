@@ -14,6 +14,11 @@
             Creates a success response with optional data.
             </summary>
         </member>
+        <member name="M:LXP.Api.Controllers.BaseController.CreateSuccessResponseForDelete(System.Object)">
+            <summary>
+            Creates a success response with optional data.
+            </summary>
+        </member>
         <member name="M:LXP.Api.Controllers.BaseController.CreateFailureResponse(System.String,System.Int32)">
             <summary>
             Creates a failure response with specified message and status code.

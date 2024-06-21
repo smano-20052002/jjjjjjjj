@@ -99,7 +99,7 @@ namespace LXP.Api.Controllers
 
             if (course == true)
             {
-                return Ok(CreateSuccessResponse(course));
+                return Ok(CreateSuccessResponseForDelete(course));
             }
             return Ok(
                 CreateFailureResponse(
