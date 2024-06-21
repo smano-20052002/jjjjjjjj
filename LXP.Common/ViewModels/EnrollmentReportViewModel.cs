@@ -58,5 +58,10 @@ namespace LXP.Common.ViewModels
         ///Email ID
         /// </summary>
         public string? EmailId { get; set; }
+
+        ///<summary>
+        ///Course Percentage
+        ///</summary>
+        public decimal? CourseCompletionPercentage { get; set; }// 2162024
     }
 }

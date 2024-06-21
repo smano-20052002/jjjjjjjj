@@ -167,6 +167,7 @@ namespace LXP.Data.Repository
                         e.First().Learner.LearnerProfiles.First().ProfilePhoto
                     ),
                     EmailId = e.First().Learner.Email,
+                    CourseCompletionPercentage = e.First().CourseCompletionPercentage,
                 })
                 .ToList();
             return CompletedLearner;
@@ -192,6 +193,7 @@ namespace LXP.Data.Repository
                         e.First().Learner.LearnerProfiles.First().ProfilePhoto
                     ),
                     EmailId = e.First().Learner.Email,
+                    CourseCompletionPercentage = e.First().CourseCompletionPercentage,
                 })
                 .ToList();
             return InprogressLearner;
