@@ -1040,6 +1040,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LearnerProfileImages\4802eb25-3e8a-4a2f-8898-e5575d4ee1c3_404 error with people holding the numbers.gif))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LearnerProfileImages\9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>LXP.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LXP.Api</BasePath>
+      <RelativePath>LearnerProfileImages/9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LearnerProfileImages\9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LearnerProfileImages\asha.jfif))">
       <SourceType>Package</SourceType>
       <SourceId>LXP.Api</SourceId>

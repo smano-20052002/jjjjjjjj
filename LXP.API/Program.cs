@@ -200,10 +200,10 @@ app.UseStaticFiles(
     new StaticFileOptions
     {
         FileProvider = new PhysicalFileProvider(
-            Path.Combine(app.Environment.WebRootPath, "Images")
+            Path.Combine(app.Environment.WebRootPath, "LearnerProfileImages")
         ),
 
-        RequestPath = "/wwwroot/Images"
+        RequestPath = "/wwwroot/LearnerProfileImages"
     }
 );
 

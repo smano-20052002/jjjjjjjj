@@ -116,7 +116,7 @@ namespace LXP.Core.Services
                 Stream = profile.Stream,
                 ContactNumber = profile.ContactNumber,
                 ProfilePhoto = String.Format(
-                    "{0}://{1}{2}/wwwroot/Images/{3}",
+                    "{0}://{1}{2}/wwwroot/LearnerProfileImages/{3}",
                     _contextAccessor.HttpContext.Request.Scheme,
                     _contextAccessor.HttpContext.Request.Host,
                     _contextAccessor.HttpContext.Request.PathBase,
@@ -136,7 +136,7 @@ namespace LXP.Core.Services
             if (model.ProfilePhoto != null)
             {
                 var uniqueFileName = $"{Guid.NewGuid()}_{model.ProfilePhoto.FileName}";
-                var uploadsFolder = Path.Combine(_environment.WebRootPath, "Images"); // Use WebRootPath
+                var uploadsFolder = Path.Combine(_environment.WebRootPath, "LearnerProfileImages"); // Use WebRootPath
                 var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))

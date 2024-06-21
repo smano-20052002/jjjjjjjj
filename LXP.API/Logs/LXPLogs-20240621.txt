@@ -11,3 +11,161 @@
 2024-06-21 10:07:05.423 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 60.2308ms
 2024-06-21 10:07:05.682 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
 2024-06-21 10:07:06.062 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 379.8261ms
+2024-06-21 11:24:10.750 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 11:24:11.548 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 11:24:11.553 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 11:24:11.555 +05:30 [INF] Hosting environment: Development
+2024-06-21 11:24:11.556 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 11:24:18.339 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 11:24:19.422 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 1093.618ms
+2024-06-21 11:24:19.441 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 11:24:19.443 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 11:24:19.452 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 11.5328ms
+2024-06-21 11:24:19.506 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 62.3772ms
+2024-06-21 11:24:19.643 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 11:24:20.105 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 462.3409ms
+2024-06-21 11:25:12.400 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz - null null
+2024-06-21 11:25:12.442 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-21 11:25:12.447 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 11:25:12.475 +05:30 [INF] Route matched with {action = "GetAllQuizzes", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllQuizzes() on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 11:25:14.556 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 11:25:14.594 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api) in 2111.5586ms
+2024-06-21 11:25:14.596 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 11:25:14.598 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz - 200 null application/json; charset=utf-8 2199.3671ms
+2024-06-21 11:25:37.735 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - multipart/form-data; boundary=----WebKitFormBoundaryAC4C5B1GPlB3N8g6 12130
+2024-06-21 11:25:37.746 +05:30 [INF] CORS policy execution successful.
+2024-06-21 11:25:37.748 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 11:25:37.771 +05:30 [INF] Route matched with {action = "ImportQuizData", controller = "BulkQuestion"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ImportQuizData(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.BulkQuestionController (LXP.Api).
+2024-06-21 11:25:39.038 +05:30 [INF] Executing ObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 11:25:39.041 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 1255.6136ms
+2024-06-21 11:25:39.043 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 11:25:39.046 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - 500 null application/json; charset=utf-8 1310.6832ms
+2024-06-21 11:26:14.803 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/ExcelToJson/ConvertExcelToJson?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - multipart/form-data; boundary=----WebKitFormBoundaryH9qvA4noqVrBXqgv 12130
+2024-06-21 11:26:14.812 +05:30 [INF] CORS policy execution successful.
+2024-06-21 11:26:14.813 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.ExcelToJsonController.ConvertExcelToJson (LXP.Api)'
+2024-06-21 11:26:14.823 +05:30 [INF] Route matched with {action = "ConvertExcelToJson", controller = "ExcelToJson"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ConvertExcelToJson(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.ExcelToJsonController (LXP.Api).
+2024-06-21 11:26:15.388 +05:30 [INF] Executing FileStreamResult, sending file with download name 'convertedData.json' ...
+2024-06-21 11:26:15.397 +05:30 [INF] Executed action LXP.Api.Controllers.ExcelToJsonController.ConvertExcelToJson (LXP.Api) in 565.9064ms
+2024-06-21 11:26:15.400 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.ExcelToJsonController.ConvertExcelToJson (LXP.Api)'
+2024-06-21 11:26:15.403 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/ExcelToJson/ConvertExcelToJson?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - 200 4851 application/json 604.1731ms
+2024-06-21 11:31:26.587 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 11:31:27.727 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 11:31:27.731 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 11:31:27.732 +05:30 [INF] Hosting environment: Development
+2024-06-21 11:31:27.735 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 11:31:31.254 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 11:31:32.108 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 864.1717ms
+2024-06-21 11:31:32.125 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 11:31:32.134 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 9.036ms
+2024-06-21 11:31:32.144 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 11:31:32.194 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 50.6343ms
+2024-06-21 11:31:32.404 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 11:31:33.019 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 614.3768ms
+2024-06-21 11:34:18.620 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5199/lxp/learner/updateProfile - multipart/form-data; boundary=----WebKitFormBoundaryPY5sXB6vCZnQKMoj 151801
+2024-06-21 11:34:18.642 +05:30 [INF] CORS policy execution successful.
+2024-06-21 11:34:18.644 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-21 11:34:18.648 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.RegistrationController.UpdateProfile (LXP.Api)'
+2024-06-21 11:34:18.683 +05:30 [INF] Route matched with {action = "UpdateProfile", controller = "Registration"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateProfile(LXP.Common.ViewModels.UpdateProfileViewModel) on controller LXP.Api.Controllers.RegistrationController (LXP.Api).
+2024-06-21 11:34:24.132 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 11:34:24.160 +05:30 [INF] Executed action LXP.Api.Controllers.RegistrationController.UpdateProfile (LXP.Api) in 5470.287ms
+2024-06-21 11:34:24.163 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.RegistrationController.UpdateProfile (LXP.Api)'
+2024-06-21 11:34:24.170 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5199/lxp/learner/updateProfile - 200 null application/json; charset=utf-8 5549.9374ms
+2024-06-21 11:36:23.532 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/lxp/view/learnerProfile/70bf863e-da0c-408e-8ca9-c3d144ee5b52 - null null
+2024-06-21 11:36:23.555 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.RegistrationController.GetLearnerProfileById (LXP.Api)'
+2024-06-21 11:36:23.563 +05:30 [INF] Route matched with {action = "GetLearnerProfileById", controller = "Registration"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetLearnerProfileById(System.String) on controller LXP.Api.Controllers.RegistrationController (LXP.Api).
+2024-06-21 11:36:23.578 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 11:36:23.634 +05:30 [INF] Executed action LXP.Api.Controllers.RegistrationController.GetLearnerProfileById (LXP.Api) in 65.0221ms
+2024-06-21 11:36:23.637 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.RegistrationController.GetLearnerProfileById (LXP.Api)'
+2024-06-21 11:36:23.638 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/lxp/view/learnerProfile/70bf863e-da0c-408e-8ca9-c3d144ee5b52 - 200 null application/json; charset=utf-8 105.9525ms
+2024-06-21 11:36:43.003 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/wwwroot/LearnerProfileImages/9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg - null null
+2024-06-21 11:36:43.113 +05:30 [INF] Sending file. Request path: '/9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg'. Physical path: 'D:\scorecalculation\LXP.Api\wwwroot\LearnerProfileImages\9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg'
+2024-06-21 11:36:43.117 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/wwwroot/LearnerProfileImages/9f91eb62-4b83-4ff2-a3a2-0b666f603cf2_d76627b1-71c6-4b72-b1c8-9520be4b6b2f.jpg - 200 150826 image/jpeg 114.5077ms
+2024-06-21 11:36:43.845 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/favicon.ico - null null
+2024-06-21 11:36:43.850 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/favicon.ico - 404 0 null 4.9404ms
+2024-06-21 11:36:43.855 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5199/favicon.ico, Response status code: 404
+2024-06-21 11:51:01.814 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 11:51:02.353 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 11:51:02.356 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 11:51:02.357 +05:30 [INF] Hosting environment: Development
+2024-06-21 11:51:02.358 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 11:51:04.684 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 11:51:05.229 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 559.0192ms
+2024-06-21 11:51:05.237 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 11:51:05.237 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 11:51:05.251 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 13.8553ms
+2024-06-21 11:51:05.280 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 43.4951ms
+2024-06-21 11:51:05.844 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 11:51:06.189 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 344.5518ms
+2024-06-21 11:52:02.001 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz - null null
+2024-06-21 11:52:02.017 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-21 11:52:02.023 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 11:52:02.036 +05:30 [INF] Route matched with {action = "GetAllQuizzes", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllQuizzes() on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 11:52:03.205 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 11:52:03.224 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api) in 1183.9018ms
+2024-06-21 11:52:03.226 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 11:52:03.227 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz - 200 null application/json; charset=utf-8 1226.7056ms
+2024-06-21 11:52:28.189 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - multipart/form-data; boundary=----WebKitFormBoundary2qiEpUxtVDln3DdC 12130
+2024-06-21 11:52:28.196 +05:30 [INF] CORS policy execution successful.
+2024-06-21 11:52:28.197 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 11:52:28.208 +05:30 [INF] Route matched with {action = "ImportQuizData", controller = "BulkQuestion"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ImportQuizData(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.BulkQuestionController (LXP.Api).
+2024-06-21 11:52:29.051 +05:30 [INF] Executing ObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 11:52:29.056 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 845.7318ms
+2024-06-21 11:52:29.057 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 11:52:29.058 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - 500 null application/json; charset=utf-8 869.8923ms
+2024-06-21 12:02:18.803 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 12:02:19.234 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 12:02:19.236 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 12:02:19.237 +05:30 [INF] Hosting environment: Development
+2024-06-21 12:02:19.238 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 12:02:24.580 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 12:02:24.946 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 376.4923ms
+2024-06-21 12:02:24.954 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 12:02:24.956 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 12:02:24.964 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 8.6395ms
+2024-06-21 12:02:24.995 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 41.6566ms
+2024-06-21 12:02:25.082 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 12:02:25.386 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 303.6199ms
+2024-06-21 12:03:31.239 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/lxp/enroll/f7fb8372-50ca-4209-be73-b0997c6df86e/course/27da304c-feae-475b-9e99-4a3feb8b5924/topic - null null
+2024-06-21 12:03:31.251 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-21 12:03:31.255 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.EnrollmentController.GetCourseandTopicsByCourseId (LXP.Api)'
+2024-06-21 12:03:31.271 +05:30 [INF] Route matched with {action = "GetCourseandTopicsByCourseId", controller = "Enrollment"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCourseandTopicsByCourseId(System.Guid, System.Guid) on controller LXP.Api.Controllers.EnrollmentController (LXP.Api).
+2024-06-21 12:03:32.108 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 12:03:32.658 +05:30 [INF] Executed action LXP.Api.Controllers.EnrollmentController.GetCourseandTopicsByCourseId (LXP.Api) in 1383.1699ms
+2024-06-21 12:03:32.661 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.EnrollmentController.GetCourseandTopicsByCourseId (LXP.Api)'
+2024-06-21 12:03:32.662 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/lxp/enroll/f7fb8372-50ca-4209-be73-b0997c6df86e/course/27da304c-feae-475b-9e99-4a3feb8b5924/topic - 200 null application/json; charset=utf-8 1423.3358ms
+2024-06-21 12:15:04.230 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 12:15:04.693 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 12:15:04.695 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 12:15:04.696 +05:30 [INF] Hosting environment: Development
+2024-06-21 12:15:04.697 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 12:15:07.158 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 12:15:07.670 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 517.9139ms
+2024-06-21 12:15:07.675 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 12:15:07.677 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 12:15:07.692 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 15.4588ms
+2024-06-21 12:15:07.720 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 45.3095ms
+2024-06-21 12:15:07.793 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 12:15:08.122 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 329.4487ms
+2024-06-21 12:15:20.417 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz - null null
+2024-06-21 12:15:20.424 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-21 12:15:20.428 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 12:15:20.441 +05:30 [INF] Route matched with {action = "GetAllQuizzes", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllQuizzes() on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 12:15:21.777 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 12:15:21.798 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api) in 1353.5661ms
+2024-06-21 12:15:21.801 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 12:15:21.802 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz - 200 null application/json; charset=utf-8 1385.598ms
+2024-06-21 12:15:40.861 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - multipart/form-data; boundary=----WebKitFormBoundaryjgSwRNKXdBG25BAz 12130
+2024-06-21 12:15:40.876 +05:30 [INF] CORS policy execution successful.
+2024-06-21 12:15:40.881 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 12:15:40.891 +05:30 [INF] Route matched with {action = "ImportQuizData", controller = "BulkQuestion"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ImportQuizData(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.BulkQuestionController (LXP.Api).
+2024-06-21 12:15:41.620 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 12:15:41.625 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 730.1711ms
+2024-06-21 12:15:41.626 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 12:15:41.628 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=dae58ad4-e582-4a41-9e78-b4def114171e - 200 null application/json; charset=utf-8 766.0378ms
+2024-06-21 12:16:14.136 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/QuizQuestions/GetAllQuestions - null null
+2024-06-21 12:16:14.139 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizQuestionsController.GetAllQuestions (LXP.Api)'
+2024-06-21 12:16:14.142 +05:30 [INF] Route matched with {action = "GetAllQuestions", controller = "QuizQuestions"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllQuestions() on controller LXP.Api.Controllers.QuizQuestionsController (LXP.Api).
+2024-06-21 12:16:14.197 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 12:16:14.203 +05:30 [INF] Executed action LXP.Api.Controllers.QuizQuestionsController.GetAllQuestions (LXP.Api) in 59.1541ms
+2024-06-21 12:16:14.205 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizQuestionsController.GetAllQuestions (LXP.Api)'
+2024-06-21 12:16:14.207 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/QuizQuestions/GetAllQuestions - 200 null application/json; charset=utf-8 70.8652ms

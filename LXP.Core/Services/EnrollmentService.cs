@@ -123,5 +123,9 @@ namespace LXP.Core.Services
             }
             return false;
         }
+        public object GetCourseandTopicsByCourseId(Guid courseId, Guid learnerId)
+        {
+            return _enrollmentRepository.GetCourseandTopicsByCourseIdAndLearnerId(courseId, learnerId);
+        }//2106
     }
 }

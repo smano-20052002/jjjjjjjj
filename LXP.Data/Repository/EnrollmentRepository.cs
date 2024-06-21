@@ -209,5 +209,67 @@ namespace LXP.Data.Repository
             _lXPDbContext.Enrollments.Remove(enrollment);
             await _lXPDbContext.SaveChangesAsync();
         }
+        public object GetCourseandTopicsByCourseIdAndLearnerId(Guid courseId, Guid learnerId)
+        {
+            var result =
+                from enrollment in _lXPDbContext.Enrollments
+                where enrollment.LearnerId == learnerId && enrollment.CourseId == courseId
+                select new
+                {
+                    enrollmentid = enrollment.EnrollmentId,
+                    enrolledCourseId = enrollment.CourseId,
+                    enrolledCoursename = enrollment.Course.Title,
+                    enrolledcoursedescription = enrollment.Course.Description,
+                    enrolledcoursecategory = enrollment.Course.Category.Category,
+                    enrolledcourselevels = enrollment.Course.Level.Level,
+                    Thumbnailimage = String.Format(
+                        "{0}://{1}{2}/wwwroot/CourseThumbnailImages/{3}",
+                        _contextAccessor.HttpContext.Request.Scheme,
+                        _contextAccessor.HttpContext.Request.Host,
+                        _contextAccessor.HttpContext.Request.PathBase,
+                        enrollment.Course.Thumbnail
+                    ),
+
+                    Topics = (
+                        from topic in _lXPDbContext.Topics
+                        where topic.CourseId == enrollment.CourseId && topic.IsActive == true
+                        select new
+                        {
+                            TopicName = topic.Name,
+                            TopicDescription = topic.Description,
+                            TopicId = topic.TopicId,
+                            TopicIsActive = topic.IsActive,
+                            Materials = (
+                                from material in _lXPDbContext.Materials
+                                join materialType in _lXPDbContext.MaterialTypes
+                                    on material.MaterialTypeId equals materialType.MaterialTypeId
+
+                                where material.TopicId == topic.TopicId && material.IsActive == true
+                                select new
+                                {
+                                    MaterialId = material.MaterialId,
+                                    MaterialName = material.Name,
+                                    MaterialType = materialType.Type,
+                                    Material = String.Format(
+                                        "{0}://{1}{2}/wwwroot/CourseMaterial/{3}",
+                                        _contextAccessor.HttpContext.Request.Scheme,
+                                        _contextAccessor.HttpContext.Request.Host,
+                                        _contextAccessor.HttpContext.Request.PathBase,
+                                        material.FilePath
+                                    ),
+                                    MaterialDuration = material.Duration
+                                }
+                            ).ToList(),
+                            //MaterialType =(from materialType in _lXPDbContext.MaterialTypes select new
+                            //{
+                            //    MaterialType=materialType.Type,
+                            //    MaterialTypeId=materialType.MaterialTypeId,
+
+                            //}).ToList(),
+                        }
+                    ).ToList()
+                };
+            return result;
+        }
     }
 }

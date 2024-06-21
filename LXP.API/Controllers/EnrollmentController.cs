@@ -76,6 +76,12 @@ namespace LXP.Api.Controllers
             var users = _enrollmentService.GetEnrolledCompletedLearnerbyCourseId(courseId);
             return Ok(CreateSuccessResponse(users));
         }
+        [HttpGet("/lxp/enroll/{learnerId}/course/{courseId}/topic")]
+        public IActionResult GetCourseandTopicsByCourseId(Guid courseId, Guid learnerId)
+        {
+            var courses = _enrollmentService.GetCourseandTopicsByCourseId(courseId, learnerId);
+            return Ok(CreateSuccessResponse(courses));
+        }
 
         [HttpDelete("lxp/enroll/delete/{enrollmentId}")]
         public async Task<IActionResult> DeleteEnrollment(Guid enrollmentId)
