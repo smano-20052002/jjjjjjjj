@@ -357,40 +357,31 @@ namespace LXP.Core.Services
 
         // new batch
 
-        public async Task<IEnumerable<LearnerQuizResultViewModel>> GetLearnerQuizResultAsync(
-            Guid learnerId
-        )
+        public async Task<LearnerLastQuizResultViewModel> GetLearnerLastQuizResultAsync(Guid learnerId)
         {
-            var learnerQuizResults = new List<LearnerQuizResultViewModel>();
+            var lastAttempt = await _quizEngineRepository.GetLearnerLastAttemptAsync(learnerId);
+            if (lastAttempt == null)
+                return null;
 
-            var existingAttempts = await _quizEngineRepository.GetLearnerAttemptsForLearnerAsync(
-                learnerId
-            );
+            var quiz = await _quizEngineRepository.GetQuizByIdAsync(lastAttempt.QuizId);
+            if (quiz == null)
+                return null;
 
-            foreach (var attempt in existingAttempts)
+            var passMark = quiz.PassMark;
+            var hasPassedQuiz = lastAttempt.Score >= passMark;
+
+            var totalAttemptsAllowed = quiz.AttemptsAllowed ?? int.MaxValue;
+            var attemptsRemaining = totalAttemptsAllowed - lastAttempt.AttemptCount;
+            var hasAttemptsRemaining = attemptsRemaining > 0;
+
+            return new LearnerLastQuizResultViewModel
             {
-                var quiz = await _quizEngineRepository.GetQuizByIdAsync(attempt.QuizId);
-                if (quiz == null)
-                    continue;
-
-                var passMark = quiz.PassMark;
-                var hasPassedQuiz = attempt.Score >= passMark;
-
-                var totalAttemptsAllowed = quiz.AttemptsAllowed ?? int.MaxValue;
-                var attemptsRemaining = totalAttemptsAllowed - attempt.AttemptCount;
-                var hasAttemptsRemaining = attemptsRemaining > 0;
-
-                learnerQuizResults.Add(
-                    new LearnerQuizResultViewModel
-                    {
-                        IsLearnerPassed = hasPassedQuiz,
-                        HasAttemptsRemaining = hasAttemptsRemaining
-                    }
-                );
-            }
-
-            return learnerQuizResults;
-        } //20062024
+                IsLearnerPassed = hasPassedQuiz,
+                HasAttemptsRemaining = hasAttemptsRemaining,
+                QuizId = quiz.QuizId,
+                QuizName = quiz.NameOfQuiz
+            };
+        }
 
         public async Task SubmitAnswerBatchAsync(AnswerSubmissionBatchModel model)
         {

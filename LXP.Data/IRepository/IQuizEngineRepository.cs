@@ -56,8 +56,6 @@ namespace LXP.Data.IRepository
         );
         Task SubmitAnswerAsync(AnswerSubmissionModel answerSubmissionModel);
 
-        Task<IEnumerable<LearnerAttemptViewModel>> GetLearnerAttemptsForLearnerAsync(
-            Guid learnerId
-        ); //20062024
+        Task<LearnerAttemptViewModel> GetLearnerLastAttemptAsync(Guid learnerId);
     }
 }

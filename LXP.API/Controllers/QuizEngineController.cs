@@ -124,16 +124,19 @@ namespace LXP.Api.Controllers
         }
 
         /// <summary>
-        /// Retrieves all quiz results for a specific learner by their ID.
+        /// Retrieves the learner last attempt for the quiz based on the learner  ID.
         /// </summary>
         /// <param name="learnerId">The unique identifier of the learner.</param>
         /// <response code="200">Success on finding the quiz results. The response body contains the list of quiz results for the learner.</response>
-        [HttpGet("learners/{learnerId}/quiz-results")]
-        public async Task<IActionResult> GetLearnerQuizResults(Guid learnerId)
+        [HttpGet("learners/{learnerId}/last-quiz-result")]
+        public async Task<IActionResult> GetLearnerLastQuizResult(Guid learnerId)
         {
-            var learnerQuizResults = await _quizEngineService.GetLearnerQuizResultAsync(learnerId);
-            return Ok(learnerQuizResults);
+            var learnerLastQuizResult = await _quizEngineService.GetLearnerLastQuizResultAsync(learnerId);
+            if (learnerLastQuizResult == null)
+                return NotFound("No quiz attempts found for this learner.");
+            return Ok(learnerLastQuizResult);
         }
+
 
         /// <summary>
         /// Allows a learner to retake a specific quiz.
