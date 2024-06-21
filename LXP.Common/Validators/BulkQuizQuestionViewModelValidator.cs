@@ -46,11 +46,9 @@ namespace LXP.Common.Validators
             {
                 return quizQuestion.Options != null
                     && quizQuestion.Options.Length == 2
-                    && quizQuestion.Options.Distinct().Count() == 2
-                    && (
-                        quizQuestion.Options.Any(opt => opt.Equals("True", System.StringComparison.OrdinalIgnoreCase) || opt == "1") &&
-                        quizQuestion.Options.Any(opt => opt.Equals("False", System.StringComparison.OrdinalIgnoreCase) || opt == "0")
-                    );
+                    && !quizQuestion
+                        .Options[0]
+                        .Equals(quizQuestion.Options[1], System.StringComparison.OrdinalIgnoreCase);
             }
             else if (quizQuestion.QuestionType == QuizQuestionTypes.MultiSelectQuestion)
             {
@@ -76,10 +74,12 @@ namespace LXP.Common.Validators
                 return quizQuestion.CorrectOptions != null
                     && quizQuestion.CorrectOptions.Length == 1
                     && (
-                        quizQuestion.CorrectOptions[0].Equals("True", System.StringComparison.OrdinalIgnoreCase) ||
-                        quizQuestion.CorrectOptions[0].Equals("False", System.StringComparison.OrdinalIgnoreCase) ||
-                        quizQuestion.CorrectOptions[0] == "1" ||
-                        quizQuestion.CorrectOptions[0] == "0"
+                        quizQuestion
+                            .CorrectOptions[0]
+                            .Equals("true", System.StringComparison.OrdinalIgnoreCase)
+                        || quizQuestion
+                            .CorrectOptions[0]
+                            .Equals("false", System.StringComparison.OrdinalIgnoreCase)
                     );
             }
             else if (quizQuestion.QuestionType == QuizQuestionTypes.MultiSelectQuestion)

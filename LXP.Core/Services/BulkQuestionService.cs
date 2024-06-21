@@ -146,6 +146,10 @@ namespace LXP.Core.Services
             catch (Exception ex)
             {
                 Log.Error(ex, "An error occurred while importing quiz data.");
+                if (ex.InnerException != null)
+                {
+                    Log.Error(ex.InnerException, "Inner exception details.");
+                }
                 return new
                 {
                     statusCode = 500,
@@ -154,6 +158,7 @@ namespace LXP.Core.Services
                 };
             }
         }
+
 
         private bool ValidateTFOptions(BulkQuizQuestionViewModel quizQuestion)
         {

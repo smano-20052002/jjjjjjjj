@@ -393,3 +393,181 @@
 2024-06-21 14:04:23.221 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 813.8531ms
 2024-06-21 14:04:23.222 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
 2024-06-21 14:04:23.224 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=582fb2d9-c623-460d-936b-424ce6b2a57c - 200 null application/json; charset=utf-8 845.3248ms
+2024-06-21 14:27:35.842 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 14:27:37.370 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 14:27:37.374 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 14:27:37.376 +05:30 [INF] Hosting environment: Development
+2024-06-21 14:27:37.377 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 14:27:46.301 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 14:27:46.930 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 631.8028ms
+2024-06-21 14:27:46.943 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 14:27:46.958 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 14:27:46.977 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 18.7364ms
+2024-06-21 14:27:47.056 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 113.6927ms
+2024-06-21 14:27:47.171 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 14:27:47.735 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 564.1881ms
+2024-06-21 14:29:30.124 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz - null null
+2024-06-21 14:29:30.141 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-21 14:29:30.145 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 14:29:30.158 +05:30 [INF] Route matched with {action = "GetAllQuizzes", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllQuizzes() on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 14:29:31.192 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:29:31.211 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api) in 1048.7461ms
+2024-06-21 14:29:31.213 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 14:29:31.214 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz - 200 null application/json; charset=utf-8 1090.1412ms
+2024-06-21 14:29:47.211 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5199/api/Quiz/582fb2d9-c623-460d-936b-424ce6b2a57c - null null
+2024-06-21 14:29:47.229 +05:30 [INF] CORS policy execution successful.
+2024-06-21 14:29:47.230 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.DeleteQuiz (LXP.Api)'
+2024-06-21 14:29:47.237 +05:30 [INF] Route matched with {action = "DeleteQuiz", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult DeleteQuiz(System.Guid) on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 14:29:47.458 +05:30 [INF] Executing StatusCodeResult, setting HTTP status code 204
+2024-06-21 14:29:47.460 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.DeleteQuiz (LXP.Api) in 220.4525ms
+2024-06-21 14:29:47.460 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.DeleteQuiz (LXP.Api)'
+2024-06-21 14:29:47.461 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5199/api/Quiz/582fb2d9-c623-460d-936b-424ce6b2a57c - 204 null null 249.9118ms
+2024-06-21 14:30:24.385 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/Quiz - application/json 144
+2024-06-21 14:30:24.388 +05:30 [INF] CORS policy execution successful.
+2024-06-21 14:30:24.389 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.CreateQuiz (LXP.Api)'
+2024-06-21 14:30:24.391 +05:30 [INF] Route matched with {action = "CreateQuiz", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateQuiz(LXP.Common.ViewModels.QuizViewModel.CreateQuizViewModel) on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 14:30:24.469 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:30:24.483 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.CreateQuiz (LXP.Api) in 89.5324ms
+2024-06-21 14:30:24.485 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.CreateQuiz (LXP.Api)'
+2024-06-21 14:30:24.485 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/Quiz - 201 null application/json; charset=utf-8 100.67ms
+2024-06-21 14:30:29.024 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz - null null
+2024-06-21 14:30:29.028 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 14:30:29.029 +05:30 [INF] Route matched with {action = "GetAllQuizzes", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllQuizzes() on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 14:30:29.032 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:30:29.035 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api) in 4.766ms
+2024-06-21 14:30:29.036 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 14:30:29.037 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz - 200 null application/json; charset=utf-8 13.0772ms
+2024-06-21 14:30:54.228 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=5150d8eb-e17e-4fb6-8e62-30211324b613 - multipart/form-data; boundary=----WebKitFormBoundaryABrz0U0iIFolZjMB 12130
+2024-06-21 14:30:54.276 +05:30 [INF] CORS policy execution successful.
+2024-06-21 14:30:54.282 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 14:30:54.304 +05:30 [INF] Route matched with {action = "ImportQuizData", controller = "BulkQuestion"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ImportQuizData(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.BulkQuestionController (LXP.Api).
+2024-06-21 14:30:55.217 +05:30 [ERR] An error occurred while importing quiz data.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`lxp`.`quiz_questions`, CONSTRAINT `FK_quiz_questions_quizzes_quiz_id` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 894
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 130
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 483
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at LXP.Core.Repositories.BulkQuestionRepository.AddQuestionsAsync(List`1 questions) in D:\scorecalculation\LXP.Data\Repository\BulkQuestionRepository.cs:line 20
+   at LXP.Core.Services.BulkQuestionService.ImportQuizDataAsync(IFormFile file, Guid quizId) in D:\scorecalculation\LXP.Core\Services\BulkQuestionService.cs:line 126
+2024-06-21 14:30:55.540 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:30:55.561 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 1242.5684ms
+2024-06-21 14:30:55.569 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 14:30:55.572 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=5150d8eb-e17e-4fb6-8e62-30211324b613 - 200 null application/json; charset=utf-8 1343.6779ms
+2024-06-21 14:31:39.237 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/QuizQuestions/GetAllQuestionsByQuizId?quizId=5150d8eb-e17e-4fb6-8e62-30211324b613 - null null
+2024-06-21 14:31:39.242 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizQuestionsController.GetAllQuestionsByQuizId (LXP.Api)'
+2024-06-21 14:31:39.248 +05:30 [INF] Route matched with {action = "GetAllQuestionsByQuizId", controller = "QuizQuestions"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllQuestionsByQuizId(System.Guid) on controller LXP.Api.Controllers.QuizQuestionsController (LXP.Api).
+2024-06-21 14:31:39.288 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:31:39.291 +05:30 [INF] Executed action LXP.Api.Controllers.QuizQuestionsController.GetAllQuestionsByQuizId (LXP.Api) in 37.832ms
+2024-06-21 14:31:39.292 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizQuestionsController.GetAllQuestionsByQuizId (LXP.Api)'
+2024-06-21 14:31:39.295 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/QuizQuestions/GetAllQuestionsByQuizId?quizId=5150d8eb-e17e-4fb6-8e62-30211324b613 - 404 null application/json; charset=utf-8 57.4789ms
+2024-06-21 14:31:53.902 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=5150d8eb-e17e-4fb6-8e62-30211324b613 - multipart/form-data; boundary=----WebKitFormBoundaryAyoQlqObhuzS0VfK 12360
+2024-06-21 14:31:53.907 +05:30 [INF] CORS policy execution successful.
+2024-06-21 14:31:53.908 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 14:31:53.910 +05:30 [INF] Route matched with {action = "ImportQuizData", controller = "BulkQuestion"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ImportQuizData(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.BulkQuestionController (LXP.Api).
+2024-06-21 14:31:53.963 +05:30 [ERR] An error occurred while importing quiz data.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`lxp`.`quiz_questions`, CONSTRAINT `FK_quiz_questions_quizzes_quiz_id` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 894
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 130
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 483
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at LXP.Core.Repositories.BulkQuestionRepository.AddQuestionsAsync(List`1 questions) in D:\scorecalculation\LXP.Data\Repository\BulkQuestionRepository.cs:line 20
+   at LXP.Core.Services.BulkQuestionService.ImportQuizDataAsync(IFormFile file, Guid quizId) in D:\scorecalculation\LXP.Core\Services\BulkQuestionService.cs:line 126
+2024-06-21 14:31:53.986 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:31:53.988 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 69.3972ms
+2024-06-21 14:31:53.990 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 14:31:53.991 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=5150d8eb-e17e-4fb6-8e62-30211324b613 - 200 null application/json; charset=utf-8 89.0027ms
+2024-06-21 14:47:30.561 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 14:47:30.598 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 36.939ms
+2024-06-21 14:47:30.657 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 14:47:30.658 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 14:47:30.669 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 12.0617ms
+2024-06-21 14:47:30.688 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.599ms
+2024-06-21 14:47:30.994 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 14:47:31.127 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 133.4651ms
+2024-06-21 14:47:41.753 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz - null null
+2024-06-21 14:47:41.758 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 14:47:41.760 +05:30 [INF] Route matched with {action = "GetAllQuizzes", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllQuizzes() on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-21 14:47:41.816 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:47:41.820 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api) in 57.0171ms
+2024-06-21 14:47:41.821 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.GetAllQuizzes (LXP.Api)'
+2024-06-21 14:47:41.822 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz - 200 null application/json; charset=utf-8 69.0207ms
+2024-06-21 14:47:59.828 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=4ea73e6e-5a2b-47f3-932f-d5e64f256b03 - multipart/form-data; boundary=----WebKitFormBoundarySI8gOatFLILnDPni 12130
+2024-06-21 14:47:59.833 +05:30 [INF] CORS policy execution successful.
+2024-06-21 14:47:59.834 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 14:47:59.835 +05:30 [INF] Route matched with {action = "ImportQuizData", controller = "BulkQuestion"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ImportQuizData(Microsoft.AspNetCore.Http.IFormFile, System.Guid) on controller LXP.Api.Controllers.BulkQuestionController (LXP.Api).
+2024-06-21 14:47:59.872 +05:30 [ERR] An error occurred while importing quiz data.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> MySqlConnector.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`lxp`.`quiz_questions`, CONSTRAINT `FK_quiz_questions_quizzes_quiz_id` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`) ON DELETE CASCADE)
+   at MySqlConnector.Core.ServerSession.ReceiveReplyAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/ServerSession.cs:line 894
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 37
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 130
+   at MySqlConnector.MySqlDataReader.InitAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 483
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 357
+   at MySqlConnector.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 350
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at LXP.Core.Repositories.BulkQuestionRepository.AddQuestionsAsync(List`1 questions) in D:\scorecalculation\LXP.Data\Repository\BulkQuestionRepository.cs:line 20
+   at LXP.Core.Services.BulkQuestionService.ImportQuizDataAsync(IFormFile file, Guid quizId) in D:\scorecalculation\LXP.Core\Services\BulkQuestionService.cs:line 126
+2024-06-21 14:47:59.892 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-21 14:47:59.895 +05:30 [INF] Executed action LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api) in 55.9082ms
+2024-06-21 14:47:59.896 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.BulkQuestionController.ImportQuizData (LXP.Api)'
+2024-06-21 14:47:59.897 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/api/BulkQuestion/ImportQuizData?quizId=4ea73e6e-5a2b-47f3-932f-d5e64f256b03 - 200 null application/json; charset=utf-8 69.2867ms
+2024-06-21 14:56:14.026 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-21 14:56:14.371 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-21 14:56:14.377 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-21 14:56:14.379 +05:30 [INF] Hosting environment: Development
+2024-06-21 14:56:14.380 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-21 14:56:14.644 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-21 14:56:14.975 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 332.741ms
+2024-06-21 14:56:14.995 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-21 14:56:15.005 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 9.1719ms
+2024-06-21 14:56:15.012 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-21 14:56:15.051 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.8148ms
+2024-06-21 14:56:15.461 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-21 14:56:15.756 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 295.1173ms
