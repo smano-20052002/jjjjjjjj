@@ -203,6 +203,32 @@ namespace LXP.Data.Repository
                 .ToListAsync();
         }
 
+        public async Task<LearnerQuizStatusViewModel> GetLearnerQuizStatusAsync(
+            Guid learnerId,
+            Guid quizId
+        )
+        {
+            var quiz = await _dbContext.Quizzes.FindAsync(quizId);
+            if (quiz == null)
+                return new LearnerQuizStatusViewModel { IsPassed = false, IsAbleToAttempt = false };
+
+            var existingAttempts = await _dbContext
+                .LearnerAttempts.Where(a => a.LearnerId == learnerId && a.QuizId == quizId)
+                .ToListAsync();
+
+            var passMark = quiz.PassMark;
+            var hasPassedQuiz = existingAttempts.Any(a => a.Score >= passMark);
+
+            var attemptsAllowed = quiz.AttemptsAllowed ?? int.MaxValue;
+            var attemptsRemaining = attemptsAllowed - existingAttempts.Count;
+
+            return new LearnerQuizStatusViewModel
+            {
+                IsPassed = hasPassedQuiz,
+                IsAbleToAttempt = attemptsRemaining > 0
+            };
+        } //2206
+
         public async Task<IEnumerable<LearnerAttemptViewModel>> GetLearnerAttemptsForQuizAsync(
             Guid learnerId,
             Guid quizId
@@ -502,6 +528,5 @@ namespace LXP.Data.Repository
             // Save changes
             await _dbContext.SaveChangesAsync();
         }
-        
     }
 }

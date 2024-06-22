@@ -198,53 +198,40 @@ namespace LXP.Services
             feedbackResponse.TopicId = question.TopicId;
         }
 
-
         public LearnerFeedbackStatusViewModel GetQuizFeedbackStatus(Guid learnerId, Guid quizId)
         {
             var allQuestions = _feedbackResponseRepository.GetQuizFeedbackQuestions(quizId);
-            var submittedResponses = _feedbackResponseRepository.GetQuizFeedbackResponsesByLearner(learnerId, quizId);
+            var submittedResponses = _feedbackResponseRepository.GetQuizFeedbackResponsesByLearner(
+                learnerId,
+                quizId
+            );
+
+            var isQuizFeedbackSubmitted =
+                allQuestions.Any() && allQuestions.Count() == submittedResponses.Count();
 
             return new LearnerFeedbackStatusViewModel
             {
                 LearnerId = learnerId,
-                IsQuizFeedbackSubmitted = allQuestions.Count() == submittedResponses.Count()
+                IsQuizFeedbackSubmitted = isQuizFeedbackSubmitted
             };
         }
 
         public LearnerFeedbackStatusViewModel GetTopicFeedbackStatus(Guid learnerId, Guid topicId)
         {
             var allQuestions = _feedbackResponseRepository.GetTopicFeedbackQuestions(topicId);
-            var submittedResponses = _feedbackResponseRepository.GetTopicFeedbackResponsesByLearner(learnerId, topicId);
+            var submittedResponses = _feedbackResponseRepository.GetTopicFeedbackResponsesByLearner(
+                learnerId,
+                topicId
+            );
+
+            var isTopicFeedbackSubmitted =
+                allQuestions.Any() && allQuestions.Count() == submittedResponses.Count();
 
             return new LearnerFeedbackStatusViewModel
             {
                 LearnerId = learnerId,
-                IsTopicFeedbackSubmitted = allQuestions.Count() == submittedResponses.Count()
+                IsTopicFeedbackSubmitted = isTopicFeedbackSubmitted
             };
         }
-
-
-
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,8 +1,8 @@
 ﻿namespace LXP.Common.ViewModels.QuizEngineViewModel
 {
-    public class LearnerQuizStatusViewModel
+    public class LearnerPassStatusViewModel
     {
+        //for the frontend requirement
         public bool IsPassed { get; set; }
-        public bool IsAbleToAttempt { get; set; }
     }
 }

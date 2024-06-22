@@ -150,6 +150,23 @@ namespace LXP.Core.Services
             }
         }
 
+        public async Task<LearnerPassStatusViewModel> CheckLearnerPassStatusAsync(
+            Guid learnerAttemptId
+        )
+        {
+            var attempt = await _quizEngineRepository.GetLearnerAttemptByIdAsync(learnerAttemptId);
+            if (attempt == null)
+                throw new KeyNotFoundException(
+                    $"Learner attempt with ID {learnerAttemptId} not found."
+                );
+
+            var quiz = await _quizEngineRepository.GetQuizByIdAsync(attempt.QuizId);
+            if (quiz == null)
+                throw new KeyNotFoundException($"Quiz with ID {attempt.QuizId} not found.");
+
+            return new LearnerPassStatusViewModel { IsPassed = attempt.Score >= quiz.PassMark };
+        }
+
         public async Task SubmitQuizAttemptAsync(Guid attemptId)
         {
             var attempt = await _quizEngineRepository.GetLearnerAttemptByIdAsync(attemptId);
@@ -297,25 +314,12 @@ namespace LXP.Core.Services
             return await _quizEngineRepository.GetLearnerQuizAttemptResultAsync(attemptId);
         }
 
-
-        public async Task<LearnerQuizStatusViewModel> GetLearnerQuizStatusAsync(Guid learnerId, Guid quizId)
+        public async Task<LearnerQuizStatusViewModel> GetLearnerQuizStatusAsync(
+            Guid learnerId,
+            Guid quizId
+        )
         {
-            var quiz = await _quizEngineRepository.GetQuizByIdAsync(quizId);
-            if (quiz == null) throw new KeyNotFoundException($"Quiz with ID {quizId} not found.");
-
-            var attempts = await _quizEngineRepository.GetLearnerAttemptsForQuizAsync(learnerId, quizId);
-            var passMark = quiz.PassMark;
-            var hasPassed = attempts.Any(a => a.Score >= passMark);
-
-            var attemptsAllowed = quiz.AttemptsAllowed ?? int.MaxValue;
-            var attemptsRemaining = attemptsAllowed - attempts.Count();
-
-            return new LearnerQuizStatusViewModel
-            {
-                IsPassed = hasPassed,
-                AbleToAttempt = attemptsRemaining > 0,
-                AttemptsRemaining = attemptsRemaining
-            };
+            return await _quizEngineRepository.GetLearnerQuizStatusAsync(learnerId, quizId);
         }
 
         // new batch

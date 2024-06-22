@@ -63,7 +63,6 @@ namespace LXP.Data.Repository
             _context.SaveChanges();
         }
 
-
         public Guid? GetOptionIdByText(Guid questionId, string optionText)
         {
             var option =
@@ -98,19 +97,22 @@ namespace LXP.Data.Repository
             _context.SaveChanges();
         }
 
-
-
-        // new 
+        // new
 
         public IEnumerable<Quizfeedbackquestion> GetQuizFeedbackQuestions(Guid quizId)
         {
             return _context.Quizfeedbackquestions.Where(q => q.QuizId == quizId).ToList();
         }
 
-        public IEnumerable<Feedbackresponse> GetQuizFeedbackResponsesByLearner(Guid learnerId, Guid quizId)
+        public IEnumerable<Feedbackresponse> GetQuizFeedbackResponsesByLearner(
+            Guid learnerId,
+            Guid quizId
+        )
         {
-            return _context.Feedbackresponses
-                .Where(r => r.LearnerId == learnerId && r.QuizFeedbackQuestion.QuizId == quizId)
+            return _context
+                .Feedbackresponses.Where(r =>
+                    r.LearnerId == learnerId && r.QuizFeedbackQuestion.QuizId == quizId
+                )
                 .ToList();
         }
 
@@ -119,12 +121,16 @@ namespace LXP.Data.Repository
             return _context.Topicfeedbackquestions.Where(q => q.TopicId == topicId).ToList();
         }
 
-        public IEnumerable<Feedbackresponse> GetTopicFeedbackResponsesByLearner(Guid learnerId, Guid topicId)
+        public IEnumerable<Feedbackresponse> GetTopicFeedbackResponsesByLearner(
+            Guid learnerId,
+            Guid topicId
+        )
         {
-            return _context.Feedbackresponses
-                .Where(r => r.LearnerId == learnerId && r.TopicFeedbackQuestion.TopicId == topicId)
+            return _context
+                .Feedbackresponses.Where(r =>
+                    r.LearnerId == learnerId && r.TopicFeedbackQuestion.TopicId == topicId
+                )
                 .ToList();
         }
     }
 }
-

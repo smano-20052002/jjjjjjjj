@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
+using LXP.Services;
 using LXP.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -88,7 +89,6 @@ namespace LXP.API.Controllers
             }
         }
 
-
         /// <summary>
         /// Retrieves the feedback status of a quiz for a specific learner.
         /// </summary>
@@ -122,6 +122,8 @@ namespace LXP.API.Controllers
         /// <response code="200">Topic feedback status retrieved successfully.</response>
         /// <response code="400">Bad request due to an exception during the operation.</response>
 
+
+
         [HttpGet("TopicFeedbackStatus")]
         public IActionResult GetTopicFeedbackStatus(Guid learnerId, Guid topicId)
         {
@@ -137,7 +139,6 @@ namespace LXP.API.Controllers
         }
     }
 }
-
 
 
 

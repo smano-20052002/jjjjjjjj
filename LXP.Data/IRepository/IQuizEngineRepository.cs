@@ -56,7 +56,6 @@ namespace LXP.Data.IRepository
         );
         Task SubmitAnswerAsync(AnswerSubmissionModel answerSubmissionModel);
 
-       // Task<ViewQuizDetailsViewModel> GetQuizByIdAsync(Guid quizId);
-       // Task<IEnumerable<LearnerAttemptViewModel>> GetLearnerAttemptsForQuizAsync(Guid learnerId, Guid quizId);
+        Task<LearnerQuizStatusViewModel> GetLearnerQuizStatusAsync(Guid learnerId, Guid quizId); //new
     }
 }

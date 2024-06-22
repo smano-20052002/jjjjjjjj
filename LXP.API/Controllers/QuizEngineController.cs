@@ -122,8 +122,6 @@ namespace LXP.Api.Controllers
             return Ok(viewModel);
         }
 
-        
-
         /// <summary>
         /// Allows a learner to retake a specific quiz.
         /// </summary>
@@ -138,7 +136,7 @@ namespace LXP.Api.Controllers
         }
 
         /// <summary>
-        /// Retrieves the status of a quiz for a specific learner.
+        /// Retrieves the status of a quiz for a specific learner. for frontend
         /// </summary>
         /// <param name="learnerId">The ID of the learner.</param>
         /// <param name="quizId">The ID of the quiz.</param>
@@ -146,14 +144,26 @@ namespace LXP.Api.Controllers
         /// <response code="200">Quiz status retrieved successfully.</response>
         /// <response code="404">No data found for the given learnerId and quizId.</response>
 
-        [HttpGet("learner-quiz-status")]
-        public async Task<IActionResult> GetLearnerQuizStatus(Guid learnerId, Guid quizId)
+        [HttpGet("learner/{learnerId}/quiz/{quizId}/status")]
+        public async Task<ActionResult<LearnerQuizStatusViewModel>> GetLearnerQuizStatus(
+            Guid learnerId,
+            Guid quizId
+        )
         {
-            var result = await _quizEngineService.GetLearnerQuizStatusAsync(learnerId, quizId);
-            if (result == null)
-            {
-                return NotFound($"No data found for learnerId: {learnerId} and quizId: {quizId}");
-            }
+            var status = await _quizEngineService.GetLearnerQuizStatusAsync(learnerId, quizId);
+            return Ok(status);
+        }
+
+        /// <summary>
+        /// Retrieves the pass status of a specific learner by their attempt ID. for forntend
+        /// </summary>
+        /// <param name="learnerAttemptId">The unique identifier of the learner's attempt to retrieve.</param>
+        /// <response code="200">Success on finding the learner's attempt. The response body contains a boolean representation of the pass status.</response>
+        /// <response code="404">Not found if no learner attempt exists with the provided ID.</response>
+        [HttpGet("learner/{learnerAttemptId}/passstatus")]
+        public async Task<IActionResult> GetPassStatus(Guid learnerAttemptId)
+        {
+            var result = await _quizEngineService.CheckLearnerPassStatusAsync(learnerAttemptId);
             return Ok(result);
         }
 
