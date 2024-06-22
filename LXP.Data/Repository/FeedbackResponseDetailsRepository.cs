@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using LXP.Common.Entities;
+﻿using LXP.Common.Entities;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
 using LXP.Data.IRepository;
 using Microsoft.EntityFrameworkCore;

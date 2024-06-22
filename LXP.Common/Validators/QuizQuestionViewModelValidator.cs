@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentValidation;
+﻿using FluentValidation;
 using LXP.Common.ViewModels.QuizQuestionViewModel;
 
 namespace LXP.Common.Validators

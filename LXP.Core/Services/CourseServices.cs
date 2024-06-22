@@ -1,15 +1,10 @@
-using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
-using LXP.Data.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Hosting;
-using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace LXP.Core.Services
 {

@@ -1,6 +1,4 @@
-﻿using LXP.Common.Entities;
-
-namespace LXP.Common.ViewModels
+﻿namespace LXP.Common.ViewModels
 {
     public class QuizReportViewModel
     {

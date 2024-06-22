@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LXP.Common.Entities;
+﻿using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Data.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.Hosting;
 
 namespace LXP.Data.Repository
 {

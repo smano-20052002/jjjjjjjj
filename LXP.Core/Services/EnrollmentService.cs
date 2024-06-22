@@ -1,20 +1,10 @@
-﻿using System;
-//using AutoMapper;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using AutoMapper;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
-using LXP.Data.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Hosting;
-using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace LXP.Core.Services
 {
@@ -123,9 +113,13 @@ namespace LXP.Core.Services
             }
             return false;
         }
+
         public object GetCourseandTopicsByCourseId(Guid courseId, Guid learnerId)
         {
-            return _enrollmentRepository.GetCourseandTopicsByCourseIdAndLearnerId(courseId, learnerId);
-        }//2106
+            return _enrollmentRepository.GetCourseandTopicsByCourseIdAndLearnerId(
+                courseId,
+                learnerId
+            );
+        } //2106
     }
 }

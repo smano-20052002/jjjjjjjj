@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using LXP.Common.ViewModels;
+﻿using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
 
 namespace LXP.Services.IServices

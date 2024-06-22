@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Google.Protobuf.WellKnownTypes;
+﻿using AutoMapper;
 using LXP.Common.Entities;
-using LXP.Common.Utils;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;

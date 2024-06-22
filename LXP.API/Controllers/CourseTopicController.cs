@@ -79,11 +79,7 @@ namespace LXP.Api.Controllers
             bool updatedStatus = _courseTopicServices.UpdateCourseTopic(courseTopic);
             if (updatedStatus)
             {
-                return Ok(
-                    CreateSuccessResponse(
-                        null
-                    )
-                );
+                return Ok(CreateSuccessResponse(null));
             }
             return Ok(
                 CreateFailureResponse(
@@ -92,7 +88,6 @@ namespace LXP.Api.Controllers
                 )
             );
         }
-       
 
         [HttpDelete("/lxp/course/topic/{topicId}")]
         public async Task<IActionResult> DeleteCourseTopic(string topicId)

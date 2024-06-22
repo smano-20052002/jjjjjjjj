@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using LXP.Common.ViewModels.QuizQuestionViewModel;
+﻿using LXP.Common.ViewModels.QuizQuestionViewModel;
 
 namespace LXP.Core.IServices
 {

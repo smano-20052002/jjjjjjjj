@@ -1,6 +1,5 @@
 using LXP.Common.ViewModels.QuizEngineViewModel;
 using LXP.Core.IServices;
-using LXP.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers
@@ -131,12 +130,13 @@ namespace LXP.Api.Controllers
         [HttpGet("learners/{learnerId}/last-quiz-result")]
         public async Task<IActionResult> GetLearnerLastQuizResult(Guid learnerId)
         {
-            var learnerLastQuizResult = await _quizEngineService.GetLearnerLastQuizResultAsync(learnerId);
+            var learnerLastQuizResult = await _quizEngineService.GetLearnerLastQuizResultAsync(
+                learnerId
+            );
             if (learnerLastQuizResult == null)
                 return NotFound("No quiz attempts found for this learner.");
             return Ok(learnerLastQuizResult);
         }
-
 
         /// <summary>
         /// Allows a learner to retake a specific quiz.

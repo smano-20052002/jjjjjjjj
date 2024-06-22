@@ -1,5 +1,4 @@
-﻿using System.Data.Entity.Core.Mapping;
-using LXP.Core.IServices;
+﻿using LXP.Core.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers

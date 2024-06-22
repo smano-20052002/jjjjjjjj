@@ -2,13 +2,10 @@
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Mail;
-using System.Runtime.InteropServices;
 using LXP.Common.Constants;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using LXP.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers

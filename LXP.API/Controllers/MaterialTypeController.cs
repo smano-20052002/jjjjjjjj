@@ -1,6 +1,4 @@
 ﻿using LXP.Core.IServices;
-using LXP.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers

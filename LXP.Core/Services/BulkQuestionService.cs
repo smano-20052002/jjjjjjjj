@@ -52,9 +52,11 @@ namespace LXP.Core.Services
                         {
                             string type = worksheet.Cells[row, 2].Value?.ToString();
 
-                            if (type == QuizQuestionTypes.MultiChoiceQuestion ||
-                                type == QuizQuestionTypes.TrueFalseQuestion ||
-                                type == QuizQuestionTypes.MultiSelectQuestion)
+                            if (
+                                type == QuizQuestionTypes.MultiChoiceQuestion
+                                || type == QuizQuestionTypes.TrueFalseQuestion
+                                || type == QuizQuestionTypes.MultiSelectQuestion
+                            )
                             {
                                 var quizQuestion = new BulkQuizQuestionViewModel
                                 {
@@ -62,28 +64,67 @@ namespace LXP.Core.Services
                                     Question = worksheet.Cells[row, 3].Value?.ToString(),
                                 };
 
-                                if (string.IsNullOrEmpty(quizQuestion.QuestionType) || string.IsNullOrEmpty(quizQuestion.Question))
+                                if (
+                                    string.IsNullOrEmpty(quizQuestion.QuestionType)
+                                    || string.IsNullOrEmpty(quizQuestion.Question)
+                                )
                                     continue;
 
                                 if (type == QuizQuestionTypes.MultiChoiceQuestion)
                                 {
-                                    quizQuestion.Options = ExtractOptions(worksheet, row, 4, 4, type);
-                                    quizQuestion.CorrectOptions = ExtractOptions(worksheet, row, 12, 1, type);
+                                    quizQuestion.Options = ExtractOptions(
+                                        worksheet,
+                                        row,
+                                        4,
+                                        4,
+                                        type
+                                    );
+                                    quizQuestion.CorrectOptions = ExtractOptions(
+                                        worksheet,
+                                        row,
+                                        12,
+                                        1,
+                                        type
+                                    );
                                     if (!ValidateMCQOptions(quizQuestion))
                                         continue;
                                 }
                                 else if (type == QuizQuestionTypes.TrueFalseQuestion)
                                 {
-                                    quizQuestion.Options = ExtractOptions(worksheet, row, 4, 2, type);
-                                    quizQuestion.CorrectOptions = ExtractOptions(worksheet, row, 12, 1, type);
+                                    quizQuestion.Options = ExtractOptions(
+                                        worksheet,
+                                        row,
+                                        4,
+                                        2,
+                                        type
+                                    );
+                                    quizQuestion.CorrectOptions = ExtractOptions(
+                                        worksheet,
+                                        row,
+                                        12,
+                                        1,
+                                        type
+                                    );
                                     if (!ValidateTFOptions(quizQuestion))
                                         continue;
                                 }
                                 else if (type == QuizQuestionTypes.MultiSelectQuestion)
                                 {
                                     int optionCount = GetMSQOptionCount(worksheet, row);
-                                    quizQuestion.Options = ExtractOptions(worksheet, row, 4, optionCount, type);
-                                    quizQuestion.CorrectOptions = ExtractOptions(worksheet, row, 12, GetMSQCorrectOptionCount(optionCount), type);
+                                    quizQuestion.Options = ExtractOptions(
+                                        worksheet,
+                                        row,
+                                        4,
+                                        optionCount,
+                                        type
+                                    );
+                                    quizQuestion.CorrectOptions = ExtractOptions(
+                                        worksheet,
+                                        row,
+                                        12,
+                                        GetMSQCorrectOptionCount(optionCount),
+                                        type
+                                    );
                                     if (!ValidateMSQOptions(quizQuestion))
                                         continue;
                                 }
@@ -111,7 +152,9 @@ namespace LXP.Core.Services
 
                 foreach (var quizQuestion in validQuizQuestions)
                 {
-                    int nextQuestionNo = await _quizQuestionRepository.GetNextQuestionNoAsync(quizId);
+                    int nextQuestionNo = await _quizQuestionRepository.GetNextQuestionNoAsync(
+                        quizId
+                    );
 
                     QuizQuestion questionEntity = new QuizQuestion
                     {
@@ -123,10 +166,12 @@ namespace LXP.Core.Services
                         CreatedAt = DateTime.Now
                     };
 
-                    await _bulkQuestionRepository.AddQuestionsAsync(new List<QuizQuestion> { questionEntity });
+                    await _bulkQuestionRepository.AddQuestionsAsync(
+                        new List<QuizQuestion> { questionEntity }
+                    );
 
-                    var optionEntities = quizQuestion.Options
-                        .Where(option => !string.IsNullOrEmpty(option))
+                    var optionEntities = quizQuestion
+                        .Options.Where(option => !string.IsNullOrEmpty(option))
                         .Select(option => new QuestionOption
                         {
                             QuizQuestionId = questionEntity.QuizQuestionId,
@@ -138,7 +183,10 @@ namespace LXP.Core.Services
                         })
                         .ToList();
 
-                    await _bulkQuestionRepository.AddOptionsAsync(optionEntities, questionEntity.QuizQuestionId);
+                    await _bulkQuestionRepository.AddOptionsAsync(
+                        optionEntities,
+                        questionEntity.QuizQuestionId
+                    );
                 }
 
                 return validQuizQuestions;
@@ -159,7 +207,6 @@ namespace LXP.Core.Services
             }
         }
 
-
         private bool ValidateTFOptions(BulkQuizQuestionViewModel quizQuestion)
         {
             return quizQuestion.Options.Length == 2
@@ -174,8 +221,12 @@ namespace LXP.Core.Services
                     || quizQuestion.Options.Contains("0")
                 )
                 && (
-                    quizQuestion.CorrectOptions.First().Equals("True", StringComparison.OrdinalIgnoreCase)
-                    || quizQuestion.CorrectOptions.First().Equals("False", StringComparison.OrdinalIgnoreCase)
+                    quizQuestion
+                        .CorrectOptions.First()
+                        .Equals("True", StringComparison.OrdinalIgnoreCase)
+                    || quizQuestion
+                        .CorrectOptions.First()
+                        .Equals("False", StringComparison.OrdinalIgnoreCase)
                     || quizQuestion.CorrectOptions.First() == "1"
                     || quizQuestion.CorrectOptions.First() == "0"
                 );
@@ -238,8 +289,10 @@ namespace LXP.Core.Services
 
                 if (questionType == QuizQuestionTypes.TrueFalseQuestion)
                 {
-                    if (option == "1") option = "True";
-                    else if (option == "0") option = "False";
+                    if (option == "1")
+                        option = "True";
+                    else if (option == "0")
+                        option = "False";
                 }
 
                 options[i] = option;

@@ -1,8 +1,8 @@
 using System.Transactions;
+using LXP.Common.Constants;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels.QuizQuestionViewModel;
 using LXP.Core.IServices;
-using LXP.Common.Constants;
 using LXP.Data.IRepository;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
@@ -40,7 +40,6 @@ namespace LXP.Core.Services
                         if (string.IsNullOrEmpty(questionType) || string.IsNullOrEmpty(question))
                             continue;
 
-                        
                         var quizQuestion = new QuizQuestionJsonViewModel
                         {
                             QuestionNumber = row - 2,
@@ -78,7 +77,6 @@ namespace LXP.Core.Services
                         continue;
                     }
                 }
-                
                 else if (question.QuestionType == QuizQuestionTypes.TrueFalseQuestion)
                 {
                     if (
@@ -103,7 +101,6 @@ namespace LXP.Core.Services
                         continue;
                     }
                 }
-
                 else if (question.QuestionType == QuizQuestionTypes.MultiSelectQuestion)
                 {
                     if (
@@ -179,12 +176,12 @@ namespace LXP.Core.Services
         }
 
         private string[] ExtractOptions(
-    ExcelWorksheet worksheet,
-    int row,
-    int startColumn,
-    int count,
-    string questionType
-)
+            ExcelWorksheet worksheet,
+            int row,
+            int startColumn,
+            int count,
+            string questionType
+        )
         {
             var options = new List<string>();
             for (int i = 0; i < count; i++)
@@ -194,8 +191,10 @@ namespace LXP.Core.Services
                 {
                     if (questionType == QuizQuestionTypes.TrueFalseQuestion)
                     {
-                        if (option == "1") option = "True";
-                        else if (option == "0") option = "False";
+                        if (option == "1")
+                            option = "True";
+                        else if (option == "0")
+                            option = "False";
                     }
                     options.Add(option);
                 }
@@ -208,7 +207,7 @@ namespace LXP.Core.Services
 
 
 /*
- * 
+ *
  * //var quizQuestion = new QuizQuestionJsonViewModel
                         //{
                         //    QuestionNumber = row - 2,
@@ -233,8 +232,8 @@ namespace LXP.Core.Services
                 //        continue;
                 //    }
                 //}
- * 
- * 
+ *
+ *
  * private string[] ExtractOptions(
             ExcelWorksheet worksheet,
             int row,
@@ -251,9 +250,9 @@ namespace LXP.Core.Services
             }
             return options.ToArray();
         }
- * 
- * 
- * 
+ *
+ *
+ *
  * private string[] ExtractOptions(
     ExcelWorksheet worksheet,
     int row,

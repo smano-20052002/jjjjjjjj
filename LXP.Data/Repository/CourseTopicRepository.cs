@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using LXP.Common.Entities;
-using LXP.Common.Utils;
 using LXP.Data.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 
 namespace LXP.Data.Repository
 {
@@ -166,13 +159,10 @@ namespace LXP.Data.Repository
                 )
                 .ToListAsync();
         }
+
         public List<Topic> GetAllTopics()
         {
-            return _lXPDbContext
-                .Topics.ToList();
-
+            return _lXPDbContext.Topics.ToList();
         }
-
-
     }
 }

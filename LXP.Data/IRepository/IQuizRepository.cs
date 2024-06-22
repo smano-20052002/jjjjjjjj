@@ -1,5 +1,4 @@
 ﻿using LXP.Common.Entities;
-using LXP.Common.ViewModels.QuizViewModel;
 
 namespace LXP.Data.IRepository
 {

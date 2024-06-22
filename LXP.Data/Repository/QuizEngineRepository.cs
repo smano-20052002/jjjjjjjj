@@ -317,8 +317,7 @@ namespace LXP.Data.Repository
         public async Task<LearnerAttemptViewModel> GetLearnerLastAttemptAsync(Guid learnerId)
         {
             return await _dbContext
-                .LearnerAttempts
-                .Where(a => a.LearnerId == learnerId)
+                .LearnerAttempts.Where(a => a.LearnerId == learnerId)
                 .OrderByDescending(a => a.EndTime)
                 .Select(a => new LearnerAttemptViewModel
                 {

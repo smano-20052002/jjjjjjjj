@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LXP.Common.Entities;
+﻿using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
-using LXP.Data.Repository;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
 
 namespace LXP.Core.Services
 {

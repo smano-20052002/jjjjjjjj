@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using LXP.Data;
-using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace LXP.Common.Entities;
 

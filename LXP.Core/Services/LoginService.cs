@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using LXP.Common.Entities;
-using LXP.Common.Utils;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using LXP.Data;
 using LXP.Data.IRepository;
-using Mysqlx;
 
 namespace LXP.Core.Services
 {

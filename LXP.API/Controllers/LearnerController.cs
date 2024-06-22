@@ -1,11 +1,4 @@
-﻿using System.Net;
-using System.Reflection.Metadata.Ecma335;
-using LXP.Common.Constants;
-using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using LXP.Core.Services;
-using LXP.Data;
-using Microsoft.AspNetCore.Http;
+﻿using LXP.Core.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers

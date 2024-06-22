@@ -97,7 +97,6 @@ builder.Services.AddScoped<IQuizQuestionJsonRepository, QuizQuestionJsonReposito
 builder.Services.AddScoped<IFeedbackResponseDetailsRepository, FeedbackResponseDetailsRepository>();
 builder.Services.AddScoped<IFeedbackResponseDetailsService, FeedbackResponseDetailsService>();
 
-
 builder.Services.AddScoped<ILearnerRepository, LearnerRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<ILearnerService, LearnerService>();

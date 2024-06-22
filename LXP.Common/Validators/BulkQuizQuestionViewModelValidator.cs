@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using FluentValidation;
+﻿using FluentValidation;
 using LXP.Common.Constants;
-using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.QuizQuestionViewModel;
 
 namespace LXP.Common.Validators
@@ -29,9 +27,9 @@ namespace LXP.Common.Validators
 
         private bool BeAValidQuestionType(string questionType)
         {
-            return questionType == QuizQuestionTypes.MultiChoiceQuestion ||
-                   questionType == QuizQuestionTypes.TrueFalseQuestion ||
-                   questionType == QuizQuestionTypes.MultiSelectQuestion;
+            return questionType == QuizQuestionTypes.MultiChoiceQuestion
+                || questionType == QuizQuestionTypes.TrueFalseQuestion
+                || questionType == QuizQuestionTypes.MultiSelectQuestion;
         }
 
         private bool ValidateOptions(BulkQuizQuestionViewModel quizQuestion)
@@ -48,12 +46,14 @@ namespace LXP.Common.Validators
                     && quizQuestion.Options.Length == 2
                     && quizQuestion.Options.Distinct().Count() == 2
                     && (
-                        quizQuestion.Options.Any(option => option.Equals("True", System.StringComparison.OrdinalIgnoreCase))
-                        || quizQuestion.Options.Contains("1")
+                        quizQuestion.Options.Any(option =>
+                            option.Equals("True", System.StringComparison.OrdinalIgnoreCase)
+                        ) || quizQuestion.Options.Contains("1")
                     )
                     && (
-                        quizQuestion.Options.Any(option => option.Equals("False", System.StringComparison.OrdinalIgnoreCase))
-                        || quizQuestion.Options.Contains("0")
+                        quizQuestion.Options.Any(option =>
+                            option.Equals("False", System.StringComparison.OrdinalIgnoreCase)
+                        ) || quizQuestion.Options.Contains("0")
                     );
             }
             else if (quizQuestion.QuestionType == QuizQuestionTypes.MultiSelectQuestion)
@@ -80,8 +80,12 @@ namespace LXP.Common.Validators
                 return quizQuestion.CorrectOptions != null
                     && quizQuestion.CorrectOptions.Length == 1
                     && (
-                        quizQuestion.CorrectOptions[0].Equals("True", System.StringComparison.OrdinalIgnoreCase)
-                        || quizQuestion.CorrectOptions[0].Equals("False", System.StringComparison.OrdinalIgnoreCase)
+                        quizQuestion
+                            .CorrectOptions[0]
+                            .Equals("True", System.StringComparison.OrdinalIgnoreCase)
+                        || quizQuestion
+                            .CorrectOptions[0]
+                            .Equals("False", System.StringComparison.OrdinalIgnoreCase)
                         || quizQuestion.CorrectOptions[0] == "1"
                         || quizQuestion.CorrectOptions[0] == "0"
                     );

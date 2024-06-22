@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LXP.Common.Entities;
-
-namespace LXP.Common.ViewModels
+﻿namespace LXP.Common.ViewModels
 {
     public class EnrollmentReportViewModel
     {
@@ -62,6 +55,6 @@ namespace LXP.Common.ViewModels
         ///<summary>
         ///Course Percentage
         ///</summary>
-        public decimal? CourseCompletionPercentage { get; set; }// 2162024
+        public decimal? CourseCompletionPercentage { get; set; } // 2162024
     }
 }

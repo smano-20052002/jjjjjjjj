@@ -1,6 +1,4 @@
-﻿using LXP.Common.Entities;
-using LXP.Common.ViewModels.FeedbackResponseViewModel;
-using LXP.Data.IRepository;
+﻿using LXP.Common.ViewModels.FeedbackResponseViewModel;
 
 namespace LXP.Data.IRepository
 {

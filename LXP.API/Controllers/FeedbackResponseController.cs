@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentValidation;
+﻿using FluentValidation;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
 using LXP.Services.IServices;
 using Microsoft.AspNetCore.Mvc;

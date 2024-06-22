@@ -50,20 +50,13 @@
 
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
-using LXP.Data.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 
 namespace LXP.Core.Services
 {

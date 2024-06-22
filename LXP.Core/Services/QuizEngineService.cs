@@ -270,21 +270,17 @@ namespace LXP.Core.Services
                     var correctlySelectedOptions = selectedOptions
                         .Intersect(correctOptions)
                         .Count();
+                    var incorrectlySelectedOptions = selectedOptions.Except(correctOptions).Count();
 
-                    // If all correct options are selected, award full marks
-                    if (correctlySelectedOptions == correctOptionCount)
+                    // If all correct options are selected and no incorrect options are selected, award full marks
+                    if (
+                        correctlySelectedOptions == correctOptionCount
+                        && incorrectlySelectedOptions == 0
+                    )
                     {
                         return (int)Math.Round(individualQuestionMarks);
                     }
-                    // If some correct options are selected but not all, award partial marks
-                    else if (correctlySelectedOptions > 0)
-                    {
-                        var partialMark =
-                            (individualQuestionMarks / correctOptionCount)
-                            * correctlySelectedOptions;
-                        return (int)Math.Round(partialMark);
-                    }
-                    // If no correct options are selected, no marks awarded
+                    // In all other cases, no marks are awarded
                     else
                     {
                         return 0;
@@ -294,6 +290,64 @@ namespace LXP.Core.Services
                     return 0;
             }
         }
+
+        //private async Task<int> CalculateQuestionScore(
+        //    Guid quizQuestionId,
+        //    bool isAnswerCorrect,
+        //    float individualQuestionMarks,
+        //    AnswerSubmissionModel answerSubmissionModel
+        //)
+        //{
+        //    var questionType = await _quizEngineRepository.GetQuestionTypeByIdAsync(quizQuestionId);
+        //    switch (questionType)
+        //    {
+        //        case "MCQ":
+        //        case "T/F":
+        //            return isAnswerCorrect ? (int)Math.Round(individualQuestionMarks) : 0;
+
+        //        case "MSQ":
+        //            var correctOptions =
+        //                await _quizEngineRepository.GetCorrectOptionsForQuestionAsync(
+        //                    quizQuestionId
+        //                );
+        //            var correctOptionCount = correctOptions.Count();
+        //            var selectedOptions = answerSubmissionModel
+        //                .SelectedOptions.Select(o => o.ToString())
+        //                .ToList();
+
+        //            // Check if the number of selected options is between 2 and 3
+        //            if (selectedOptions.Count < 2 || selectedOptions.Count > 3)
+        //            {
+        //                return 0; // Invalid number of options selected, no marks awarded
+        //            }
+
+        //            var correctlySelectedOptions = selectedOptions
+        //                .Intersect(correctOptions)
+        //                .Count();
+
+        //            // If all correct options are selected, award full marks
+        //            if (correctlySelectedOptions == correctOptionCount)
+        //            {
+        //                return (int)Math.Round(individualQuestionMarks);
+        //            }
+        //            // If some correct options are selected but not all, award partial marks
+        //            else if (correctlySelectedOptions > 0)
+        //            {
+        //                var partialMark =
+        //                    (individualQuestionMarks / correctOptionCount)
+        //                    * correctlySelectedOptions;
+        //                return (int)Math.Round(partialMark);
+        //            }
+        //            // If no correct options are selected, no marks awarded
+        //            else
+        //            {
+        //                return 0;
+        //            }
+
+        //        default:
+        //            return 0;
+        //    }
+        //}
 
         //private async Task<float> CalculateQuestionScore(
         //    Guid quizQuestionId,
@@ -357,7 +411,9 @@ namespace LXP.Core.Services
 
         // new batch
 
-        public async Task<LearnerLastQuizResultViewModel> GetLearnerLastQuizResultAsync(Guid learnerId)
+        public async Task<LearnerLastQuizResultViewModel> GetLearnerLastQuizResultAsync(
+            Guid learnerId
+        )
         {
             var lastAttempt = await _quizEngineRepository.GetLearnerLastAttemptAsync(learnerId);
             if (lastAttempt == null)

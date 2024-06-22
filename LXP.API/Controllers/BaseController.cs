@@ -1,12 +1,8 @@
 ﻿// BaseController.cs
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Net;
 using LXP.Common.Constants;
 using LXP.Common.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers
@@ -31,6 +27,7 @@ namespace LXP.Api.Controllers
                 Data = result
             };
         }
+
         /// <summary>
         /// Creates a success response with optional data.
         /// </summary>
@@ -44,7 +41,6 @@ namespace LXP.Api.Controllers
                 Data = result
             };
         }
-
 
         /// <summary>
         /// Creates a failure response with specified message and status code.

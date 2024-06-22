@@ -1,11 +1,5 @@
-﻿using System;
-using System.Net;
-using LXP.Common.Constants;
-using LXP.Common.Entities;
-using LXP.Common.ViewModels;
+﻿using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using LXP.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers

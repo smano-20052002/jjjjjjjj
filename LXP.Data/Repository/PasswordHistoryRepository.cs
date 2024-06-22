@@ -1,9 +1,4 @@
 ﻿// using System.Data.Entity; // Remove this
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LXP.Common.Entities;
 using LXP.Data.IRepository;
 using Microsoft.EntityFrameworkCore; // Use this

@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using LXP.Common.Entities;
+﻿using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Data.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Spire.Doc;
-using Spire.Presentation;
 
 namespace LXP.Data.Repository
 {
@@ -209,6 +201,7 @@ namespace LXP.Data.Repository
             _lXPDbContext.Enrollments.Remove(enrollment);
             await _lXPDbContext.SaveChangesAsync();
         }
+
         public object GetCourseandTopicsByCourseIdAndLearnerId(Guid courseId, Guid learnerId)
         {
             var result =

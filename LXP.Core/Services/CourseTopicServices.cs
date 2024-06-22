@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using LXP.Common.Entities;
 using LXP.Common.ViewModels;
@@ -146,8 +141,12 @@ namespace LXP.Core.Services
             //    Guid.Parse(courseTopic.TopicId)
             //);
             List<Topic> topicsList = _courseTopicRepository.GetAllTopics();
-            Topic topic = topicsList.FirstOrDefault(topic => topic.TopicId == Guid.Parse(courseTopic.TopicId));
-            List<Topic> topicsListByCourseId = topicsList.Where(topics => topics.CourseId == topic.CourseId).ToList();
+            Topic topic = topicsList.FirstOrDefault(topic =>
+                topic.TopicId == Guid.Parse(courseTopic.TopicId)
+            );
+            List<Topic> topicsListByCourseId = topicsList
+                .Where(topics => topics.CourseId == topic.CourseId)
+                .ToList();
             topicsListByCourseId.Remove(topic);
             bool isTopicAlreadyExists = topicsListByCourseId.Any(topics =>
                 topics.Name == courseTopic.Name

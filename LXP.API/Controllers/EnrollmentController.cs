@@ -1,15 +1,6 @@
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Net;
-using System.Net.Mail;
-using LXP.Common.Entities;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using LXP.Core.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace LXP.Api.Controllers
 {
@@ -76,6 +67,7 @@ namespace LXP.Api.Controllers
             var users = _enrollmentService.GetEnrolledCompletedLearnerbyCourseId(courseId);
             return Ok(CreateSuccessResponse(users));
         }
+
         [HttpGet("/lxp/enroll/{learnerId}/course/{courseId}/topic")]
         public IActionResult GetCourseandTopicsByCourseId(Guid courseId, Guid learnerId)
         {

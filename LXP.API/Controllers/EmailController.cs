@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers

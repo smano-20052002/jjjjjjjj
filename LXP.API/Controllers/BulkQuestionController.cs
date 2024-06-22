@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using Microsoft.AspNetCore.Http;
+﻿using LXP.Core.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers
