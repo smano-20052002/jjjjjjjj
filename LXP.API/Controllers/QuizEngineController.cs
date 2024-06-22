@@ -122,21 +122,7 @@ namespace LXP.Api.Controllers
             return Ok(viewModel);
         }
 
-        /// <summary>
-        /// Retrieves the learner last attempt for the quiz based on the learner  ID.
-        /// </summary>
-        /// <param name="learnerId">The unique identifier of the learner.</param>
-        /// <response code="200">Success on finding the quiz results. The response body contains the list of quiz results for the learner.</response>
-        [HttpGet("learners/{learnerId}/last-quiz-result")]
-        public async Task<IActionResult> GetLearnerLastQuizResult(Guid learnerId)
-        {
-            var learnerLastQuizResult = await _quizEngineService.GetLearnerLastQuizResultAsync(
-                learnerId
-            );
-            if (learnerLastQuizResult == null)
-                return NotFound("No quiz attempts found for this learner.");
-            return Ok(learnerLastQuizResult);
-        }
+        
 
         /// <summary>
         /// Allows a learner to retake a specific quiz.
@@ -149,6 +135,26 @@ namespace LXP.Api.Controllers
         {
             var attemptId = await _quizEngineService.RetakeQuizAsync(learnerId, quizId);
             return Ok(attemptId);
+        }
+
+        /// <summary>
+        /// Retrieves the status of a quiz for a specific learner.
+        /// </summary>
+        /// <param name="learnerId">The ID of the learner.</param>
+        /// <param name="quizId">The ID of the quiz.</param>
+        /// <returns>A response containing the quiz status for the learner.</returns>
+        /// <response code="200">Quiz status retrieved successfully.</response>
+        /// <response code="404">No data found for the given learnerId and quizId.</response>
+
+        [HttpGet("learner-quiz-status")]
+        public async Task<IActionResult> GetLearnerQuizStatus(Guid learnerId, Guid quizId)
+        {
+            var result = await _quizEngineService.GetLearnerQuizStatusAsync(learnerId, quizId);
+            if (result == null)
+            {
+                return NotFound($"No data found for learnerId: {learnerId} and quizId: {quizId}");
+            }
+            return Ok(result);
         }
 
         /// <summary>

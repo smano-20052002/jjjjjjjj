@@ -10,6 +10,12 @@ namespace LXP.Services.IServices
         void SubmitFeedbackResponses(IEnumerable<QuizFeedbackResponseViewModel> feedbackResponses);
         void SubmitFeedbackResponses(IEnumerable<TopicFeedbackResponseViewModel> feedbackResponses);
 
-        IEnumerable<LearnerFeedbackViewModel> GetLearnerFeedbackStatus(Guid learnerId);
+
+        //new
+        LearnerFeedbackStatusViewModel GetQuizFeedbackStatus(Guid learnerId, Guid quizId);
+        LearnerFeedbackStatusViewModel GetTopicFeedbackStatus(Guid learnerId, Guid topicId);
+
+
+
     }
 }

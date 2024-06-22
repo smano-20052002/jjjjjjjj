@@ -198,49 +198,34 @@ namespace LXP.Services
             feedbackResponse.TopicId = question.TopicId;
         }
 
-        public IEnumerable<LearnerFeedbackViewModel> GetLearnerFeedbackStatus(Guid learnerId)
+
+        public LearnerFeedbackStatusViewModel GetQuizFeedbackStatus(Guid learnerId, Guid quizId)
         {
-            var quizIds = _feedbackResponseRepository.GetQuizIdsForLearner(learnerId);
-            var topicIds = _feedbackResponseRepository.GetTopicIdsForLearner(learnerId);
+            var allQuestions = _feedbackResponseRepository.GetQuizFeedbackQuestions(quizId);
+            var submittedResponses = _feedbackResponseRepository.GetQuizFeedbackResponsesByLearner(learnerId, quizId);
 
-            var feedbackStatus = new List<LearnerFeedbackViewModel>();
-
-            foreach (var quizId in quizIds)
+            return new LearnerFeedbackStatusViewModel
             {
-                var isQuizFeedbackGiven = _feedbackResponseRepository.IsQuizFeedbackGivenByLearner(
-                    learnerId,
-                    quizId
-                );
-                feedbackStatus.Add(
-                    new LearnerFeedbackViewModel
-                    {
-                        LearnerId = learnerId,
-                        QuizId = quizId,
-                        TopicId = Guid.Empty,
-                        IsQuizFeedbackGiven = isQuizFeedbackGiven,
-                        IsTopicFeedbackGiven = false
-                    }
-                );
-            }
-
-            foreach (var topicId in topicIds)
-            {
-                var isTopicFeedbackGiven =
-                    _feedbackResponseRepository.IsTopicFeedbackGivenByLearner(learnerId, topicId);
-                feedbackStatus.Add(
-                    new LearnerFeedbackViewModel
-                    {
-                        LearnerId = learnerId,
-                        QuizId = Guid.Empty,
-                        TopicId = topicId,
-                        IsQuizFeedbackGiven = false,
-                        IsTopicFeedbackGiven = isTopicFeedbackGiven
-                    }
-                );
-            }
-
-            return feedbackStatus;
+                LearnerId = learnerId,
+                IsQuizFeedbackSubmitted = allQuestions.Count() == submittedResponses.Count()
+            };
         }
+
+        public LearnerFeedbackStatusViewModel GetTopicFeedbackStatus(Guid learnerId, Guid topicId)
+        {
+            var allQuestions = _feedbackResponseRepository.GetTopicFeedbackQuestions(topicId);
+            var submittedResponses = _feedbackResponseRepository.GetTopicFeedbackResponsesByLearner(learnerId, topicId);
+
+            return new LearnerFeedbackStatusViewModel
+            {
+                LearnerId = learnerId,
+                IsTopicFeedbackSubmitted = allQuestions.Count() == submittedResponses.Count()
+            };
+        }
+
+
+
+
     }
 }
 
@@ -263,31 +248,3 @@ namespace LXP.Services
 
 
 
-
-
-//using LXP.Common.ViewModels.FeedbackResponseViewModel;
-//using LXP.Data.IRepository;
-//using LXP.Services.IServices;
-
-//namespace LXP.Services
-//{
-//    public class FeedbackResponseService : IFeedbackResponseService
-//    {
-//        private readonly IFeedbackResponseRepository _feedbackResponseRepository;
-
-//        public FeedbackResponseService(IFeedbackResponseRepository feedbackResponseRepository)
-//        {
-//            _feedbackResponseRepository = feedbackResponseRepository;
-//        }
-
-//        public void SubmitFeedbackResponse(QuizFeedbackResponseViewModel feedbackResponse)
-//        {
-//            _feedbackResponseRepository.SubmitFeedbackResponse(feedbackResponse);
-//        }
-
-//        public void SubmitFeedbackResponse(TopicFeedbackResponseViewModel feedbackResponse)
-//        {
-//            _feedbackResponseRepository.SubmitFeedbackResponse(feedbackResponse);
-//        }
-//    }
-//}

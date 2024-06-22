@@ -24,10 +24,17 @@ namespace LXP.Data.IRepository
 
         //LearnerProfile GetLearnerProfile(Guid learnerId);
 
-        IEnumerable<Guid> GetQuizIdsForLearner(Guid learnerId);
-        IEnumerable<Guid> GetTopicIdsForLearner(Guid learnerId);
-        bool IsQuizFeedbackGivenByLearner(Guid learnerId, Guid quizId);
-        bool IsTopicFeedbackGivenByLearner(Guid learnerId, Guid topicId);
+
+        //new 
+
+
+        IEnumerable<Quizfeedbackquestion> GetQuizFeedbackQuestions(Guid quizId);
+        IEnumerable<Feedbackresponse> GetQuizFeedbackResponsesByLearner(Guid learnerId, Guid quizId);
+        IEnumerable<Topicfeedbackquestion> GetTopicFeedbackQuestions(Guid topicId);
+        IEnumerable<Feedbackresponse> GetTopicFeedbackResponsesByLearner(Guid learnerId, Guid topicId);
+
+
+
     }
 }
 

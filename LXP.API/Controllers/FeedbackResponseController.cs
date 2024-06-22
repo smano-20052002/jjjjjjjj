@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LXP.Common.ViewModels;
 using LXP.Common.ViewModels.FeedbackResponseViewModel;
 using LXP.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
@@ -87,11 +88,52 @@ namespace LXP.API.Controllers
             }
         }
 
-        [HttpGet("learnerfeedbackinfo")]
-        public IActionResult GetLearnerFeedbackStatus(Guid learnerId)
+
+        /// <summary>
+        /// Retrieves the feedback status of a quiz for a specific learner.
+        /// </summary>
+        /// <param name="learnerId">The ID of the learner.</param>
+        /// <param name="quizId">The ID of the quiz.</param>
+        /// <returns>A response containing the quiz feedback status for the learner.</returns>
+        /// <response code="200">Quiz feedback status retrieved successfully.</response>
+        /// <response code="400">Bad request due to an exception during the operation.</response>
+
+
+        [HttpGet("QuizFeedbackStatus")]
+        public IActionResult GetQuizFeedbackStatus(Guid learnerId, Guid quizId)
         {
-            var feedbackStatus = _feedbackResponseService.GetLearnerFeedbackStatus(learnerId);
-            return Ok(feedbackStatus);
+            try
+            {
+                var status = _feedbackResponseService.GetQuizFeedbackStatus(learnerId, quizId);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the feedback status of a topic for a specific learner.
+        /// </summary>
+        /// <param name="learnerId">The ID of the learner.</param>
+        /// <param name="topicId">The ID of the topic.</param>
+        /// <returns>A response containing the topic feedback status for the learner.</returns>
+        /// <response code="200">Topic feedback status retrieved successfully.</response>
+        /// <response code="400">Bad request due to an exception during the operation.</response>
+
+        [HttpGet("TopicFeedbackStatus")]
+        public IActionResult GetTopicFeedbackStatus(Guid learnerId, Guid topicId)
+        {
+            try
+            {
+                var status = _feedbackResponseService.GetTopicFeedbackStatus(learnerId, topicId);
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
         }
     }
 }

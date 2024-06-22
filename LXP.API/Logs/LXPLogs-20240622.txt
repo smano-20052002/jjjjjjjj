@@ -1,0 +1,39 @@
+2024-06-22 11:58:33.841 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-22 11:58:34.816 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-22 11:58:34.820 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-22 11:58:34.822 +05:30 [INF] Hosting environment: Development
+2024-06-22 11:58:34.823 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-22 11:58:39.436 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-22 11:58:40.009 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 579.3475ms
+2024-06-22 11:58:40.021 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-22 11:58:40.027 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-22 11:58:40.030 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 9.1604ms
+2024-06-22 11:58:40.119 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 91.7079ms
+2024-06-22 11:58:40.195 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-22 11:58:40.673 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 477.8886ms
+2024-06-22 13:00:18.199 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-22 13:00:18.662 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-22 13:00:18.664 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-22 13:00:18.665 +05:30 [INF] Hosting environment: Development
+2024-06-22 13:00:18.665 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-22 13:00:23.424 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-22 13:00:23.900 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 481.7876ms
+2024-06-22 13:00:23.906 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-22 13:00:23.910 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-22 13:00:23.926 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 16.1817ms
+2024-06-22 13:00:23.951 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 44.4372ms
+2024-06-22 13:00:24.019 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-22 13:00:24.272 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 252.5476ms
+2024-06-22 13:51:42.160 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-22 13:51:42.677 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-22 13:51:42.680 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-22 13:51:42.680 +05:30 [INF] Hosting environment: Development
+2024-06-22 13:51:42.681 +05:30 [INF] Content root path: D:\scorecalculation\LXP.Api
+2024-06-22 13:51:44.357 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-22 13:51:44.811 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 461.9744ms
+2024-06-22 13:51:44.819 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-22 13:51:44.822 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-22 13:51:44.826 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 6.8557ms
+2024-06-22 13:51:44.854 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.2436ms
+2024-06-22 13:51:44.927 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-22 13:51:45.186 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 259.3844ms

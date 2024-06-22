@@ -301,13 +301,6 @@
             <param name="attemptId">The unique identifier of the quiz attempt.</param>
             <response code="200">Success on finding the quiz attempt result. The response body contains the result details.</response>
         </member>
-        <member name="M:LXP.Api.Controllers.QuizEngineController.GetLearnerLastQuizResult(System.Guid)">
-            <summary>
-            Retrieves the learner last attempt for the quiz based on the learner  ID.
-            </summary>
-            <param name="learnerId">The unique identifier of the learner.</param>
-            <response code="200">Success on finding the quiz results. The response body contains the list of quiz results for the learner.</response>
-        </member>
         <member name="M:LXP.Api.Controllers.QuizEngineController.RetakeQuiz(System.Guid,System.Guid)">
             <summary>
             Allows a learner to retake a specific quiz.
@@ -315,6 +308,16 @@
             <param name="learnerId">The unique identifier of the learner.</param>
             <param name="quizId">The unique identifier of the quiz.</param>
             <response code="200">Success on retaking the quiz. The response body contains the new attempt ID.</response>
+        </member>
+        <member name="M:LXP.Api.Controllers.QuizEngineController.GetLearnerQuizStatus(System.Guid,System.Guid)">
+            <summary>
+            Retrieves the status of a quiz for a specific learner.
+            </summary>
+            <param name="learnerId">The ID of the learner.</param>
+            <param name="quizId">The ID of the quiz.</param>
+            <returns>A response containing the quiz status for the learner.</returns>
+            <response code="200">Quiz status retrieved successfully.</response>
+            <response code="404">No data found for the given learnerId and quizId.</response>
         </member>
         <member name="M:LXP.Api.Controllers.QuizEngineController.SubmitAnswerBatch(LXP.Common.ViewModels.QuizEngineViewModel.AnswerSubmissionBatchModel)">
             <summary>
@@ -616,6 +619,26 @@
             <returns>A response indicating the result of the feedback submission.</returns>
             <response code="201">Topic feedback responses added successfully.</response>
             <response code="400">Bad request due to invalid input.</response>
+        </member>
+        <member name="M:LXP.API.Controllers.FeedbackResponseController.GetQuizFeedbackStatus(System.Guid,System.Guid)">
+            <summary>
+            Retrieves the feedback status of a quiz for a specific learner.
+            </summary>
+            <param name="learnerId">The ID of the learner.</param>
+            <param name="quizId">The ID of the quiz.</param>
+            <returns>A response containing the quiz feedback status for the learner.</returns>
+            <response code="200">Quiz feedback status retrieved successfully.</response>
+            <response code="400">Bad request due to an exception during the operation.</response>
+        </member>
+        <member name="M:LXP.API.Controllers.FeedbackResponseController.GetTopicFeedbackStatus(System.Guid,System.Guid)">
+            <summary>
+            Retrieves the feedback status of a topic for a specific learner.
+            </summary>
+            <param name="learnerId">The ID of the learner.</param>
+            <param name="topicId">The ID of the topic.</param>
+            <returns>A response containing the topic feedback status for the learner.</returns>
+            <response code="200">Topic feedback status retrieved successfully.</response>
+            <response code="400">Bad request due to an exception during the operation.</response>
         </member>
         <member name="M:LXP.API.Controllers.FeedbackResponseDetailsController.GetQuizFeedbackResponses(System.Guid)">
             <summary>

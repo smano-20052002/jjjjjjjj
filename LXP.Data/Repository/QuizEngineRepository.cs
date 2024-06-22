@@ -314,24 +314,6 @@ namespace LXP.Data.Repository
                     .FirstOrDefaultAsync() ?? new ViewQuizDetailsViewModel();
         }
 
-        public async Task<LearnerAttemptViewModel> GetLearnerLastAttemptAsync(Guid learnerId)
-        {
-            return await _dbContext
-                .LearnerAttempts.Where(a => a.LearnerId == learnerId)
-                .OrderByDescending(a => a.EndTime)
-                .Select(a => new LearnerAttemptViewModel
-                {
-                    LearnerAttemptId = a.LearnerAttemptId,
-                    LearnerId = a.LearnerId,
-                    QuizId = a.QuizId,
-                    AttemptCount = a.AttemptCount,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    Score = a.Score
-                })
-                .FirstOrDefaultAsync();
-        }
-
         public async Task<LearnerQuizAttemptViewModel> GetLearnerQuizAttemptAsync(Guid attemptId)
         {
             var attempt = await _dbContext
@@ -520,5 +502,6 @@ namespace LXP.Data.Repository
             // Save changes
             await _dbContext.SaveChangesAsync();
         }
+        
     }
 }
