@@ -327,21 +327,6 @@
             <response code="200">Success on finding the learner's attempt. The response body contains a boolean representation of the pass status.</response>
             <response code="404">Not found if no learner attempt exists with the provided ID.</response>
         </member>
-        <member name="M:LXP.Api.Controllers.QuizEngineController.SubmitAnswerBatch(LXP.Common.ViewModels.QuizEngineViewModel.AnswerSubmissionBatchModel)">
-            <summary>
-            Api  Endpoint in development stage not ready to use yet
-            </summary>
-        </member>
-        <member name="M:LXP.Api.Controllers.QuizEngineController.SubmitCachedAnswers(System.Guid)">
-            <summary>
-            Api  Endpoint in development stage not ready to use yet
-            </summary>
-        </member>
-        <member name="M:LXP.Api.Controllers.QuizEngineController.CacheAnswers(LXP.Common.ViewModels.QuizEngineViewModel.CachedAnswerSubmissionModel)">
-            <summary>
-            Api  Endpoint in development stage not ready to use yet
-            </summary>
-        </member>
         <member name="M:LXP.Api.Controllers.QuizFeedbackController.AddFeedbackQuestion(LXP.Common.ViewModels.QuizFeedbackQuestionViewModel.QuizfeedbackquestionViewModel)">
             <summary>
             Add a new feedback question

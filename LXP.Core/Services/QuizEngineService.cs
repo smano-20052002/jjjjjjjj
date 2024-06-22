@@ -2,21 +2,23 @@ using LXP.Common.ViewModels.QuizEngineViewModel;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace LXP.Core.Services
 {
     public class QuizEngineService : IQuizEngineService
     {
         private readonly IQuizEngineRepository _quizEngineRepository;
-        private readonly IMemoryCache _memoryCache;
+        private readonly ILogger<QuizEngineService> _logger;
 
         public QuizEngineService(
             IQuizEngineRepository quizEngineRepository,
-            IMemoryCache memoryCache
+            ILogger<QuizEngineService> logger
         )
         {
             _quizEngineRepository = quizEngineRepository;
-            _memoryCache = memoryCache;
+
+            _logger = logger;
         }
 
         public async Task<ViewQuizDetailsViewModel> GetQuizByIdAsync(Guid quizId)
@@ -148,6 +150,10 @@ namespace LXP.Core.Services
                     optionId
                 );
             }
+
+            _logger.LogInformation(
+                $"Answer submitted for attempt {answerSubmissionModel.LearnerAttemptId}, question {answerSubmissionModel.QuizQuestionId}"
+            );
         }
 
         public async Task<LearnerPassStatusViewModel> CheckLearnerPassStatusAsync(
@@ -172,21 +178,51 @@ namespace LXP.Core.Services
             var attempt = await _quizEngineRepository.GetLearnerAttemptByIdAsync(attemptId);
             if (attempt == null)
                 throw new KeyNotFoundException($"Learner attempt with ID {attemptId} not found.");
+
             var quiz = await _quizEngineRepository.GetQuizByIdAsync(attempt.QuizId);
             if (quiz == null)
                 throw new KeyNotFoundException($"Quiz with ID {attempt.QuizId} not found.");
+
             var totalQuestions = (
                 await _quizEngineRepository.GetQuestionsForQuizAsync(quiz.QuizId)
             ).Count();
+
+            // Add a small delay to ensure all answers are saved
+            await Task.Delay(500);
+
             var existingAnswers = await _quizEngineRepository.GetLearnerAnswersForAttemptAsync(
                 attemptId
             );
+
+            // Implement a retry mechanism if the count doesn't match
+            int retryCount = 0;
+            while (
+                existingAnswers.Select(a => a.QuizQuestionId).Distinct().Count() != totalQuestions
+                && retryCount < 3
+            )
+            {
+                _logger.LogWarning(
+                    $"Attempt {attemptId}: Mismatch in answer count. Retrying... (Attempt {retryCount + 1})"
+                );
+                await Task.Delay(500);
+                existingAnswers = await _quizEngineRepository.GetLearnerAnswersForAttemptAsync(
+                    attemptId
+                );
+                retryCount++;
+            }
+
             if (existingAnswers.Select(a => a.QuizQuestionId).Distinct().Count() != totalQuestions)
                 throw new InvalidOperationException(
                     "You need to answer all the questions in the quiz before submitting the quiz attempt."
                 );
-            var individualQuestionMarks = 100 / totalQuestions;
+
+            _logger.LogInformation(
+                $"Attempt {attemptId}: Found {existingAnswers.Count()} answers for {totalQuestions} questions"
+            );
+
+            var individualQuestionMarks = 100.0f / totalQuestions;
             float finalScore = 0;
+
             foreach (var answer in existingAnswers)
             {
                 var isAnswerCorrect = await _quizEngineRepository.IsQuestionOptionCorrectAsync(
@@ -209,8 +245,14 @@ namespace LXP.Core.Services
                         }
                     }
                 );
+                _logger.LogInformation(
+                    $"Attempt {attemptId}: Processed question {answer.QuizQuestionId}, score: {questionScore}"
+                );
                 finalScore += questionScore;
             }
+
+            _logger.LogInformation($"Attempt {attemptId}: Final score calculated: {finalScore}");
+
             attempt.Score = (float)Math.Round(finalScore);
             attempt.EndTime = DateTime.Now;
             await _quizEngineRepository.UpdateLearnerAttemptAsync(attempt);
@@ -280,21 +322,25 @@ namespace LXP.Core.Services
                     var correctlySelectedOptions = selectedOptions
                         .Intersect(correctOptions)
                         .Count();
+                    var incorrectlySelectedOptions = selectedOptions.Except(correctOptions).Count();
 
-                    if (correctlySelectedOptions == correctOptionCount)
+                    if (
+                        correctlySelectedOptions == correctOptionCount
+                        && incorrectlySelectedOptions == 0
+                    )
                     {
-                        return individualQuestionMarks; // All correct options selected
+                        return individualQuestionMarks; // All correct options selected and no incorrect options
                     }
-                    else if (correctlySelectedOptions > 0)
+                    else if (correctlySelectedOptions > 0 && incorrectlySelectedOptions == 0)
                     {
                         var partialMark =
                             (individualQuestionMarks / correctOptionCount)
                             * correctlySelectedOptions;
-                        return partialMark; // Partial marks for partially correct answer
+                        return partialMark; // Partial marks for partially correct answer and no incorrect options
                     }
                     else
                     {
-                        return 0; // No marks for incorrect answer
+                        return 0; // No marks for incorrect answer or selecting more options than correct options
                     }
 
                 default:
@@ -320,149 +366,6 @@ namespace LXP.Core.Services
         )
         {
             return await _quizEngineRepository.GetLearnerQuizStatusAsync(learnerId, quizId);
-        }
-
-        // new batch
-
-
-        public async Task SubmitAnswerBatchAsync(AnswerSubmissionBatchModel model)
-        {
-            var validationErrors = new List<string>();
-
-            foreach (var submission in model.AnswerSubmissions)
-            {
-                // Validate each submission
-                var errors = await ValidateSubmissionAsync(submission);
-                if (errors.Count > 0)
-                {
-                    validationErrors.AddRange(errors);
-                    continue; // Skip this submission if validation fails
-                }
-
-                foreach (var option in submission.SelectedOptions)
-                {
-                    var learnerAnswer = new LearnerAnswerViewModel
-                    {
-                        LearnerAnswerId = Guid.NewGuid(),
-                        LearnerAttemptId = submission.LearnerAttemptId,
-                        QuizQuestionId = submission.QuizQuestionId,
-                        QuestionOptionId = new Guid(option)
-                    };
-
-                    await _quizEngineRepository.SaveLearnerAnswerAsync(learnerAnswer);
-                }
-            }
-
-            if (validationErrors.Count > 0)
-            {
-                throw new Exception(string.Join("; ", validationErrors));
-            }
-        }
-
-        private async Task<List<string>> ValidateSubmissionAsync(AnswerSubmissionModel submission)
-        {
-            var errors = new List<string>();
-
-            // Example validation: Check if LearnerAttemptId is valid
-            if (submission.LearnerAttemptId == Guid.Empty)
-            {
-                errors.Add("LearnerAttemptId is invalid.");
-            }
-
-            // Example validation: Check if QuizQuestionId is valid
-            if (submission.QuizQuestionId == Guid.Empty)
-            {
-                errors.Add("QuizQuestionId is invalid.");
-            }
-
-            // Example validation: Check if there are any selected options
-            if (submission.SelectedOptions == null || submission.SelectedOptions.Count == 0)
-            {
-                errors.Add("No options selected.");
-            }
-
-            // Fetch the question type
-            var question = await _quizEngineRepository.GetQuizQuestionByIdAsync(
-                submission.QuizQuestionId
-            );
-            if (question != null)
-            {
-                if (
-                    question.QuestionType == "MSQ"
-                    && (
-                        submission.SelectedOptions.Count < 2 || submission.SelectedOptions.Count > 3
-                    )
-                )
-                {
-                    errors.Add("MSQ type question must have 2 or 3 options selected.");
-                }
-            }
-            else
-            {
-                errors.Add("Quiz question not found.");
-            }
-
-            // Add more validations as needed
-
-            return errors;
-        }
-
-        public async Task CacheAnswersAsync(CachedAnswerSubmissionModel model)
-        {
-            // Store the cached answers in memory
-            var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(
-                TimeSpan.FromMinutes(30)
-            );
-            _memoryCache.Set(
-                $"CachedAnswers_{model.LearnerAttemptId}",
-                model.QuestionAnswers,
-                cacheEntryOptions
-            );
-
-            // Save the cached answers to the repository
-            await _quizEngineRepository.SaveCachedAnswersAsync(
-                model.LearnerAttemptId,
-                model.QuestionAnswers
-            );
-
-            // has to implement  additional logic, such as validation or processing
-        }
-
-        public async Task SubmitCachedAnswersAsync(Guid learnerAttemptId)
-        {
-            // Retrieve the cached answers from memory
-            if (
-                _memoryCache.TryGetValue(
-                    $"CachedAnswers_{learnerAttemptId}",
-                    out Dictionary<Guid, List<string>> questionAnswers
-                )
-            )
-            {
-                // Convert the cached answers to the format expected by the SubmitAnswer endpoint
-                var answerSubmissionModels = questionAnswers
-                    .Select(kvp => new AnswerSubmissionModel
-                    {
-                        LearnerAttemptId = learnerAttemptId,
-                        QuizQuestionId = kvp.Key,
-                        SelectedOptions = kvp.Value
-                    })
-                    .ToList();
-
-                // Submit the answers to the repository using the SubmitAnswer endpoint
-                foreach (var answerSubmissionModel in answerSubmissionModels)
-                {
-                    await _quizEngineRepository.SubmitAnswerAsync(answerSubmissionModel);
-                }
-
-                // Remove the cached answers from memory
-                _memoryCache.Remove($"CachedAnswers_{learnerAttemptId}");
-            }
-            else
-            {
-                throw new InvalidOperationException(
-                    "No cached answers found for the specified learner attempt."
-                );
-            }
         }
     }
 }

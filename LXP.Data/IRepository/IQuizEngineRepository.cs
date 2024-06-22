@@ -50,11 +50,8 @@ namespace LXP.Data.IRepository
 
         // cache
 
-        Task SaveCachedAnswersAsync(
-            Guid learnerAttemptId,
-            Dictionary<Guid, List<string>> questionAnswers
-        );
-        Task SubmitAnswerAsync(AnswerSubmissionModel answerSubmissionModel);
+
+
 
         Task<LearnerQuizStatusViewModel> GetLearnerQuizStatusAsync(Guid learnerId, Guid quizId); //new
     }
