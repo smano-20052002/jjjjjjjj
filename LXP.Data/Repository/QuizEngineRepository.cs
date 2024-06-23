@@ -183,24 +183,60 @@ namespace LXP.Data.Repository
                 .ToListAsync();
         }
 
+        // public async Task<IEnumerable<QuizEngineQuestionViewModel>> GetQuestionsForQuizAsync(
+        //     Guid quizId
+        // )
+        // {
+        //     return await _dbContext
+        //         .QuizQuestions.Where(q => q.QuizId == quizId)
+        //         .Select(q => new QuizEngineQuestionViewModel
+        //         {
+        //             QuizQuestionId = q.QuizQuestionId,
+        //             Question = q.Question,
+        //             QuestionType = q.QuestionType,
+        //             QuestionNo = q.QuestionNo,
+        //             Options = _dbContext
+        //                 .QuestionOptions.Where(o => o.QuizQuestionId == q.QuizQuestionId)
+        //                 .Select(o => new QuizEngineOptionViewModel { Option = o.Option })
+        //                 .ToList()
+        //         })
+        //         .ToListAsync();
+        // }
         public async Task<IEnumerable<QuizEngineQuestionViewModel>> GetQuestionsForQuizAsync(
             Guid quizId
         )
         {
-            return await _dbContext
+            var questions = await _dbContext
                 .QuizQuestions.Where(q => q.QuizId == quizId)
                 .Select(q => new QuizEngineQuestionViewModel
                 {
                     QuizQuestionId = q.QuizQuestionId,
                     Question = q.Question,
                     QuestionType = q.QuestionType,
-                    QuestionNo = q.QuestionNo,
                     Options = _dbContext
                         .QuestionOptions.Where(o => o.QuizQuestionId == q.QuizQuestionId)
                         .Select(o => new QuizEngineOptionViewModel { Option = o.Option })
                         .ToList()
                 })
                 .ToListAsync();
+
+            // Shuffle the questions and assign new question numbers
+            var shuffledQuestions = questions
+                .OrderBy(q => Guid.NewGuid())
+                .Select(
+                    (q, index) =>
+                        new QuizEngineQuestionViewModel
+                        {
+                            QuizQuestionId = q.QuizQuestionId,
+                            Question = q.Question,
+                            QuestionType = q.QuestionType,
+                            QuestionNo = index + 1, // Assign new question number based on shuffled order
+                            Options = q.Options.OrderBy(o => Guid.NewGuid()).ToList()
+                        }
+                )
+                .ToList();
+
+            return shuffledQuestions;
         }
 
         public async Task<LearnerQuizStatusViewModel> GetLearnerQuizStatusAsync(
