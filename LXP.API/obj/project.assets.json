@@ -10617,11 +10617,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\scorecalculation\\LXP.Api\\LXP.Api.csproj",
+      "projectUniqueName": "D:\\backend\\LXP.API\\LXP.Api.csproj",
       "projectName": "LXP.Api",
-      "projectPath": "D:\\scorecalculation\\LXP.Api\\LXP.Api.csproj",
+      "projectPath": "D:\\backend\\LXP.API\\LXP.Api.csproj",
       "packagesPath": "C:\\Users\\gokul.jawahar\\.nuget\\packages\\",
-      "outputPath": "D:\\scorecalculation\\LXP.Api\\obj\\",
+      "outputPath": "D:\\backend\\LXP.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -10643,8 +10643,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\scorecalculation\\LXP.Core\\LXP.Core.csproj": {
-              "projectPath": "D:\\scorecalculation\\LXP.Core\\LXP.Core.csproj"
+            "D:\\backend\\LXP.Core\\LXP.Core.csproj": {
+              "projectPath": "D:\\backend\\LXP.Core\\LXP.Core.csproj"
             }
           }
         }
