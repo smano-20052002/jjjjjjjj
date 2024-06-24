@@ -1,6 +1,5 @@
 ﻿using LXP.Common.ViewModels;
 using LXP.Core.IServices;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LXP.Api.Controllers
