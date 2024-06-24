@@ -462,7 +462,7 @@ namespace LXP.Data.Repository
             };
         }
 
-        // new batch
+        
 
 
         public async Task SaveLearnerAnswerAsync(LearnerAnswerViewModel learnerAnswer)

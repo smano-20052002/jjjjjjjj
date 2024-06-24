@@ -74,5 +74,8 @@ namespace LXP.Data.Repository
             _LXPDbContext.LearnerAttempts.Remove(attempt);
             _LXPDbContext.SaveChanges();
         }
+
+
+        
     }
 }

@@ -20,5 +20,7 @@ namespace LXP.Data.IRepository
 
         IEnumerable<LearnerAttempt> GetLearnerAttemptsByQuizId(Guid quizId);
         void DeleteLearnerAttempt(LearnerAttempt attempt);
+
+        
     }
 }

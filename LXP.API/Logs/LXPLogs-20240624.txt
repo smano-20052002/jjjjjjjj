@@ -1,0 +1,32 @@
+2024-06-24 09:58:36.518 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-24 09:58:37.886 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-24 09:58:37.892 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-24 09:58:37.896 +05:30 [INF] Hosting environment: Development
+2024-06-24 09:58:37.898 +05:30 [INF] Content root path: D:\backend\LXP.Api
+2024-06-24 09:58:47.403 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger - null null
+2024-06-24 09:58:48.041 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger - 301 0 null 653.6697ms
+2024-06-24 09:58:48.057 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-24 09:58:48.223 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 165.9951ms
+2024-06-24 09:58:48.239 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui.css - null null
+2024-06-24 09:58:48.253 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-bundle.js - null null
+2024-06-24 09:58:48.253 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-standalone-preset.js - null null
+2024-06-24 09:58:48.394 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-06-24 09:58:48.395 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-06-24 09:58:48.395 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-06-24 09:58:48.399 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui.css - 200 152034 text/css 161.0992ms
+2024-06-24 09:58:48.399 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-standalone-preset.js - 200 230280 text/javascript 146.5546ms
+2024-06-24 09:58:48.402 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-bundle.js - 200 1456682 text/javascript 148.5878ms
+2024-06-24 09:58:48.406 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-24 09:58:48.411 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-24 09:58:48.507 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 100.8496ms
+2024-06-24 09:58:48.610 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 199.1985ms
+2024-06-24 09:58:48.934 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-24 09:58:49.521 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 587.3503ms
+2024-06-24 09:59:58.325 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/api/Quiz/CheckQuizAvailability/5150d8eb-e17e-4fb6-8e62-30211324b613 - null null
+2024-06-24 09:59:58.406 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-24 09:59:58.419 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.QuizController.CheckQuizAvailability (LXP.Api)'
+2024-06-24 09:59:58.445 +05:30 [INF] Route matched with {action = "CheckQuizAvailability", controller = "Quiz"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CheckQuizAvailability(System.Guid) on controller LXP.Api.Controllers.QuizController (LXP.Api).
+2024-06-24 10:00:01.283 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.QuizViewModel.QuizAvailabilityViewModel'.
+2024-06-24 10:00:01.303 +05:30 [INF] Executed action LXP.Api.Controllers.QuizController.CheckQuizAvailability (LXP.Api) in 2851.5536ms
+2024-06-24 10:00:01.306 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.QuizController.CheckQuizAvailability (LXP.Api)'
+2024-06-24 10:00:01.322 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/api/Quiz/CheckQuizAvailability/5150d8eb-e17e-4fb6-8e62-30211324b613 - 200 null application/json; charset=utf-8 2998.4632ms
