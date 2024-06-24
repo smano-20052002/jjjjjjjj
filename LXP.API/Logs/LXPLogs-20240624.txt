@@ -283,3 +283,16 @@
 2024-06-24 16:34:46.688 +05:30 [INF] Executed action LXP.Api.Controllers.UpdatePasswordController.LeanerUpdatePassword (LXP.Api) in 132.5692ms
 2024-06-24 16:34:46.690 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.UpdatePasswordController.LeanerUpdatePassword (LXP.Api)'
 2024-06-24 16:34:46.692 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5199/api/UpdatePassword - 200 null text/plain; charset=utf-8 148.4781ms
+2024-06-24 16:35:06.515 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-24 16:35:07.160 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-24 16:35:07.167 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-24 16:35:07.171 +05:30 [INF] Hosting environment: Development
+2024-06-24 16:35:07.172 +05:30 [INF] Content root path: D:\backend\LXP.Api
+2024-06-24 16:35:09.561 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-24 16:35:10.049 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 509.8228ms
+2024-06-24 16:35:10.059 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-24 16:35:10.061 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-24 16:35:10.068 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 8.9267ms
+2024-06-24 16:35:10.110 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.8678ms
+2024-06-24 16:35:10.200 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-24 16:35:10.568 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 367.8353ms

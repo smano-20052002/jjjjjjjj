@@ -1,9 +1,9 @@
 ﻿using LXP.Common.Entities;
-using LXP.Data.IRepository;
 using LXP.Common.Entities;
 using LXP.Data.IRepository;
+using LXP.Data.IRepository;
 using Microsoft.EntityFrameworkCore;
- 
+
 namespace LXP.Data.Repository
 {
     public class UpdatePasswordRepository : IUpdatePasswordRepository
@@ -27,6 +27,5 @@ namespace LXP.Data.Repository
             _dbcontext.Learners.Update(learner);
             await _dbcontext.SaveChangesAsync();
         }
-
     }
 }

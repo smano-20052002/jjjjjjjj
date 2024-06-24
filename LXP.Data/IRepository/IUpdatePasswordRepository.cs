@@ -1,7 +1,6 @@
 ﻿using LXP.Common.Entities;
-
 using LXP.Common.Entities;
- 
+
 namespace LXP.Data.IRepository
 {
     public interface IUpdatePasswordRepository
@@ -21,10 +20,7 @@ namespace LXP.Data.IRepository
         Task<Learner> LearnerByEmailAndPasswordAsync(string email, string password);
     }
 
-
-
     // public void LearnerByEmailAndPasswordAsync(Learner learner);
 
     // Learner UpdatePasswordAsync(string Email, string Password);
-
 }

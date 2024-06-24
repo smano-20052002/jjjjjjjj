@@ -145,8 +145,7 @@ namespace LXP.Core.Services
 
             // Handle options only if the question type is MCQ
             if (
-                existingQuestion.QuestionType
-                == FeedbackQuestionTypes.MultiChoiceQuestion.ToUpper()
+                existingQuestion.QuestionType == FeedbackQuestionTypes.MultiChoiceQuestion.ToUpper()
             )
             {
                 if (!ValidateOptionsByFeedbackQuestionType(existingQuestion.QuestionType, options))

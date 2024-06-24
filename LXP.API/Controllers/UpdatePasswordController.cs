@@ -1,10 +1,8 @@
 ﻿using LXP.Common.ViewModels;
 using LXP.Core.IServices;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using Microsoft.AspNetCore.Mvc;
- 
+
 namespace LXP.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -22,7 +20,9 @@ namespace LXP.Api.Controllers
         ///Update Password once user use the Forgot Password operation
         ///</summary>
         [HttpPut]
-        public async Task<IActionResult> LeanerUpdatePassword([FromBody] UpdatePassword updatepassword)
+        public async Task<IActionResult> LeanerUpdatePassword(
+            [FromBody] UpdatePassword updatepassword
+        )
         {
             bool result = await _services.UpdatePassword(updatepassword);
             if (result)
@@ -31,10 +31,8 @@ namespace LXP.Api.Controllers
             }
             else
             {
-                return BadRequest("Incorrect Received Password");
+                return Ok("Incorrect Received Password");
             }
         }
-
-
     }
 }

@@ -1,18 +1,18 @@
-﻿using AutoMapper;
-using LXP.Common.Utils;
-using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
 using AutoMapper;
 using LXP.Common.Entities;
 using LXP.Common.Utils;
+using LXP.Common.Utils;
+using LXP.Common.ViewModels;
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
+using LXP.Core.IServices;
 using LXP.Data.IRepository;
- 
+using LXP.Data.IRepository;
+
 namespace LXP.Core.Services
 {
     public class Services : IService
@@ -132,7 +132,6 @@ namespace LXP.Core.Services
                 updatePassword.Email,
                 Encryption.ComputePasswordToSha256Hash(updatePassword.OldPassword)
             );
-
 
             if (
                 learner.Password

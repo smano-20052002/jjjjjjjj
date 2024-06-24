@@ -102,5 +102,3 @@ namespace LXP.Common.Validators
         }
     }
 }
-
-

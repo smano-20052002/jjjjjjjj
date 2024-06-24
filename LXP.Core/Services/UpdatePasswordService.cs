@@ -2,12 +2,7 @@
 using LXP.Common.ViewModels;
 using LXP.Core.IServices;
 using LXP.Data.IRepository;
-using LXP.Common.Entities;
-using LXP.Common.Utils;
-using LXP.Common.ViewModels;
-using LXP.Core.IServices;
-using LXP.Data.IRepository;
- 
+
 namespace LXP.Core.Services
 {
     public class UpdatePasswordService : IUpdatePasswordService
@@ -18,6 +13,7 @@ namespace LXP.Core.Services
         {
             _repository = repository;
         }
+
         public async Task<bool> UpdatePassword(UpdatePassword updatePassword)
         {
             var learner = await _repository.LearnerByEmailAndPasswordAsync(
@@ -30,12 +26,13 @@ namespace LXP.Core.Services
                 return false;
             }
 
-            string encryptNewPassword = Encryption.ComputePasswordToSha256Hash(updatePassword.NewPassword);
+            string encryptNewPassword = Encryption.ComputePasswordToSha256Hash(
+                updatePassword.NewPassword
+            );
             learner.Password = encryptNewPassword;
 
             await _repository.UpdatePasswordAsync(learner);
             return true;
         }
-
     }
 }
