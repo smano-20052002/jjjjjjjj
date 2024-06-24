@@ -1,6 +1,4 @@
-﻿
-
-namespace LXP.Common.ViewModels.QuizViewModel
+﻿namespace LXP.Common.ViewModels.QuizViewModel
 {
     public class QuizAvailabilityViewModel
     {

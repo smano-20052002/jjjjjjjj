@@ -68,8 +68,6 @@ namespace LXP.Core.Services
             }
         }
 
-        
-
         public void DeleteQuiz(Guid quizId)
         {
             var quizEntity = _quizRepository.GetQuizById(quizId);
@@ -153,7 +151,6 @@ namespace LXP.Core.Services
                 throw new Exception("AttemptsAllowed must be null or a positive integer.");
         }
 
-
         public QuizAvailabilityViewModel CheckQuizAvailability(Guid topicId)
         {
             var quiz = _quizRepository.GetQuizByTopicId(topicId);
@@ -165,8 +162,3 @@ namespace LXP.Core.Services
         }
     }
 }
-
-
-
-
-

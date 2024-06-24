@@ -248,7 +248,6 @@ namespace LXP.Core.Services
             return attempt.LearnerAttemptId;
         }
 
-        
         private async Task<float> CalculateQuestionScore(
             Guid quizQuestionId,
             bool isAnswerCorrect,

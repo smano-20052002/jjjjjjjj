@@ -29,6 +29,13 @@ namespace LXP.Data.Repository
             await _lXPDbContext.SaveChangesAsync();
         }
 
+        public bool AnyTopicByTopicNameAndCourseId(string topicName, Guid courseId)
+        {
+            return _lXPDbContext.Topics.Any(topic =>
+                topic.Name == topicName && topic.CourseId == courseId && topic.IsActive == true
+            );
+        }
+
         public object GetTopicDetails(string courseId)
         {
             var result =

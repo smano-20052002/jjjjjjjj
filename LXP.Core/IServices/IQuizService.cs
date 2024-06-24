@@ -12,6 +12,5 @@ namespace LXP.Core.IServices
         Guid? GetQuizIdByTopicId(Guid topicId);
 
         QuizAvailabilityViewModel CheckQuizAvailability(Guid topicId);
-
     }
 }

@@ -462,9 +462,6 @@ namespace LXP.Data.Repository
             };
         }
 
-        
-
-
         public async Task SaveLearnerAnswerAsync(LearnerAnswerViewModel learnerAnswer)
         {
             var entity = new LearnerAnswer
