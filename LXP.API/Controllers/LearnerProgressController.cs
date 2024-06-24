@@ -9,7 +9,6 @@ namespace LXP.Api.Controllers
     ///</summary>
     [Route("api/[controller]")]
     [ApiController]
-    
     public class LearnerProgressController : BaseController
     {
         //private readonly ILearnerProgressService _learnerProgressService;

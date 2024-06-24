@@ -183,7 +183,6 @@ namespace LXP.Data.Repository
                 .ToListAsync();
         }
 
-        
         public async Task<IEnumerable<QuizEngineQuestionViewModel>> GetQuestionsForQuizAsync(
             Guid quizId
         )
@@ -481,8 +480,8 @@ namespace LXP.Data.Repository
 
 
 
-/*Atomic code 
- * 
+/*Atomic code
+ *
  * public async Task SubmitQuizAttemptAsync(Guid attemptId)
 {
     using var transaction = await _quizEngineRepository.BeginTransactionAsync();

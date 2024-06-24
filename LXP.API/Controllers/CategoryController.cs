@@ -11,7 +11,6 @@ namespace LXP.Api.Controllers
     ///</summary>
     [Route("api/[controller]")]
     [ApiController]
-    
     public class CategoryController : BaseController
     {
         private readonly ICategoryServices _categoryServices;

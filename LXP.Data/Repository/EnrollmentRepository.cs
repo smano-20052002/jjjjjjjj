@@ -294,16 +294,31 @@ namespace LXP.Data.Repository
                             TopicDescription = topic.Description,
                             TopicId = topic.TopicId,
                             TopicIsActive = topic.IsActive,
-                            IsQuiz = _lXPDbContext.Quizzes.Any(quizzes => quizzes.TopicId == topic.TopicId) ? (from q in _lXPDbContext.Quizzes
-                                                                                                               join la in _lXPDbContext.LearnerAttempts on q.QuizId equals la.QuizId
-                                                                                                               where la.LearnerId == learnerId && q.TopicId == topic.TopicId
-                                                                                                               group la by new { la.QuizId, q.PassMark } into g
-                                                                                                               where g.Max(x => x.Score) >= g.Key.PassMark
-                                                                                                               select g.Key.PassMark).Count() != 0 : true,
-                            IsFeedBack = _lXPDbContext.Topicfeedbackquestions.Any(topicfeedbackquesion => topicfeedbackquesion.TopicId == topic.TopicId) ? (from tfq in _lXPDbContext.Topicfeedbackquestions
-                                                                                                                                                            join fr in _lXPDbContext.Feedbackresponses on tfq.TopicFeedbackQuestionId equals fr.TopicFeedbackQuestionId
-                                                                                                                                                            where fr.LearnerId == learnerId && tfq.TopicId == topic.TopicId
-                                                                                                                                                            select tfq).Count() == 0 : true,
+                            IsQuiz = _lXPDbContext.Quizzes.Any(quizzes =>
+                                quizzes.TopicId == topic.TopicId
+                            )
+                                ? (
+                                    from q in _lXPDbContext.Quizzes
+                                    join la in _lXPDbContext.LearnerAttempts
+                                        on q.QuizId equals la.QuizId
+                                    where la.LearnerId == learnerId && q.TopicId == topic.TopicId
+                                    group la by new { la.QuizId, q.PassMark } into g
+                                    where g.Max(x => x.Score) >= g.Key.PassMark
+                                    select g.Key.PassMark
+                                ).Count() != 0
+                                : true,
+                            IsFeedBack = _lXPDbContext.Topicfeedbackquestions.Any(
+                                topicfeedbackquesion =>
+                                    topicfeedbackquesion.TopicId == topic.TopicId
+                            )
+                                ? (
+                                    from tfq in _lXPDbContext.Topicfeedbackquestions
+                                    join fr in _lXPDbContext.Feedbackresponses
+                                        on tfq.TopicFeedbackQuestionId equals fr.TopicFeedbackQuestionId
+                                    where fr.LearnerId == learnerId && tfq.TopicId == topic.TopicId
+                                    select tfq
+                                ).Count() == 0
+                                : true,
                             Materials = (
                                 from material in _lXPDbContext.Materials
                                 join materialType in _lXPDbContext.MaterialTypes

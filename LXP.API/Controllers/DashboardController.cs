@@ -8,7 +8,6 @@ namespace LXP.Api.Controllers
     ///</summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
-   
     public class DashboardController : BaseController
     {
         private readonly IDashboardService _dashboardService;
