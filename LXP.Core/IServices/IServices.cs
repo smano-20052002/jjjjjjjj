@@ -1,5 +1,6 @@
 ﻿using LXP.Common.ViewModels;
-
+using LXP.Common.ViewModels;
+ 
 namespace LXP.Core.IServices
 {
     public interface IService
@@ -8,6 +9,6 @@ namespace LXP.Core.IServices
 
         Task<bool> ForgetPassword(string Email);
 
-        Task<ResultUpdatePassword> UpdatePassword(UpdatePassword updatePassword);
+        Task<bool> UpdatePassword(UpdatePassword updatePassword);
     }
 }
