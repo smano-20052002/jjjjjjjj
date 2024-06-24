@@ -146,3 +146,58 @@
 2024-06-24 14:11:50.595 +05:30 [INF] Executed action LXP.Api.Controllers.CourseTopicController.AddCourseTopic (LXP.Api) in 2277.4802ms
 2024-06-24 14:11:50.597 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.CourseTopicController.AddCourseTopic (LXP.Api)'
 2024-06-24 14:11:50.599 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5199/lxp/course/topic - 200 null application/json; charset=utf-8 2301.3782ms
+2024-06-24 14:56:25.560 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-24 14:56:25.998 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-24 14:56:26.001 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-24 14:56:26.002 +05:30 [INF] Hosting environment: Development
+2024-06-24 14:56:26.003 +05:30 [INF] Content root path: D:\backend\LXP.Api
+2024-06-24 14:56:31.285 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-24 14:56:31.710 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 431.5891ms
+2024-06-24 14:56:31.716 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-24 14:56:31.718 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-24 14:56:31.730 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 12.3737ms
+2024-06-24 14:56:31.754 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.2215ms
+2024-06-24 14:56:31.828 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-24 14:56:32.085 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 256.8594ms
+2024-06-24 15:21:23.265 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-24 15:21:23.704 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-24 15:21:23.707 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-24 15:21:23.708 +05:30 [INF] Hosting environment: Development
+2024-06-24 15:21:23.709 +05:30 [INF] Content root path: D:\backend\LXP.Api
+2024-06-24 15:21:25.911 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-24 15:21:26.816 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 906.4182ms
+2024-06-24 15:21:26.846 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-24 15:21:26.848 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-24 15:21:26.867 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 18.9937ms
+2024-06-24 15:21:26.886 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.9044ms
+2024-06-24 15:21:26.995 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-24 15:21:27.344 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 348.7941ms
+2024-06-24 15:22:03.263 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/lxp/courses/27da304c-feae-475b-9e99-4a3feb8b5924/topic - null null
+2024-06-24 15:22:03.273 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-24 15:22:03.276 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.CourseTopicController.GetAllCourseTopicByCourseId (LXP.Api)'
+2024-06-24 15:22:03.293 +05:30 [INF] Route matched with {action = "GetAllCourseTopicByCourseId", controller = "CourseTopic"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCourseTopicByCourseId(System.String) on controller LXP.Api.Controllers.CourseTopicController (LXP.Api).
+2024-06-24 15:22:04.892 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-24 15:22:05.941 +05:30 [INF] Executed action LXP.Api.Controllers.CourseTopicController.GetAllCourseTopicByCourseId (LXP.Api) in 2640.6958ms
+2024-06-24 15:22:05.944 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.CourseTopicController.GetAllCourseTopicByCourseId (LXP.Api)'
+2024-06-24 15:22:05.952 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/lxp/courses/27da304c-feae-475b-9e99-4a3feb8b5924/topic - 200 null application/json; charset=utf-8 2689.1105ms
+2024-06-24 15:22:18.536 +05:30 [INF] User profile is available. Using 'C:\Users\gokul.jawahar\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-24 15:22:19.011 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-24 15:22:19.016 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-24 15:22:19.020 +05:30 [INF] Hosting environment: Development
+2024-06-24 15:22:19.022 +05:30 [INF] Content root path: D:\backend\LXP.Api
+2024-06-24 15:22:21.097 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-24 15:22:21.883 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 793.1623ms
+2024-06-24 15:22:21.904 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_vs/browserLink - null null
+2024-06-24 15:22:21.909 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-24 15:22:21.942 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13750 application/javascript; charset=utf-8 32.4735ms
+2024-06-24 15:22:21.996 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_vs/browserLink - 200 null text/javascript; charset=UTF-8 92.6129ms
+2024-06-24 15:22:22.134 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-24 15:22:22.587 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 452.9986ms
+2024-06-24 15:22:32.033 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/lxp/courses/27da304c-feae-475b-9e99-4a3feb8b5924/topic - null null
+2024-06-24 15:22:32.045 +05:30 [WRN] Failed to determine the https port for redirect.
+2024-06-24 15:22:32.051 +05:30 [INF] Executing endpoint 'LXP.Api.Controllers.CourseTopicController.GetAllCourseTopicByCourseId (LXP.Api)'
+2024-06-24 15:22:32.079 +05:30 [INF] Route matched with {action = "GetAllCourseTopicByCourseId", controller = "CourseTopic"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCourseTopicByCourseId(System.String) on controller LXP.Api.Controllers.CourseTopicController (LXP.Api).
+2024-06-24 15:22:33.652 +05:30 [INF] Executing OkObjectResult, writing value of type 'LXP.Common.ViewModels.APIResponse'.
+2024-06-24 15:22:34.421 +05:30 [INF] Executed action LXP.Api.Controllers.CourseTopicController.GetAllCourseTopicByCourseId (LXP.Api) in 2334.3976ms
+2024-06-24 15:22:34.424 +05:30 [INF] Executed endpoint 'LXP.Api.Controllers.CourseTopicController.GetAllCourseTopicByCourseId (LXP.Api)'
+2024-06-24 15:22:34.434 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/lxp/courses/27da304c-feae-475b-9e99-4a3feb8b5924/topic - 200 null application/json; charset=utf-8 2400.5788ms

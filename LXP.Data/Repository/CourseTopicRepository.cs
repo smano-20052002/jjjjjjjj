@@ -95,6 +95,7 @@ namespace LXP.Data.Repository
                             TopicDescription = topic.Description,
                             TopicId = topic.TopicId,
                             TopicIsActive = topic.IsActive,
+                            IsQuiz = (_lXPDbContext.Quizzes.Any(quizzes => quizzes.TopicId == topic.TopicId)),
                             Materials = (
                                 from material in _lXPDbContext.Materials
                                 join materialType in _lXPDbContext.MaterialTypes
