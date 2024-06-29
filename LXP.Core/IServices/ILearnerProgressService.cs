@@ -27,7 +27,7 @@ namespace LXP.Core.IServices
             string MaterialId
         );
 
-        Task<bool> LearnerProgress(ProgressViewModel learnerProgress);
+        Task<double> LearnerProgress(ProgressViewModel learnerProgress);
     }
     //public interface ILearnerProgressService
     //{

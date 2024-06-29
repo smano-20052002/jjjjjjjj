@@ -1,0 +1,12 @@
+2024-06-29 15:08:32.098 +05:30 [INF] User profile is available. Using 'C:\Users\mano.selvaraj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-06-29 15:08:32.521 +05:30 [INF] Now listening on: http://localhost:5199
+2024-06-29 15:08:32.523 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-06-29 15:08:32.523 +05:30 [INF] Hosting environment: Development
+2024-06-29 15:08:32.523 +05:30 [INF] Content root path: D:\FinalCorrection\Date26_06\Backend\LXP.API
+2024-06-29 15:08:34.530 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-06-29 15:08:34.884 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 357.2659ms
+2024-06-29 15:08:34.976 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-06-29 15:08:34.979 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13710 application/javascript; charset=utf-8 3.5854ms
+2024-06-29 15:08:35.425 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-06-29 15:08:35.779 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 354.8877ms
+2024-06-29 15:12:01.554 +05:30 [INF] Application is shutting down...

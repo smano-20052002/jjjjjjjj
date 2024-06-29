@@ -5699,23 +5699,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gokul.jawahar\\.nuget\\packages\\": {},
+    "C:\\Users\\mano.selvaraj\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\backend\\LXP.Data\\LXP.Data.csproj",
+      "projectUniqueName": "D:\\FinalCorrection\\Date26_06\\Backend\\LXP.Data\\LXP.Data.csproj",
       "projectName": "LXP.Data",
-      "projectPath": "D:\\backend\\LXP.Data\\LXP.Data.csproj",
-      "packagesPath": "C:\\Users\\gokul.jawahar\\.nuget\\packages\\",
-      "outputPath": "D:\\backend\\LXP.Data\\obj\\",
+      "projectPath": "D:\\FinalCorrection\\Date26_06\\Backend\\LXP.Data\\LXP.Data.csproj",
+      "packagesPath": "C:\\Users\\mano.selvaraj\\.nuget\\packages\\",
+      "outputPath": "D:\\FinalCorrection\\Date26_06\\Backend\\LXP.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\gokul.jawahar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mano.selvaraj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5731,8 +5731,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\backend\\LXP.Common\\LXP.Common.csproj": {
-              "projectPath": "D:\\backend\\LXP.Common\\LXP.Common.csproj"
+            "D:\\FinalCorrection\\Date26_06\\Backend\\LXP.Common\\LXP.Common.csproj": {
+              "projectPath": "D:\\FinalCorrection\\Date26_06\\Backend\\LXP.Common\\LXP.Common.csproj"
             }
           }
         }

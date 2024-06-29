@@ -37,7 +37,7 @@ namespace LXP.Api.Controllers
         }
 
         [HttpGet("/lxp/course/topic/{topicId}/materialtype/{materialTypeId}/")]
-        public async Task<List<MaterialListViewModel>> GetAllMaterialDetailsByTopicAndMaterialType(
+        public async Task<List<MaterialWithCourseListViewModel>> GetAllMaterialDetailsByTopicAndMaterialType(
             string topicId,
             string materialTypeId
         )

@@ -30,7 +30,7 @@ namespace LXP.Core.Services
             _courseRepository = courseRepository;
         }
 
-        public async Task<bool> LearnerProgress(ProgressViewModel learnerProgress)
+        public async Task<double> LearnerProgress(ProgressViewModel learnerProgress)
         {
             var material = await _materialRepository.GetMaterialById(learnerProgress.MaterialId);
             var topic = await _courseTopicRepository.GetTopicByTopicId(material.TopicId);
@@ -50,13 +50,17 @@ namespace LXP.Core.Services
                 )
             )
             {
-                return await Progress(learnerProgressViewModel);
+                await Progress(learnerProgressViewModel);
             }
-            return await UpdateProgress(
-                learnerProgress.LearnerId,
-                material.MaterialId,
-                learnerProgress.WatchTime
-            );
+            else
+            {
+                await UpdateProgress(
+                                learnerProgress.LearnerId,
+                                material.MaterialId,
+                                learnerProgress.WatchTime
+                            );
+            }
+            return await materialCompletionPercentage(learnerProgress.LearnerId, course.CourseId);
         }
 
         public async Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(
@@ -137,6 +141,7 @@ namespace LXP.Core.Services
             );
             learnermaterial.WatchTime = watchtime;
             _learnerProgressRepository.UpdateLearnerProgress(learnermaterial);
+
             await materialCompletion(learnerId, learnermaterial.CourseId);
             return true;
         }
@@ -170,20 +175,20 @@ namespace LXP.Core.Services
             return courseWatchDuration;
         }
 
-        //public async Task<double> materialCompletionPercentage(Guid learnerId, Guid courseId)
-        //{
-        //    var learnerProgress = await _learnerProgressRepository.GetLearnerProgressById(learnerId, courseId);
-        //    TimeSpan timeSpan_total = learnerProgress.TotalTime.ToTimeSpan();
-        //    double totaltime = timeSpan_total.TotalHours;
+        public async Task<double> materialCompletionPercentage(Guid learnerId, Guid courseId)
+        {
+            var learnerProgress = await _learnerProgressRepository.GetLearnerProgressById(learnerId, courseId);
+            TimeSpan timeSpan_total = learnerProgress.TotalTime.ToTimeSpan();
+            double totaltime = timeSpan_total.TotalHours;
 
-        //    TimeSpan timeSpan_watch = learnerProgress.CourseWatchtime.ToTimeSpan();
-        //    double watchtime = timeSpan_watch.TotalHours;
+            TimeSpan timeSpan_watch = learnerProgress.CourseWatchtime.ToTimeSpan();
+            double watchtime = timeSpan_watch.TotalHours;
 
-        //    double percentage = (watchtime / totaltime) * 100;
-        //    return percentage;
+            double percentage = (watchtime / totaltime) * 100;
+            return percentage;
 
 
-        //}
+        }
 
 
         public async Task<double> TopicWatchTime(Guid topicId, Guid learnerId)

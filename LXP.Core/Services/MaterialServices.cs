@@ -87,12 +87,12 @@ namespace LXP.Core.Services
             }
         }
 
-        public async Task<List<MaterialListViewModel>> GetAllMaterialDetailsByTopicAndType(
+        public async Task<List<MaterialWithCourseListViewModel>> GetAllMaterialDetailsByTopicAndType(
             string topicId,
             string materialTypeId
         )
         {
-            Topic topic = await _courseTopicRepository.GetTopicByTopicId(Guid.Parse(topicId));
+            Topic topic = _courseTopicRepository.GetTopicDetailsByTopicId(Guid.Parse(topicId));
             MaterialType materialType = _materialTypeRepository.GetMaterialTypeByMaterialTypeId(
                 Guid.Parse(materialTypeId)
             );
@@ -102,14 +102,15 @@ namespace LXP.Core.Services
                 materialType
             );
 
-            List<MaterialListViewModel> materialLists = new List<MaterialListViewModel>();
+            List<MaterialWithCourseListViewModel> materialLists = new List<MaterialWithCourseListViewModel>();
 
             foreach (var item in material)
             {
-                MaterialListViewModel materialList = new MaterialListViewModel()
+                MaterialWithCourseListViewModel materialList = new MaterialWithCourseListViewModel()
                 {
                     MaterialId = item.MaterialId,
                     TopicName = item.Topic.Name,
+                    CourseName = item.Topic.Course.Title,
                     MaterialType = item.MaterialType.Type,
                     Name = item.Name,
                     // FilePath = item.FilePath,

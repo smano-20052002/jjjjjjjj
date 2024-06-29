@@ -4,7 +4,7 @@ namespace LXP.Core.IServices
 {
     public interface IMaterialServices
     {
-        Task<List<MaterialListViewModel>> GetAllMaterialDetailsByTopicAndType(
+        Task<List<MaterialWithCourseListViewModel>> GetAllMaterialDetailsByTopicAndType(
             string topicId,
             string materialTypeId
         ); // get

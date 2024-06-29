@@ -176,5 +176,9 @@ namespace LXP.Data.Repository
         {
             return _lXPDbContext.Topics.ToList();
         }
+        public Topic GetTopicDetailsByTopicId(Guid topicId){
+
+            return _lXPDbContext.Topics.Include(topic=>topic.Course).FirstOrDefault(topic=>topic.TopicId==topicId)!;
+        }
     }
 }
