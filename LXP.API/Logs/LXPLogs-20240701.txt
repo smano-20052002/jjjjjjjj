@@ -1,0 +1,21 @@
+2024-07-01 09:11:39.973 +05:30 [INF] User profile is available. Using 'C:\Users\mano.selvaraj\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-07-01 09:11:40.312 +05:30 [INF] Now listening on: http://localhost:5199
+2024-07-01 09:11:40.314 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2024-07-01 09:11:40.314 +05:30 [INF] Hosting environment: Development
+2024-07-01 09:11:40.314 +05:30 [INF] Content root path: D:\FinalCorrection\Date26_06\Backend\LXP.API
+2024-07-01 09:11:44.773 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/index.html - null null
+2024-07-01 09:11:44.954 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/index.html - 200 null text/html;charset=utf-8 181.8613ms
+2024-07-01 09:11:44.974 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui.css - null null
+2024-07-01 09:11:44.975 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-bundle.js - null null
+2024-07-01 09:11:44.975 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-standalone-preset.js - null null
+2024-07-01 09:11:44.982 +05:30 [INF] The file /swagger-ui-bundle.js was not modified
+2024-07-01 09:11:44.982 +05:30 [INF] The file /swagger-ui-standalone-preset.js was not modified
+2024-07-01 09:11:44.982 +05:30 [INF] The file /swagger-ui.css was not modified
+2024-07-01 09:11:44.984 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-standalone-preset.js - 304 null text/javascript 7.8543ms
+2024-07-01 09:11:44.984 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui.css - 304 null text/css 9.0445ms
+2024-07-01 09:11:44.984 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/swagger-ui-bundle.js - 304 null text/javascript 8.2737ms
+2024-07-01 09:11:45.016 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-01 09:11:45.023 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/_framework/aspnetcore-browser-refresh.js - 200 13710 application/javascript; charset=utf-8 7.2338ms
+2024-07-01 09:11:45.357 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - null null
+2024-07-01 09:11:45.745 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5199/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 388.7613ms
+2024-07-01 09:15:58.354 +05:30 [INF] Application is shutting down...

@@ -30,7 +30,7 @@ namespace LXP.Core.Services
             _courseRepository = courseRepository;
         }
 
-        public async Task<double> LearnerProgress(ProgressViewModel learnerProgress)
+        public async Task<bool> LearnerProgress(ProgressViewModel learnerProgress)
         {
             var material = await _materialRepository.GetMaterialById(learnerProgress.MaterialId);
             var topic = await _courseTopicRepository.GetTopicByTopicId(material.TopicId);
@@ -50,17 +50,17 @@ namespace LXP.Core.Services
                 )
             )
             {
-                await Progress(learnerProgressViewModel);
+                return await Progress(learnerProgressViewModel);
             }
             else
             {
-                await UpdateProgress(
+                return await UpdateProgress(
                                 learnerProgress.LearnerId,
                                 material.MaterialId,
                                 learnerProgress.WatchTime
                             );
             }
-            return await materialCompletionPercentage(learnerProgress.LearnerId, course.CourseId);
+           // return await materialCompletionPercentage(learnerProgress.LearnerId, course.CourseId);
         }
 
         public async Task<LearnerProgress> GetLearnerProgressByLearnerIdAndMaterialId(

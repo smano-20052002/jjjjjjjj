@@ -34,7 +34,10 @@ namespace LXP.Api.Controllers
             var result = await _Progress.LearnerProgress(learnerProgress);
             return Ok(result);
         }
-
+        [HttpGet("/lxp/course/learner/{learnerId}/course/{courseId}/percentage")]
+        public async Task<IActionResult> GetPercentage(Guid learnerId,Guid courseId){
+            return Ok(CreateSuccessResponse(await  _Progress.materialCompletionPercentage(learnerId, courseId)));
+        }
         [HttpGet("/lxp/course/learner/learnerprogress/watchtime")]
         public async Task<IActionResult> GetLearnerProgressByLearnerIdAndMaterialId(
             string LearnerId,

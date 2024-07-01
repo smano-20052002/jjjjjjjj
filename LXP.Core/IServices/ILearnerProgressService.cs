@@ -26,8 +26,8 @@ namespace LXP.Core.IServices
             string LearnerId,
             string MaterialId
         );
-
-        Task<double> LearnerProgress(ProgressViewModel learnerProgress);
+        Task<double> materialCompletionPercentage(Guid learnerId, Guid courseId);
+        Task<bool> LearnerProgress(ProgressViewModel learnerProgress);
     }
     //public interface ILearnerProgressService
     //{
